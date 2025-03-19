@@ -1,0 +1,51 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-03-19 11:52:45.302793",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "file",
+  "file_type",
+  "file_desc"
+ ],
+ "fields": [
+  {
+   "columns": 2,
+   "fieldname": "file",
+   "fieldtype": "Attach",
+   "in_list_view": 1,
+   "label": "Attach File",
+   "reqd": 1
+  },
+  {
+   "columns": 4,
+   "fieldname": "file_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Document Type",
+   "options": "Witness Statement\nPhotograph\nVoice Recording\nVideo Recording\nChecklist",
+   "reqd": 1
+  },
+  {
+   "columns": 4,
+   "fieldname": "file_desc",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Document Description"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-03-19 11:54:49.968499",
+ "modified_by": "Administrator",
+ "module": "Safety",
+ "name": "Safety Incident Documents",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -1,0 +1,49 @@
+{
+ "charts": [],
+ "content": "[{\"id\":\"WM46gAsu6s\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Safety</span>\",\"col\":12}},{\"id\":\"HcNX4le3iE\",\"type\":\"card\",\"data\":{\"card_name\":\"Incident Management\",\"col\":4}}]",
+ "creation": "2025-03-19 11:24:52.276925",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "unhide",
+ "idx": 0,
+ "indicator_color": "green",
+ "is_hidden": 0,
+ "label": "Safety",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Incident Management",
+   "link_count": 1,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Safety Incident",
+   "link_count": 0,
+   "link_to": "Safety Incident",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2025-03-19 11:29:08.351123",
+ "modified_by": "Administrator",
+ "module": "Safety",
+ "name": "Safety",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 46.0,
+ "shortcuts": [],
+ "title": "Safety"
+}

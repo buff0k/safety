@@ -1,0 +1,159 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "creation": "2025-03-19 11:25:41.617167",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_xzyg",
+  "amended_from",
+  "sec_site",
+  "branch",
+  "column_break_ymdd",
+  "incident_date",
+  "incident_time",
+  "sec_employee",
+  "employees",
+  "sec_asset",
+  "assets",
+  "sec_docs",
+  "documents"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_xzyg",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Safety Incident",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "sec_site",
+   "fieldtype": "Section Break",
+   "label": "Site Details"
+  },
+  {
+   "fieldname": "branch",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Site",
+   "options": "Branch",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_ymdd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "incident_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Incident Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "incident_time",
+   "fieldtype": "Time",
+   "label": "Incident Time"
+  },
+  {
+   "fieldname": "sec_employee",
+   "fieldtype": "Section Break",
+   "label": "Employee Details"
+  },
+  {
+   "fieldname": "sec_asset",
+   "fieldtype": "Section Break",
+   "label": "Equipment Details"
+  },
+  {
+   "fieldname": "employees",
+   "fieldtype": "Table",
+   "options": "Safety Incident Employees"
+  },
+  {
+   "fieldname": "assets",
+   "fieldtype": "Table",
+   "options": "Safety Incident Equipment"
+  },
+  {
+   "fieldname": "sec_docs",
+   "fieldtype": "Section Break",
+   "label": "Documentation"
+  },
+  {
+   "fieldname": "documents",
+   "fieldtype": "Table",
+   "options": "Safety Incident Documents"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2025-03-19 11:55:50.971941",
+ "modified_by": "Administrator",
+ "module": "Safety",
+ "name": "Safety Incident",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "import": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "select": 1,
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "import": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Safety Manager",
+   "select": 1,
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "import": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Safety User",
+   "select": 1,
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "track_seen": 1
+}
