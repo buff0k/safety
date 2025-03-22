@@ -1,0 +1,47 @@
+[
+ {
+  "amended_from": null,
+  "docstatus": 1,
+  "doctype": "Safety Incident Classification",
+  "incident_class": "Lost Time Injury",
+  "incident_description": "Any Incident where Production was stopped due to the severity of an injury.",
+  "modified": "2025-03-22 21:50:25.344232",
+  "name": "Lost Time Injury"
+ },
+ {
+  "amended_from": null,
+  "docstatus": 1,
+  "doctype": "Safety Incident Classification",
+  "incident_class": "Near Miss",
+  "incident_description": "An incident where no damage or injury occurred, however damage or injury could have occurred.",
+  "modified": "2025-03-22 21:51:02.923593",
+  "name": "Near Miss"
+ },
+ {
+  "amended_from": null,
+  "docstatus": 1,
+  "doctype": "Safety Incident Classification",
+  "incident_class": "Minor Injury",
+  "incident_description": "Any Incident where an injury occurred, but production was not stopped due to the severity of an injury.",
+  "modified": "2025-03-22 21:56:52.397116",
+  "name": "Minor Injury"
+ },
+ {
+  "amended_from": null,
+  "docstatus": 1,
+  "doctype": "Safety Incident Classification",
+  "incident_class": "Unsafe Act",
+  "incident_description": "No incident occurred, however Unsafe Acts were observed which may result in an incident in future.",
+  "modified": "2025-03-22 21:57:29.742518",
+  "name": "Unsafe Act"
+ },
+ {
+  "amended_from": null,
+  "docstatus": 1,
+  "doctype": "Safety Incident Classification",
+  "incident_class": "Fatality",
+  "incident_description": "An incident during which a fatality occurred (Loss of human life).",
+  "modified": "2025-03-22 21:58:35.269149",
+  "name": "Fatality"
+ }
+]

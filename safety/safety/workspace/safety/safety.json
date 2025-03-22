@@ -17,7 +17,7 @@
    "hidden": 0,
    "is_query_report": 0,
    "label": "Incident Management",
-   "link_count": 1,
+   "link_count": 2,
    "link_type": "DocType",
    "onboard": 0,
    "type": "Card Break"
@@ -31,9 +31,19 @@
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Safety Incident Classification",
+   "link_count": 0,
+   "link_to": "Safety Incident Classification",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2025-03-19 11:29:08.351123",
+ "modified": "2025-03-22 21:55:42.256697",
  "modified_by": "Administrator",
  "module": "Safety",
  "name": "Safety",

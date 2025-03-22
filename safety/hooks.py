@@ -25,6 +25,13 @@ fixtures = [
 	{"dt": "Custom DocPerm", "filters": [["role", "in", [
 		"Safety Manager",
 		"Safety User"
+	]]]},
+	{"dt": "Safety Incident Classification", "filters": [["name", "in", [
+		"Fatality",
+		"Lost Time Injury",
+		"Minor Injury",
+		"Near Miss",
+		"Unsafe Act"
 	]]]}
 ]
 

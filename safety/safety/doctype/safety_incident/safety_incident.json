@@ -8,6 +8,11 @@
  "field_order": [
   "section_break_xzyg",
   "amended_from",
+  "sec_safrep",
+  "safetyemployee",
+  "column_break_wdhl",
+  "safetyfull_name",
+  "safetydesignation",
   "sec_site",
   "branch",
   "column_break_ymdd",
@@ -17,6 +22,9 @@
   "employees",
   "sec_asset",
   "assets",
+  "sec_incident",
+  "incident_class",
+  "column_break_iuva",
   "sec_docs",
   "documents"
  ],
@@ -93,12 +101,59 @@
    "fieldname": "documents",
    "fieldtype": "Table",
    "options": "Safety Incident Documents"
+  },
+  {
+   "fieldname": "sec_safrep",
+   "fieldtype": "Section Break",
+   "label": "Responsible Safety Representative"
+  },
+  {
+   "fieldname": "safetyemployee",
+   "fieldtype": "Link",
+   "label": "Safety Officer",
+   "link_filters": "[[\"Employee\",\"designation\",\"like\",\"%Safety%\"]]",
+   "options": "Employee",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_wdhl",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "safetyfull_name",
+   "fieldtype": "Data",
+   "label": "Safety Officer Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "safetydesignation",
+   "fieldtype": "Link",
+   "label": "Safety Officer Position",
+   "options": "Designation",
+   "read_only": 1
+  },
+  {
+   "fieldname": "sec_incident",
+   "fieldtype": "Section Break",
+   "label": "Incident Details"
+  },
+  {
+   "fieldname": "incident_class",
+   "fieldtype": "Link",
+   "label": "Incident Classification",
+   "link_filters": "[[\"Safety Incident Classification\",\"docstatus\",\"=\",\"1\"]]",
+   "options": "Safety Incident Classification",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_iuva",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-03-19 11:55:50.971941",
+ "modified": "2025-03-22 21:53:25.132702",
  "modified_by": "Administrator",
  "module": "Safety",
  "name": "Safety Incident",

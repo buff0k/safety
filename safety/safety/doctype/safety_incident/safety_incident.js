@@ -1,11 +1,24 @@
 // Copyright (c) 2025, BuFf0k and contributors
 // For license information, please see license.txt
 
-// frappe.ui.form.on("Safety Incident", {
-// 	refresh(frm) {
-
-// 	},
-// });
+frappe.ui.form.on("Safety Incident", {
+    safetyemployee: function(frm) {
+        if (frm.doc.safetyemployee) {
+            frappe.call({
+                method: 'safety.safety.doctype.safety_incident.safety_incident.fetch_safety_data',
+                args: {
+                    safetyemployee: frm.doc.safetyemployee
+                },
+                callback: function(r) {
+                    if (r.message) {
+                        frm.set_value('safetyfull_name', r.message.safetyfull_name);
+                        frm.set_value('safetydesignation', r.message.safetydesignation);
+                    }
+                }
+            });
+        }
+    }
+});
 
 frappe.ui.form.on('Safety Incident Employees', {
     employee: function(frm, cdt, cdn) {
