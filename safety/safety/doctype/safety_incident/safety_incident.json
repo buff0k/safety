@@ -22,9 +22,11 @@
   "employees",
   "sec_asset",
   "assets",
-  "sec_incident",
+  "sec_incident0",
   "incident_class",
   "column_break_iuva",
+  "sec_incident1",
+  "incident_details",
   "sec_docs",
   "documents"
  ],
@@ -133,11 +135,7 @@
    "read_only": 1
   },
   {
-   "fieldname": "sec_incident",
-   "fieldtype": "Section Break",
-   "label": "Incident Details"
-  },
-  {
+   "default": "Unsafe Act",
    "fieldname": "incident_class",
    "fieldtype": "Link",
    "label": "Incident Classification",
@@ -148,12 +146,26 @@
   {
    "fieldname": "column_break_iuva",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "sec_incident0",
+   "fieldtype": "Section Break",
+   "label": "Incident Details"
+  },
+  {
+   "fieldname": "sec_incident1",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "incident_details",
+   "fieldtype": "Text Editor",
+   "label": "Incident Details"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-03-22 21:53:25.132702",
+ "modified": "2025-03-22 22:04:07.246080",
  "modified_by": "Administrator",
  "module": "Safety",
  "name": "Safety Incident",
