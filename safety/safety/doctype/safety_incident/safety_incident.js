@@ -5,14 +5,14 @@ frappe.ui.form.on("Safety Incident", {
     safetyemployee: function(frm) {
         if (frm.doc.safetyemployee) {
             frappe.call({
-                method: 'safety.safety.doctype.safety_incident.safety_incident.fetch_safety_data',
+                method: 'safety.safety.doctype.safety_incident.safety_incident.fetch_employee_data',
                 args: {
-                    safetyemployee: frm.doc.safetyemployee
+                    employee_id: frm.doc.safetyemployee
                 },
                 callback: function(r) {
                     if (r.message) {
-                        frm.set_value('safetyfull_name', r.message.safetyfull_name);
-                        frm.set_value('safetydesignation', r.message.safetydesignation);
+                        frm.set_value('safetyfull_name', r.message.employee_name);
+                        frm.set_value('safetydesignation', r.message.designation);
                     }
                 }
             });
@@ -24,9 +24,17 @@ frappe.ui.form.on('Safety Incident Employees', {
     employee: function(frm, cdt, cdn) {
         let row = locals[cdt][cdn];
         if (row.employee) {
-            frappe.db.get_doc('Employee', row.employee).then(employee => {
-                frappe.model.set_value(cdt, cdn, 'employee_name', employee.employee_name);
-                frappe.model.set_value(cdt, cdn, 'designation', employee.designation);
+            frappe.call({
+                method: 'safety.safety.doctype.safety_incident.safety_incident.fetch_employee_data',
+                args: {
+                    employee_id: row.employee
+                },
+                callback: function(r) {
+                    if (r.message) {
+                        frappe.model.set_value(cdt, cdn, 'employee_name', r.message.employee_name);
+                        frappe.model.set_value(cdt, cdn, 'designation', r.message.designation);
+                    }
+                }
             });
         }
     }
@@ -36,9 +44,17 @@ frappe.ui.form.on('Safety Incident Equipment', {
     asset: function(frm, cdt, cdn) {
         let row = locals[cdt][cdn];
         if (row.asset) {
-            frappe.db.get_doc('Asset', row.asset).then(asset => {
-                frappe.model.set_value(cdt, cdn, 'asset_name', asset.asset_name);
-                frappe.model.set_value(cdt, cdn, 'asset_category', asset.asset_category);
+            frappe.call({
+                method: 'safety.safety.doctype.safety_incident.safety_incident.fetch_asset_data',
+                args: {
+                    asset_id: row.asset
+                },
+                callback: function(r) {
+                    if (r.message) {
+                        frappe.model.set_value(cdt, cdn, 'asset_name', r.message.asset_name);
+                        frappe.model.set_value(cdt, cdn, 'asset_category', r.message.asset_category);
+                    }
+                }
             });
         }
     }

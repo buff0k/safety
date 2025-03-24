@@ -9,11 +9,19 @@ class SafetyIncident(Document):
 	pass
 
 @frappe.whitelist()
-def fetch_safety_data(safetyemployee):
+def fetch_employee_data(employee_id):
 	frappe.flags.ignore_permissions = True
 	data = {
-		'safetyfull_name': frappe.db.get_value('Employee', safetyemployee, 'employee_name') or '',
-		'safetydesignation': frappe.db.get_value('Employee', safetyemployee, 'designation') or ''
+		'employee_name': frappe.db.get_value('Employee', employee_id, 'employee_name') or '',
+		'designation': frappe.db.get_value('Employee', employee_id, 'designation') or ''
 	}
+	return data
 
+@frappe.whitelist()
+def fetch_asset_data(asset_id):
+	frappe.flags.ignore_permissions = True
+	data = {
+		'asset_name': frappe.db.get_value('Asset', asset_id, 'asset_name') or '',
+		'asset_category': frappe.db.get_value('Asset', asset_id, 'asset_category') or ''
+	}
 	return data
