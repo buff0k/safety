@@ -27,6 +27,7 @@
   "column_break_iuva",
   "sec_incident1",
   "incident_details",
+  "incident_timeline",
   "sec_docs",
   "documents"
  ],
@@ -160,12 +161,18 @@
    "fieldname": "incident_details",
    "fieldtype": "Text Editor",
    "label": "Incident Details"
+  },
+  {
+   "fieldname": "incident_timeline",
+   "fieldtype": "Table",
+   "label": "Incident Timeline",
+   "options": "Safety Incident Timeline"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-03-22 22:04:07.246080",
+ "modified": "2025-03-26 11:56:59.497508",
  "modified_by": "Administrator",
  "module": "Safety",
  "name": "Safety Incident",
