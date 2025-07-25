@@ -1,0 +1,70 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-07-17 13:31:48.576775",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "action",
+  "responsable_person",
+  "responsable_person_name",
+  "target_date",
+  "feedback_on_action",
+  "completion_date",
+  "signature"
+ ],
+ "fields": [
+  {
+   "fieldname": "responsable_person",
+   "fieldtype": "Link",
+   "label": "Responsable Person",
+   "options": "Employee"
+  },
+  {
+   "fetch_from": "responsable_person.employee_name",
+   "fieldname": "responsable_person_name",
+   "fieldtype": "Data",
+   "label": "Responsable Person Name"
+  },
+  {
+   "fieldname": "target_date",
+   "fieldtype": "Date",
+   "label": "Target Date"
+  },
+  {
+   "fieldname": "feedback_on_action",
+   "fieldtype": "Small Text",
+   "label": "Feedback on Action"
+  },
+  {
+   "fieldname": "completion_date",
+   "fieldtype": "Date",
+   "label": "Completion Date"
+  },
+  {
+   "fieldname": "signature",
+   "fieldtype": "Signature",
+   "label": "Signature"
+  },
+  {
+   "fieldname": "action",
+   "fieldtype": "Small Text",
+   "label": "Action"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-07-17 13:46:23.857969",
+ "modified_by": "Administrator",
+ "module": "Safety",
+ "name": "Emergency Drill Actions",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

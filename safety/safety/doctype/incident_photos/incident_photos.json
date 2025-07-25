@@ -1,0 +1,50 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-07-17 12:39:19.008803",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "photos_and_attachments_section",
+  "photos_and_attachments",
+  "descritpion_of_image",
+  "date_and_time_of_photo"
+ ],
+ "fields": [
+  {
+   "fieldname": "photos_and_attachments_section",
+   "fieldtype": "Section Break",
+   "label": "Photos and Attachments"
+  },
+  {
+   "fieldname": "photos_and_attachments",
+   "fieldtype": "Attach Image",
+   "label": "Photos and attachments"
+  },
+  {
+   "fieldname": "descritpion_of_image",
+   "fieldtype": "Small Text",
+   "label": "Descritpion of image"
+  },
+  {
+   "fieldname": "date_and_time_of_photo",
+   "fieldtype": "Datetime",
+   "label": "Date and Time of photo"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-07-17 12:45:30.491533",
+ "modified_by": "Administrator",
+ "module": "Safety",
+ "name": "Incident Photos",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

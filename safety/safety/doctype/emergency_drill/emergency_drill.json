@@ -1,0 +1,128 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-07-17 13:19:14.568845",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "emergency_drill_section",
+  "departmentsection",
+  "date",
+  "time_started",
+  "time_stopped",
+  "planned_or_unplanned",
+  "procedure_tested_as_per_scheduleprocedure",
+  "scenario",
+  "employees_present_section",
+  "employees_present",
+  "suggested_improvement_section",
+  "suggested_improvement",
+  "actions_completed_section",
+  "actions"
+ ],
+ "fields": [
+  {
+   "fieldname": "emergency_drill_section",
+   "fieldtype": "Section Break",
+   "label": "Emergency Drill "
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Date",
+   "in_list_view" : 1
+  },
+  {
+   "fieldname": "time_started",
+   "fieldtype": "Time",
+   "label": "Time Started"
+  },
+  {
+   "fieldname": "time_stopped",
+   "fieldtype": "Time",
+   "label": "Time Stopped"
+  },
+  {
+   "fieldname": "planned_or_unplanned",
+   "fieldtype": "Select",
+   "label": "Planned or unplanned",
+   "options": "Planned\nUnplanned",
+   "in_list_view" : 1
+  },
+  {
+   "fieldname": "procedure_tested_as_per_scheduleprocedure",
+   "fieldtype": "Small Text",
+   "label": "Procedure tested as per schedule/procedure"
+  },
+  {
+   "fieldname": "scenario",
+   "fieldtype": "Small Text",
+   "label": "Scenario"
+  },
+  {
+   "fieldname": "employees_present_section",
+   "fieldtype": "Section Break",
+   "label": "Employees Present"
+  },
+  {
+   "fieldname": "employees_present",
+   "fieldtype": "Table",
+   "label": "Employees Present",
+   "options": "Emergency drill employees present"
+  },
+  {
+   "fieldname": "suggested_improvement_section",
+   "fieldtype": "Section Break",
+   "label": "Suggested improvement"
+  },
+  {
+   "fieldname": "suggested_improvement",
+   "fieldtype": "Small Text",
+   "label": "Suggested improvement"
+  },
+  {
+   "fieldname": "actions_completed_section",
+   "fieldtype": "Section Break",
+   "label": "Actions completed"
+  },
+  {
+   "fieldname": "actions",
+   "fieldtype": "Table",
+   "label": "Actions",
+   "options": "Emergency Drill Actions"
+  },
+  {
+   "fieldname": "departmentsection",
+   "fieldtype": "Link",
+   "label": "Department/Section",
+   "options": "Department",
+   "in_list_view" : 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-07-17 13:51:57.569520",
+ "modified_by": "Administrator",
+ "module": "Safety",
+ "name": "Emergency Drill",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

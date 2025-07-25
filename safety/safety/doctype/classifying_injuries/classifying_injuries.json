@@ -1,0 +1,60 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-07-08 11:56:55.325101",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "classification_of_injuries_section",
+  "treated_by",
+  "treatment",
+  "return_to_work",
+  "injury_classifications"
+ ],
+ "fields": [
+  {
+   "fieldname": "classification_of_injuries_section",
+   "fieldtype": "Section Break",
+   "label": "Classification of Injuries"
+  },
+  {
+   "fieldname": "treated_by",
+   "fieldtype": "Select",
+   "label": "Treated by",
+   "options": "Medical professional\nMedical professional or staff\nFirst aider on site or the OHP"
+  },
+  {
+   "fieldname": "treatment",
+   "fieldtype": "Select",
+   "label": "Treatment",
+   "options": "Professional Medical Attention\nMinor medical attention\nSmall wound dressing"
+  },
+  {
+   "fieldname": "return_to_work",
+   "fieldtype": "Select",
+   "label": "Return to work",
+   "options": "Not being able to resume his/her same or similar occupation the next calendar day as result of the injury sustained\nAble to resume his/her normal or similar occupation the following calendar day\nAble to resume his/her normal or similar occupation the same day"
+  },
+  {
+   "fieldname": "injury_classifications",
+   "fieldtype": "Select",
+   "label": "Injury classifications",
+   "options": "A lost Time Injury (LTI)\nA Non-Lost Time Injury (NLTI)/MTC\nA First Aid Case"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-07-08 11:59:18.419582",
+ "modified_by": "Administrator",
+ "module": "Safety",
+ "name": "Classifying Injuries",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

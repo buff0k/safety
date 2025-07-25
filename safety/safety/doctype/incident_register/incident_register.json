@@ -1,0 +1,208 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:Naming Series",
+ "creation": "2025-07-14 08:11:52.517617",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "incident_register_details_section",
+  "naming_series",
+  "incident_number",
+  "incident_classification_section",
+  "incident_classification",
+  "incident_details_section",
+  "incident_date_and_time",
+  "injury",
+  "injury_classification",
+  "section",
+  "area",
+  "column_break_velu",
+  "incident_reference_number",
+  "description_of_incident",
+  "employees_involved_section",
+  "employee_involved",
+  "employee_department",
+  "shift",
+  "column_break_lyju",
+  "investigation_needed",
+  "select_juix",
+  "responsible_person_full_name",
+  "foreman",
+  "foreman_full_name"
+ ],
+ "fields": [
+  {
+   "fieldname": "incident_register_details_section",
+   "fieldtype": "Section Break",
+   "label": "Incident Register details"
+  },
+  {
+   "default": "INC-.YYYY.-MM.-DD.-",
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Naming Series",
+   "options": "INC-.YYYY.-MM.-DD.-"
+  },
+  {
+   "fieldname": "incident_classification_section",
+   "fieldtype": "Section Break",
+   "label": "Incident Classification"
+  },
+  {
+   "fieldname": "incident_classification",
+   "fieldtype": "Link",
+   "label": "Incident Classification",
+   "options": "Incident Classification"
+  },
+  {
+   "fieldname": "incident_details_section",
+   "fieldtype": "Section Break",
+   "label": "Incident Details"
+  },
+  {
+   "fetch_from": "incident_classification.incident_date_and_time",
+   "fieldname": "incident_date_and_time",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Incident Date and Time"
+  },
+  {
+   "fieldname": "column_break_velu",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "incident_classification.short_description_of_incident",
+   "fieldname": "description_of_incident",
+   "fieldtype": "Small Text",
+   "label": "Description of Incident"
+  },
+  {
+   "fetch_from": "incident_classification.incident_reference_number",
+   "fieldname": "incident_reference_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Incident Reference number"
+  },
+  {
+   "fetch_from": "incident_classification.did_the_person_sustain_any_injuries",
+   "fieldname": "injury",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Injury Classification"
+  },
+  {
+   "fetch_from": "incident_classification.incident_site",
+   "fieldname": "section",
+   "fieldtype": "Data",
+   "label": "Site"
+  },
+  {
+   "fetch_from": "incident_classification.area",
+   "fieldname": "area",
+   "fieldtype": "Data",
+   "label": "Area"
+  },
+  {
+   "fetch_from": "incident_classification.employee_full_name",
+   "fieldname": "employee_involved",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Employee Involved"
+  },
+  {
+   "fetch_from": "incident_classification.department",
+   "fieldname": "employee_department",
+   "fieldtype": "Data",
+   "label": "Employee Department"
+  },
+  {
+   "fieldname": "employees_involved_section",
+   "fieldtype": "Section Break",
+   "label": "Employees Involved"
+  },
+  {
+   "fetch_from": "incident_classification.shift",
+   "fieldname": "shift",
+   "fieldtype": "Small Text",
+   "label": "Shift ",
+   "max_height": "30px"
+  },
+  {
+   "fieldname": "column_break_lyju",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "incident_classification.incident_to_be_investigated",
+   "fieldname": "investigation_needed",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Investigation needed"
+  },
+  {
+   "fieldname": "select_juix",
+   "fieldtype": "Link",
+   "label": "Responsable person",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "foreman",
+   "fieldtype": "Link",
+   "label": "Foreman",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "incident_number",
+   "fieldtype": "Data",
+   "label": "Incident Number"
+  },
+  {
+   "fetch_from": "select_juix.employee_name",
+   "fieldname": "responsible_person_full_name",
+   "fieldtype": "Data",
+   "label": "Responsible person full name",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "foreman.employee_name",
+   "fieldname": "foreman_full_name",
+   "fieldtype": "Data",
+   "label": "Foreman full name",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "incident_classification.safety_incident_classification",
+   "fieldname": "injury_classification",
+   "fieldtype": "Data",
+   "label": "Injury Classification"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-07-18 09:59:34.462973",
+ "modified_by": "Administrator",
+ "module": "Safety",
+ "name": "Incident Register",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -1,0 +1,650 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2025-07-08 10:17:31.231629",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "incident_details_section",
+  "incident_number",
+  "incident_date_and_time",
+  "short_description_of_incident",
+  "initial_record",
+  "safety_incident_classification",
+  "column_break_pcsb",
+  "incident_reference_number",
+  "reporting_person",
+  "impact_of_incident",
+  "urgency",
+  "priority",
+  "document_revision_section",
+  "naming_series",
+  "revision",
+  "column_break_mdeg",
+  "effective_date",
+  "incident_details_tab",
+  "incident_location_section",
+  "incident_site",
+  "area",
+  "incident_location",
+  "incident_descriptions_section",
+  "immediate_actions",
+  "description_of_events",
+  "column_break_kdjm",
+  "storyline",
+  "shift_group",
+  "shift",
+  "employees_involved_tab",
+  "employee_details_section",
+  "check_niwr",
+  "employee_full_name",
+  "id_number",
+  "occupation",
+  "column_break_uzxs",
+  "employee_name",
+  "contractors_company_name",
+  "department",
+  "branch",
+  "section_break_edgv",
+  "passengers_involved",
+  "statements_section",
+  "employee_statements",
+  "injuriesillness_tab",
+  "injury_classification_section",
+  "did_the_person_sustain_any_injuries",
+  "description_of_injury",
+  "classifying_injuries",
+  "body_injury_section",
+  "body_part",
+  "body_part_description",
+  "body_side",
+  "reporting_criteria_section",
+  "fatality",
+  "location_description",
+  "column_break_dbev",
+  "injured_on_site",
+  "injured_on_duty",
+  "date_and_time_of_fatality",
+  "cause_of_death",
+  "assets_tab",
+  "mobile_equipment_section",
+  "was_mobile_equipment_involved",
+  "description_of_damage_if_applicable",
+  "column_break_tfjg",
+  "vehicle_nameid",
+  "vehicle_description",
+  "asset_name",
+  "vehicle_manufacture",
+  "vehicle_model",
+  "license_plate_number",
+  "plant_nameid",
+  "company_owned",
+  "is_the_asset_still_operational",
+  "classifying_mobile_equipment_damage_section",
+  "classifying_mobile_equipment_damage",
+  "asset_insurance_information_section",
+  "insurance_company",
+  "policy_number",
+  "column_break_bsfa",
+  "start_date",
+  "end_date",
+  "investigation_tab",
+  "incident_investigation_section",
+  "incident_to_be_investigated",
+  "person_responsable_for_investigation",
+  "full_name_of_person_responsable_for_investigation",
+  "department_of_investigator"
+ ],
+ "fields": [
+  {
+   "fieldname": "incident_number",
+   "fieldtype": "Link",
+   "label": "Incident Number",
+   "max_height": "30px",
+   "options": "Incident Register"
+  },
+  {
+   "default": "INC-Classification.YYYY.-",
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Naming Series",
+   "options": "INC-Classification.YYYY.-"
+  },
+  {
+   "fieldname": "incident_date_and_time",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Incident Date and Time"
+  },
+  {
+   "fieldname": "short_description_of_incident",
+   "fieldtype": "Small Text",
+   "label": "Short Description of Incident"
+  },
+  {
+   "fieldname": "employee_details_section",
+   "fieldtype": "Section Break",
+   "label": "Employee Details"
+  },
+  {
+   "fieldname": "check_niwr",
+   "fieldtype": "Select",
+   "label": "Employee Type",
+   "options": "Employee\nContractor"
+  },
+  {
+   "fieldname": "employee_name",
+   "fieldtype": "Link",
+   "label": "Search for employee",
+   "options": "Employee"
+  },
+  {
+   "fetch_from": "employee_name.custom_id_number",
+   "fieldname": "id_number",
+   "fieldtype": "Data",
+   "label": "ID Number",
+   "max_height": "30px",
+   "options": "Employee"
+  },
+  {
+   "fetch_from": "employee_name.department",
+   "fieldname": "department",
+   "fieldtype": "Data",
+   "label": "Department",
+   "options": "Employee"
+  },
+  {
+   "fetch_from": "employee_number.company",
+   "fieldname": "contractors_company_name",
+   "fieldtype": "Data",
+   "label": "Company name",
+   "options": "Employee"
+  },
+  {
+   "fetch_from": "employee_number.designation",
+   "fieldname": "occupation",
+   "fieldtype": "Data",
+   "label": "Occupation",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "injury_classification_section",
+   "fieldtype": "Section Break",
+   "label": "Injury classification"
+  },
+  {
+   "fieldname": "did_the_person_sustain_any_injuries",
+   "fieldtype": "Select",
+   "label": "Did the person sustain any injuries",
+   "options": "Yes\nNo"
+  },
+  {
+   "fieldname": "description_of_injury",
+   "fieldtype": "Small Text",
+   "label": "Description of injury"
+  },
+  {
+   "columns": 4,
+   "fieldname": "classifying_injuries",
+   "fieldtype": "Table",
+   "label": "Classifying Injuries",
+   "options": "Classifying Injuries"
+  },
+  {
+   "fieldname": "mobile_equipment_section",
+   "fieldtype": "Section Break",
+   "label": "Assets"
+  },
+  {
+   "fieldname": "was_mobile_equipment_involved",
+   "fieldtype": "Select",
+   "label": "Was any assets involved?",
+   "options": "Yes\nNo",
+   "reqd": 1
+  },
+  {
+   "fieldname": "description_of_damage_if_applicable",
+   "fieldtype": "Small Text",
+   "label": "Description of damage (if applicable)"
+  },
+  {
+   "columns": 3,
+   "fieldname": "classifying_mobile_equipment_damage",
+   "fieldtype": "Table",
+   "label": "Classifying Mobile equipment damage",
+   "options": "Classifying mobile equipment damage"
+  },
+  {
+   "fieldname": "incident_investigation_section",
+   "fieldtype": "Section Break",
+   "label": "Incident Investigation"
+  },
+  {
+   "fieldname": "incident_to_be_investigated",
+   "fieldtype": "Select",
+   "label": "Incident to be investigated",
+   "options": "Yes\nNo"
+  },
+  {
+   "fieldname": "person_responsable_for_investigation",
+   "fieldtype": "Link",
+   "label": "Person responsable for investigation",
+   "options": "Employee"
+  },
+  {
+   "fetch_from": "person_responsable_for_investigation.department",
+   "fieldname": "department_of_investigator",
+   "fieldtype": "Data",
+   "label": "Department of investigator",
+   "options": "Employee"
+  },
+  {
+   "fetch_from": "employee_name.employee_name",
+   "fieldname": "employee_full_name",
+   "fieldtype": "Data",
+   "label": "Employee Full Name",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "column_break_uzxs",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_tfjg",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "vehicle_description.asset_name",
+   "fieldname": "vehicle_nameid",
+   "fieldtype": "Link",
+   "label": "Asset Name/ID",
+   "options": "Asset"
+  },
+  {
+   "fetch_from": "vehicle_nameid.asset_category",
+   "fieldname": "vehicle_description",
+   "fieldtype": "Data",
+   "label": "Asset Category",
+   "options": "Asset"
+  },
+  {
+   "fetch_from": "vehicle_nameid.location",
+   "fieldname": "plant_nameid",
+   "fieldtype": "Data",
+   "label": "Location",
+   "options": "Asset"
+  },
+  {
+   "fieldname": "vehicle_manufacture",
+   "fieldtype": "Link",
+   "label": "Vehicle Manufacture",
+   "options": "Asset"
+  },
+  {
+   "fetch_from": "policy_number.model",
+   "fieldname": "vehicle_model",
+   "fieldtype": "Data",
+   "label": "Vehicle Model",
+   "options": "Vehicle"
+  },
+  {
+   "fetch_from": "policy_number.license_plate",
+   "fieldname": "license_plate_number",
+   "fieldtype": "Small Text",
+   "label": "License plate number",
+   "max_height": "30px"
+  },
+  {
+   "fetch_from": "vehicle_nameid.asset_owner_company",
+   "fieldname": "company_owned",
+   "fieldtype": "Data",
+   "label": "Company Owned",
+   "options": "Asset"
+  },
+  {
+   "fieldname": "asset_insurance_information_section",
+   "fieldtype": "Section Break",
+   "label": "Asset Insurance Information"
+  },
+  {
+   "fetch_from": "vehicle_nameid.insurer",
+   "fieldname": "insurance_company",
+   "fieldtype": "Link",
+   "label": "Insurance Company",
+   "options": "Vehicle"
+  },
+  {
+   "fetch_from": "vehicle_nameid.policy_number",
+   "fieldname": "policy_number",
+   "fieldtype": "Link",
+   "label": "Policy Number",
+   "options": "Vehicle"
+  },
+  {
+   "fieldname": "column_break_bsfa",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "vehicle_nameid.insurance_start_date",
+   "fieldname": "start_date",
+   "fieldtype": "Link",
+   "label": "Start Date",
+   "options": "Vehicle"
+  },
+  {
+   "fetch_from": "vehicle_nameid.insurance_end_date",
+   "fieldname": "end_date",
+   "fieldtype": "Link",
+   "label": "End Date",
+   "options": "Vehicle"
+  },
+  {
+   "fetch_from": "vehicle_nameid.asset_name",
+   "fieldname": "asset_name",
+   "fieldtype": "Data",
+   "label": "Asset Name"
+  },
+  {
+   "fieldname": "is_the_asset_still_operational",
+   "fieldtype": "Select",
+   "label": "Is the Asset still operational",
+   "options": "Yes\nNo"
+  },
+  {
+   "fieldname": "incident_details_section",
+   "fieldtype": "Section Break",
+   "label": "Incident Details"
+  },
+  {
+   "fieldname": "section_break_edgv",
+   "fieldtype": "Section Break",
+   "label": "Passengers Involved"
+  },
+  {
+   "fieldname": "passengers_involved",
+   "fieldtype": "Table",
+   "label": "Passengers Involved",
+   "options": "Passengers to incident"
+  },
+  {
+   "fieldname": "employees_involved_tab",
+   "fieldtype": "Tab Break",
+   "label": "Employees Involved"
+  },
+  {
+   "fieldname": "injuriesillness_tab",
+   "fieldtype": "Tab Break",
+   "label": "Injuries/Illness"
+  },
+  {
+   "fieldname": "assets_tab",
+   "fieldtype": "Tab Break",
+   "label": "Assets"
+  },
+  {
+   "fieldname": "investigation_tab",
+   "fieldtype": "Tab Break",
+   "label": "Investigation"
+  },
+  {
+   "fieldname": "body_injury_section",
+   "fieldtype": "Section Break",
+   "label": "Body injury"
+  },
+  {
+   "fieldname": "body_part",
+   "fieldtype": "Small Text",
+   "label": "Body Part"
+  },
+  {
+   "fieldname": "body_part_description",
+   "fieldtype": "Small Text",
+   "label": "Body Part Description"
+  },
+  {
+   "fieldname": "body_side",
+   "fieldtype": "Select",
+   "label": "Body Side",
+   "options": "Left\nRight"
+  },
+  {
+   "fieldname": "reporting_criteria_section",
+   "fieldtype": "Section Break",
+   "label": "Reporting Criteria"
+  },
+  {
+   "fieldname": "injured_on_site",
+   "fieldtype": "Select",
+   "label": "Injured on Site",
+   "options": "Yes\nNo"
+  },
+  {
+   "fieldname": "injured_on_duty",
+   "fieldtype": "Select",
+   "label": "Injured on Duty",
+   "options": "Yes\nNo"
+  },
+  {
+   "fieldname": "fatality",
+   "fieldtype": "Select",
+   "label": "Fatality",
+   "options": "Yes\nNo"
+  },
+  {
+   "fieldname": "date_and_time_of_fatality",
+   "fieldtype": "Datetime",
+   "label": "Date and Time of Fatality"
+  },
+  {
+   "fieldname": "cause_of_death",
+   "fieldtype": "Small Text",
+   "label": "Cause of death"
+  },
+  {
+   "fieldname": "location_description",
+   "fieldtype": "Small Text",
+   "label": "Location Description"
+  },
+  {
+   "fieldname": "column_break_dbev",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "revision",
+   "fieldtype": "Small Text",
+   "label": "Revision",
+   "max_height": "30px"
+  },
+  {
+   "fieldname": "effective_date",
+   "fieldtype": "Datetime",
+   "label": "Effective Date"
+  },
+  {
+   "fieldname": "column_break_pcsb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "incident_reference_number",
+   "fieldtype": "Small Text",
+   "label": "Reference Number",
+   "max_height": "30px"
+  },
+  {
+   "fieldname": "incident_location_section",
+   "fieldtype": "Section Break",
+   "label": "Incident Location"
+  },
+  {
+   "fieldname": "incident_site",
+   "fieldtype": "Link",
+   "label": "Incident Site",
+   "options": "Site Code"
+  },
+  {
+   "fieldname": "incident_location",
+   "fieldtype": "Small Text",
+   "label": "Incident Location"
+  },
+  {
+   "fieldname": "area",
+   "fieldtype": "Small Text",
+   "label": "Area",
+   "max_height": "30px"
+  },
+  {
+   "fieldname": "reporting_person",
+   "fieldtype": "Select",
+   "label": "Reporting Person",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "impact_of_incident",
+   "fieldtype": "Small Text",
+   "label": "Impact of Incident"
+  },
+  {
+   "fieldname": "urgency",
+   "fieldtype": "Small Text",
+   "label": "Urgency",
+   "max_height": "30px"
+  },
+  {
+   "fieldname": "priority",
+   "fieldtype": "Select",
+   "label": "Priority",
+   "options": "High\nMedium\nLow"
+  },
+  {
+   "fieldname": "document_revision_section",
+   "fieldtype": "Section Break",
+   "label": "Document Revision"
+  },
+  {
+   "fieldname": "column_break_mdeg",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "incident_details_tab",
+   "fieldtype": "Tab Break",
+   "label": "Incident Details"
+  },
+  {
+   "fieldname": "incident_descriptions_section",
+   "fieldtype": "Section Break",
+   "label": "Incident Descriptions"
+  },
+  {
+   "fieldname": "immediate_actions",
+   "fieldtype": "Small Text",
+   "label": "Immediate Actions"
+  },
+  {
+   "fieldname": "description_of_events",
+   "fieldtype": "Small Text",
+   "label": "Description of events"
+  },
+  {
+   "fieldname": "column_break_kdjm",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "storyline",
+   "fieldtype": "Attach",
+   "label": "Storyline"
+  },
+  {
+   "fieldname": "initial_record",
+   "fieldtype": "Attach",
+   "label": "Initial Record"
+  },
+  {
+   "fieldname": "shift_group",
+   "fieldtype": "Small Text",
+   "label": "Shift group",
+   "max_height": "30px"
+  },
+  {
+   "fieldname": "shift",
+   "fieldtype": "Small Text",
+   "label": "Shift",
+   "max_height": "30px"
+  },
+  {
+   "fieldname": "statements_section",
+   "fieldtype": "Section Break",
+   "label": "Statements"
+  },
+  {
+   "fieldname": "employee_statements",
+   "fieldtype": "Attach",
+   "label": "Employee Statements"
+  },
+  {
+   "fetch_from": "employee_name.branch",
+   "fieldname": "branch",
+   "fieldtype": "Data",
+   "label": "Branch",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "classifying_mobile_equipment_damage_section",
+   "fieldtype": "Section Break",
+   "label": "Classifying Mobile Equipment Damage"
+  },
+  {
+   "fetch_from": "person_responsable_for_investigation.employee_name",
+   "fieldname": "full_name_of_person_responsable_for_investigation",
+   "fieldtype": "Data",
+   "label": "Full name of person responsable for investigation"
+  },
+  {
+   "fieldname": "safety_incident_classification",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Safety Incident Classification",
+   "options": "Safety Incident Classification"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-07-21 11:56:03.718036",
+ "modified_by": "Administrator",
+ "module": "Safety",
+ "name": "Incident Classification",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Administrator",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

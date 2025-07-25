@@ -1,0 +1,47 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-07-08 12:09:19.195691",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "type_of_damage",
+  "injury",
+  "equipment_classification"
+ ],
+ "fields": [
+  {
+   "fieldname": "type_of_damage",
+   "fieldtype": "Select",
+   "label": "Type of damage",
+   "options": "Result in significant equipment damage\nResult in moderate to minor equipment damage"
+  },
+  {
+   "fieldname": "injury",
+   "fieldtype": "Select",
+   "label": "Injury ",
+   "options": "An injury, irrespective of the type of injury\nNo injuries"
+  },
+  {
+   "fieldname": "equipment_classification",
+   "fieldtype": "Select",
+   "label": "Equipment classification",
+   "options": "Level one (1)\nLevel two (2)\nLevel three (3)"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-07-08 12:18:59.173954",
+ "modified_by": "Administrator",
+ "module": "Safety",
+ "name": "Classifying mobile equipment damage",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

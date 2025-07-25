@@ -1,0 +1,10 @@
+.page-container .workspace-safety .widget {
+  border-radius: 10px;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+}
+
+.page-container .workspace-safety h4 {
+  color: #0d47a1;
+  font-weight: bold;
+}

@@ -1,0 +1,187 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-07-07 08:46:03.218464",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "flash_report_section",
+  "incident_number",
+  "nature_of_injurydamage",
+  "potential_severity_classification",
+  "repeat_incident",
+  "column_break_mmok",
+  "incident_classification",
+  "applicable_life_saving_rules",
+  "personal_information_section",
+  "name_of_injured_or_affected_person",
+  "employee_full_name",
+  "name_of_employer_or_contractor",
+  "position",
+  "date_and_location_section",
+  "date_and_time_of_incident",
+  "site",
+  "where_did_the_incident_occur",
+  "description_and_photos_section",
+  "photos_and_attachment",
+  "description_of_incidentimpact"
+ ],
+ "fields": [
+  {
+   "fieldname": "incident_number",
+   "fieldtype": "Link",
+   "label": "Incident Number",
+   "max_height": "40px",
+   "options": "Incident Classification"
+  },
+  {
+   "fieldname": "incident_classification",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Incident classification",
+   "options": "Fatal\nLTI\nHPI\nMTC\nFAC\nTMM\nN/C"
+  },
+  {
+   "fetch_from": "incident_number.incident_date_and_time",
+   "fieldname": "date_and_time_of_incident",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Date and time of incident"
+  },
+  {
+   "fieldname": "nature_of_injurydamage",
+   "fieldtype": "Small Text",
+   "label": "Nature of injury/Damage",
+   "max_height": "60px"
+  },
+  {
+   "fieldname": "where_did_the_incident_occur",
+   "fieldtype": "Small Text",
+   "label": "Where did the Incident occur",
+   "max_height": "40px",
+   "options": "Location"
+  },
+  {
+   "fetch_from": "incident_number.contractors_company_name",
+   "fieldname": "name_of_employer_or_contractor",
+   "fieldtype": "Data",
+   "label": "Name of Employer or Contractor",
+   "options": "Contract of Employment"
+  },
+  {
+   "fetch_from": "incident_number.occupation",
+   "fieldname": "position",
+   "fieldtype": "Small Text",
+   "label": "Position",
+   "max_height": "30px"
+  },
+  {
+   "columns": 2,
+   "fieldname": "potential_severity_classification",
+   "fieldtype": "Select",
+   "label": "Potential Severity Classification",
+   "options": "High\nMedium\nLow"
+  },
+  {
+   "fieldname": "repeat_incident",
+   "fieldtype": "Select",
+   "label": "Repeat Incident",
+   "options": "Has happened\nSimilar to another Incident\nFirst know case"
+  },
+  {
+   "fieldname": "applicable_life_saving_rules",
+   "fieldtype": "Small Text",
+   "label": "Applicable Life Saving rules",
+   "max_height": "80px"
+  },
+  {
+   "fieldname": "description_of_incidentimpact",
+   "fieldtype": "Long Text",
+   "label": "Description of Incident/Impact"
+  },
+  {
+   "fieldname": "photos_and_attachment",
+   "fieldtype": "Table",
+   "label": "Photos and Attachment",
+   "options": "Incident Photos"
+  },
+  {
+   "fieldname": "flash_report_section",
+   "fieldtype": "Section Break",
+   "label": "Flash Report"
+  },
+  {
+   "fetch_from": "incident_number.incident_site",
+   "fieldname": "site",
+   "fieldtype": "Data",
+   "label": "Site"
+  },
+  {
+   "fieldname": "personal_information_section",
+   "fieldtype": "Section Break",
+   "label": "Personal information"
+  },
+  {
+   "fieldname": "date_and_location_section",
+   "fieldtype": "Section Break",
+   "label": "Date and Location"
+  },
+  {
+   "fieldname": "description_and_photos_section",
+   "fieldtype": "Section Break",
+   "label": "Description and Photos"
+  },
+  {
+   "fetch_from": "incident_number.employee_name",
+   "fieldname": "name_of_injured_or_affected_person",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Name/Employee ID of injured or affected Person",
+   "options": "Employee"
+  },
+  {
+   "fetch_from": "incident_number.employee_full_name",
+   "fieldname": "employee_full_name",
+   "fieldtype": "Small Text",
+   "label": "Employee Full Name",
+   "max_height": "30px",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_mmok",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [
+  {
+   "link_doctype": "Employee",
+   "link_fieldname": "Employee"
+  }
+ ],
+ "modified": "2025-07-17 12:46:20.049599",
+ "modified_by": "Administrator",
+ "module": "Safety",
+ "name": "Flash report",
+ "nsm_parent_field": "parent_flash_report",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

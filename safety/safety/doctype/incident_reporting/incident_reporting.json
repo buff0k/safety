@@ -1,0 +1,134 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-07-11 08:04:50.397154",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "employee_information_section",
+  "company_name",
+  "name_and_surname_person_reporting",
+  "employee_number_person_reporting",
+  "responsible_managerforeman_contractor",
+  "responsible_managerforeman_company",
+  "column_break_rjfn",
+  "name_and_surname_injuredinvolved",
+  "employee_number_injuredinvolved",
+  "where_did_the_incident_happen",
+  "date_and_time_of_incident",
+  "classification",
+  "section_break_lreu",
+  "full_description_of_incident",
+  "immediate_actions_taken"
+ ],
+ "fields": [
+  {
+   "fieldname": "company_name",
+   "fieldtype": "Small Text",
+   "label": "Company Name",
+   "max_height": "30px"
+  },
+  {
+   "fieldname": "name_and_surname_person_reporting",
+   "fieldtype": "Small Text",
+   "label": "Name and Surname (Person Reporting)",
+   "max_height": "30px"
+  },
+  {
+   "fieldname": "employee_number_person_reporting",
+   "fieldtype": "Small Text",
+   "label": "Employee Number (Person Reporting)",
+   "max_height": "30px"
+  },
+  {
+   "fieldname": "responsible_managerforeman_contractor",
+   "fieldtype": "Small Text",
+   "label": "Responsible Manager/Foreman (Contractor)",
+   "max_height": "30px"
+  },
+  {
+   "fieldname": "responsible_managerforeman_company",
+   "fieldtype": "Small Text",
+   "label": "Responsible Manager/Foreman (Company)",
+   "max_height": "30px"
+  },
+  {
+   "fieldname": "column_break_rjfn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "name_and_surname_injuredinvolved",
+   "fieldtype": "Small Text",
+   "label": "Name and Surname (Injured/Involved)",
+   "max_height": "30px"
+  },
+  {
+   "fieldname": "employee_number_injuredinvolved",
+   "fieldtype": "Small Text",
+   "label": "Employee Number (Injured/Involved)",
+   "max_height": "30px"
+  },
+  {
+   "fieldname": "where_did_the_incident_happen",
+   "fieldtype": "Small Text",
+   "label": "Where did the incident happen"
+  },
+  {
+   "fieldname": "date_and_time_of_incident",
+   "fieldtype": "Datetime",
+   "label": "Date and Time of incident"
+  },
+  {
+   "fieldname": "classification",
+   "fieldtype": "Select",
+   "label": "Classification",
+   "options": "Safety\nHealth\nHygiene\nEnvironment\nCommunity"
+  },
+  {
+   "fieldname": "section_break_lreu",
+   "fieldtype": "Section Break",
+   "label": "Incident Description"
+  },
+  {
+   "fieldname": "full_description_of_incident",
+   "fieldtype": "Text",
+   "label": "Full Description of Incident"
+  },
+  {
+   "fieldname": "immediate_actions_taken",
+   "fieldtype": "Small Text",
+   "label": "Immediate Actions taken"
+  },
+  {
+   "fieldname": "employee_information_section",
+   "fieldtype": "Section Break",
+   "label": "Employee Information"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-07-11 08:12:46.704911",
+ "modified_by": "Administrator",
+ "module": "Safety",
+ "name": "Incident Reporting",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
