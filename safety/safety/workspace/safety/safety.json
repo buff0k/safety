@@ -3,13 +3,9 @@
   {
    "chart_name": "Incident Priority",
    "label": "Priority"
-  },
-  {
-   "chart_name": "Flash report Classifications",
-   "label": "kk"
   }
  ],
- "content": "[{\"id\":\"WM46gAsu6s\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Safety</span>\",\"col\":12}},{\"id\":\"MwyBBiBy-K\",\"type\":\"card\",\"data\":{\"card_name\":\"Incident Management Bendre\",\"col\":4}},{\"id\":\"SLjNtUwjX8\",\"type\":\"card\",\"data\":{\"card_name\":\"Emergency Drills\",\"col\":4}},{\"id\":\"5wMu7S-TV7\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Priority\",\"col\":12}},{\"id\":\"G0CKnUpeQH\",\"type\":\"chart\",\"data\":{\"chart_name\":\"kk\",\"col\":12}}]",
+ "content": "[{\"id\":\"WM46gAsu6s\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Safety</span>\",\"col\":12}},{\"id\":\"MwyBBiBy-K\",\"type\":\"card\",\"data\":{\"card_name\":\"Incident Management Bendre\",\"col\":4}},{\"id\":\"SLjNtUwjX8\",\"type\":\"card\",\"data\":{\"card_name\":\"Emergency Drills\",\"col\":4}},{\"id\":\"5wMu7S-TV7\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Priority\",\"col\":12}}]",
  "creation": "2025-03-19 11:24:52.276925",
  "custom_blocks": [],
  "docstatus": 0,
@@ -111,7 +107,7 @@
    "type": "Link"
   }
  ],
- "modified": "2025-07-18 11:25:43.379807",
+ "modified": "2025-08-11 10:03:46.937389",
  "modified_by": "Administrator",
  "module": "Safety",
  "name": "Safety",
