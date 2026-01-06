@@ -1,0 +1,95 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-12-15 14:47:25.151781",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "injury",
+  "injured_person_coy_number",
+  "injured_person_name",
+  "injured_id",
+  "age_of_injured",
+  "gender",
+  "position_of_injured",
+  "years_in_current_position",
+  "attach_photo_of_injured"
+ ],
+ "fields": [
+  {
+   "fieldname": "injury",
+   "fieldtype": "Section Break",
+   "label": "Injury"
+  },
+  {
+   "fieldname": "injured_person_coy_number",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Injured Person COY Number",
+   "options": "Employee"
+  },
+  {
+   "fetch_from": "injured_person_coy_number.employee_name",
+   "fieldname": "injured_person_name",
+   "fieldtype": "Read Only",
+   "in_list_view": 1,
+   "label": "Injured Person Name"
+  },
+  {
+   "fieldname": "age_of_injured",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Age of Injured Person"
+  },
+  {
+   "fetch_from": "injured_person_coy_number.gender",
+   "fieldname": "gender",
+   "fieldtype": "Read Only",
+   "in_list_view": 1,
+   "label": "Gender"
+  },
+  {
+   "fieldname": "years_in_current_position",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Years in Current Position",
+   "options": "\n<0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23\n24\n25\n26\n27\n28\n29\n30\n31\n32\n33\n34\n35\n36\n37\n38\n39\n40\n41\n42\n43\n44\n45\n46\n47\n48\n49\n50\n51\n52\n53\n54\n55\n56\n57\n58\n59\n60\n61\n62\n63\n64\n65"
+  },
+  {
+   "fieldname": "position_of_injured",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Position of Injured",
+   "options": "\nSite Manager\nPlant Manager\nEngineering Foreman\nProduction Supervisor\nControl Room Operator\nChief Safety Officer\nSafety Officer\nSafety Clerk\nSite Clerk\nEngineering Clerk\nHR Officer\nHR Clerk\nMechanic\nMechanic Assistant\nAuto Electrician\nAuto Electrician Assistant\nBoilermaker\nBoilermaker Assistant\nADT Operator\nDozer Operator\nExcavator Operator\nService Truck Operator\nWater Bowser Operator\nDiesel Bowser Operator\nGrader Operator\nTLB Operator\nFEL Operator\nEngineer\nGES\nEngineer In Training\nProduction Manager In Training\nDrill Operator\nDrill Assistant\nSecurity\nBlaster\nBlasting Assistant\nSurveyor\nElectrician\nElectrician Assistant\nAircon Tech"
+  },
+  {
+   "fieldname": "attach_photo_of_injured",
+   "fieldtype": "Attach",
+   "in_list_view": 1,
+   "label": "Attach Photo of Injured"
+  },
+  {
+   "fetch_from": "injured_person_coy_number.date_of_birth",
+   "fieldname": "injured_id",
+   "fieldtype": "Read Only",
+   "in_list_view": 1,
+   "label": "Injured ID"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-12-17 09:57:20.226915",
+ "modified_by": "Administrator",
+ "module": "Safety",
+ "name": "Responsible Person",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

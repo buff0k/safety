@@ -1,0 +1,1015 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format: {incident_number}",
+ "creation": "2025-12-09 15:49:01.091066",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "incident_information",
+  "event_logging_section",
+  "event_category",
+  "region",
+  "site",
+  "location_on_site",
+  "departmentx",
+  "shift",
+  "datetime_incident",
+  "reporting_person_coy_number",
+  "reporting_person_name",
+  "employee_id",
+  "column_break_iyfs",
+  "incident_number",
+  "description_of_the_event",
+  "incident_type",
+  "employer",
+  "injury_details",
+  "damage_details",
+  "responsible_supervisor",
+  "responsible_supervisor_name",
+  "supervisor_id",
+  "equipment_details",
+  "vfl_team_member_details",
+  "classification",
+  "classify_incident",
+  "type",
+  "tmm",
+  "property_damage",
+  "fatality",
+  "lti",
+  "medical_treatment_case",
+  "first_aid_case",
+  "reportable_incident",
+  "repeat_incident",
+  "has_happened",
+  "first_known_case",
+  "severity_classification",
+  "high",
+  "medium",
+  "low",
+  "life_saving_rules",
+  "drugs_alcohol",
+  "wear_your_ppe",
+  "safety_belt",
+  "competent_and_licensed",
+  "column_break_ybqj",
+  "environmental_conditions",
+  "procedure_compliance",
+  "transports",
+  "column_break_avun",
+  "safety_devices",
+  "lockout_and_isolate",
+  "incident_reporting",
+  "immediate_actions",
+  "emergency_preparedness",
+  "first_aid",
+  "summoned_ambulance",
+  "procedural_communication",
+  "internal_communication",
+  "control_room",
+  "supervisor",
+  "site_manager",
+  "engineering_manager",
+  "safety_officer",
+  "isambane_management",
+  "other",
+  "specify_other",
+  "column_break_dvxl",
+  "client_communication",
+  "mine_manager",
+  "contracts_manager",
+  "engineering_managers",
+  "chief_safety_officer",
+  "other_comms",
+  "specify_other_comms",
+  "column_break_eobk",
+  "external_communication",
+  "dmpr",
+  "department_of_water_and_sanitation",
+  "department_of_labour",
+  "department_of_health",
+  "other_external",
+  "specify_other_external",
+  "secure_area",
+  "barricade",
+  "stabalise",
+  "other_securing",
+  "additional_comments_section",
+  "general_commentsobservations",
+  "impact",
+  "impact_calculation",
+  "harm_to_people",
+  "environmental_impact",
+  "business_interruption",
+  "legal_and_regulatory",
+  "impact_on_community",
+  "column_break_vsoi",
+  "hazard_consequence",
+  "likelyhood",
+  "risk_rating",
+  "risk_level",
+  "impact_details_section",
+  "description",
+  "investigation",
+  "investigation_requirement",
+  "is_the_investigation_required",
+  "preliminiary_investigation",
+  "investigation_type_and_attachments",
+  "investigation_technique",
+  "investigation_techniques",
+  "specify_type",
+  "five_why",
+  "fishbone",
+  "icam",
+  "details_of_injury",
+  "body_part",
+  "head_face_neck",
+  "shoulder",
+  "abdomen",
+  "arms",
+  "hands",
+  "legs",
+  "feet",
+  "back",
+  "column_break_qdws",
+  "others",
+  "specify",
+  "details_of_damage",
+  "equipment",
+  "cylinders",
+  "tyres",
+  "adt_bowl",
+  "fender",
+  "windshield",
+  "other_damages_tmm",
+  "specify_damage",
+  "task_classify_tab",
+  "task_classify",
+  "engineering",
+  "lifting",
+  "material_handling",
+  "transport",
+  "blasting",
+  "drilling",
+  "column_break_tcdr",
+  "oth",
+  "specify_oth"
+ ],
+ "fields": [
+  {
+   "fieldname": "incident_information",
+   "fieldtype": "Tab Break",
+   "label": "Incident information"
+  },
+  {
+   "fieldname": "datetime_incident",
+   "fieldtype": "Datetime",
+   "label": "Date and Time of the Event"
+  },
+  {
+   "fieldname": "classification",
+   "fieldtype": "Tab Break",
+   "label": "Classification"
+  },
+  {
+   "fieldname": "immediate_actions",
+   "fieldtype": "Tab Break",
+   "label": "Immediate Actions"
+  },
+  {
+   "fieldname": "impact",
+   "fieldtype": "Tab Break",
+   "label": "Impact"
+  },
+  {
+   "fieldname": "investigation",
+   "fieldtype": "Tab Break",
+   "label": "Investigation"
+  },
+  {
+   "fieldname": "details_of_injury",
+   "fieldtype": "Tab Break",
+   "label": "Details of Injury"
+  },
+  {
+   "fieldname": "task_classify_tab",
+   "fieldtype": "Tab Break",
+   "label": "Task Classification"
+  },
+  {
+   "fieldname": "event_logging_section",
+   "fieldtype": "Section Break",
+   "label": "Event Logging"
+  },
+  {
+   "fieldname": "classify_incident",
+   "fieldtype": "Section Break",
+   "label": "Classify Incident"
+  },
+  {
+   "default": "0",
+   "fieldname": "tmm",
+   "fieldtype": "Check",
+   "label": "Trackless Mobile Machinery (TMM)"
+  },
+  {
+   "fieldname": "shift",
+   "fieldtype": "Select",
+   "label": "Shift",
+   "options": "\nDay\nA\nB\nC"
+  },
+  {
+   "fieldname": "reporting_person_coy_number",
+   "fieldtype": "Link",
+   "label": "Reporting person coy number",
+   "options": "Employee"
+  },
+  {
+   "fetch_from": "reporting_person_coy_number.employee_name",
+   "fieldname": "reporting_person_name",
+   "fieldtype": "Read Only",
+   "label": "Reporting person name"
+  },
+  {
+   "fetch_from": "reporting_person_coy_number.date_of_birth",
+   "fieldname": "employee_id",
+   "fieldtype": "Read Only",
+   "label": "Reporting Person ID"
+  },
+  {
+   "fieldname": "incident_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Incident Number",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "property_damage",
+   "fieldtype": "Check",
+   "label": "Property Damage"
+  },
+  {
+   "default": "0",
+   "fieldname": "fatality",
+   "fieldtype": "Check",
+   "label": "Fatality"
+  },
+  {
+   "default": "0",
+   "fieldname": "lti",
+   "fieldtype": "Check",
+   "label": "Lost Time Injury (LTI)"
+  },
+  {
+   "default": "0",
+   "fieldname": "medical_treatment_case",
+   "fieldtype": "Check",
+   "label": "Medical Treatment Case (MTC)"
+  },
+  {
+   "default": "0",
+   "fieldname": "first_aid_case",
+   "fieldtype": "Check",
+   "label": "First Aid Case (FAC)"
+  },
+  {
+   "fieldname": "repeat_incident",
+   "fieldtype": "Column Break",
+   "label": "Repeat Incident"
+  },
+  {
+   "fieldname": "additional_comments_section",
+   "fieldtype": "Section Break",
+   "label": "Additional Comments"
+  },
+  {
+   "fieldname": "general_commentsobservations",
+   "fieldtype": "Long Text",
+   "label": "General Comments/Observations"
+  },
+  {
+   "fieldname": "emergency_preparedness",
+   "fieldtype": "Section Break",
+   "label": "Emergency Preparedness"
+  },
+  {
+   "fieldname": "first_aid",
+   "fieldtype": "Select",
+   "label": "First Aid Administered",
+   "options": "\nYes\nN/A"
+  },
+  {
+   "fieldname": "summoned_ambulance",
+   "fieldtype": "Select",
+   "label": "Summoned Ambulance",
+   "options": "\nYes\nN/A"
+  },
+  {
+   "default": "0",
+   "fieldname": "supervisor",
+   "fieldtype": "Check",
+   "label": "Supervisor"
+  },
+  {
+   "default": "0",
+   "fieldname": "dmpr",
+   "fieldtype": "Check",
+   "label": "Department of Minerals and Petroleum Resources (DMPR)"
+  },
+  {
+   "default": "0",
+   "fieldname": "site_manager",
+   "fieldtype": "Check",
+   "label": "Site Manager"
+  },
+  {
+   "default": "0",
+   "fieldname": "engineering_manager",
+   "fieldtype": "Check",
+   "label": "Engineering Manager"
+  },
+  {
+   "fieldname": "column_break_dvxl",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "other",
+   "fieldtype": "Check",
+   "label": "Other "
+  },
+  {
+   "fieldname": "specify_other",
+   "fieldtype": "Data",
+   "label": "Specify Other"
+  },
+  {
+   "fieldname": "column_break_iyfs",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "site",
+   "fieldtype": "Link",
+   "label": "Site",
+   "options": "Location",
+   "reqd": 1
+  },
+  {
+   "fieldname": "is_the_investigation_required",
+   "fieldtype": "Select",
+   "label": "Is the investigation required",
+   "options": "\nYes\nNo"
+  },
+  {
+   "fieldname": "investigation_requirement",
+   "fieldtype": "Section Break",
+   "label": "Investigation requirement "
+  },
+  {
+   "fieldname": "fishbone",
+   "fieldtype": "Attach",
+   "label": "Fishbone"
+  },
+  {
+   "fieldname": "icam",
+   "fieldtype": "Attach",
+   "label": "ICAM"
+  },
+  {
+   "fieldname": "body_part",
+   "fieldtype": "Section Break",
+   "label": "Body Part"
+  },
+  {
+   "default": "0",
+   "fieldname": "head_face_neck",
+   "fieldtype": "Check",
+   "label": "Head/Face/Neck"
+  },
+  {
+   "default": "0",
+   "fieldname": "shoulder",
+   "fieldtype": "Check",
+   "label": "Shoulder"
+  },
+  {
+   "default": "0",
+   "fieldname": "abdomen",
+   "fieldtype": "Check",
+   "label": "Abdomen"
+  },
+  {
+   "default": "0",
+   "fieldname": "arms",
+   "fieldtype": "Check",
+   "label": "Arms"
+  },
+  {
+   "default": "0",
+   "fieldname": "hands",
+   "fieldtype": "Check",
+   "label": "Hands"
+  },
+  {
+   "default": "0",
+   "fieldname": "legs",
+   "fieldtype": "Check",
+   "label": "Legs"
+  },
+  {
+   "default": "0",
+   "fieldname": "feet",
+   "fieldtype": "Check",
+   "label": "Feet"
+  },
+  {
+   "default": "0",
+   "fieldname": "back",
+   "fieldtype": "Check",
+   "label": "Back"
+  },
+  {
+   "fieldname": "column_break_qdws",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "others",
+   "fieldtype": "Check",
+   "label": "Other"
+  },
+  {
+   "fieldname": "specify",
+   "fieldtype": "Data",
+   "label": "Specify other"
+  },
+  {
+   "fieldname": "task_classify",
+   "fieldtype": "Section Break",
+   "label": "Task Classify"
+  },
+  {
+   "default": "0",
+   "fieldname": "engineering",
+   "fieldtype": "Check",
+   "label": "Engineering"
+  },
+  {
+   "default": "0",
+   "fieldname": "lifting",
+   "fieldtype": "Check",
+   "label": "Lifting"
+  },
+  {
+   "default": "0",
+   "fieldname": "material_handling",
+   "fieldtype": "Check",
+   "label": "Material Handling"
+  },
+  {
+   "default": "0",
+   "fieldname": "transport",
+   "fieldtype": "Check",
+   "label": "Transport"
+  },
+  {
+   "default": "0",
+   "fieldname": "blasting",
+   "fieldtype": "Check",
+   "label": "Blasting"
+  },
+  {
+   "default": "0",
+   "fieldname": "drilling",
+   "fieldtype": "Check",
+   "label": "Drilling"
+  },
+  {
+   "fieldname": "column_break_tcdr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "oth",
+   "fieldtype": "Check",
+   "label": "Other"
+  },
+  {
+   "fieldname": "specify_oth",
+   "fieldtype": "Data",
+   "label": "Specify Other"
+  },
+  {
+   "fieldname": "specify_type",
+   "fieldtype": "Select",
+   "label": "Specify Type",
+   "options": "\n5 Why\nFishbone\nICAM"
+  },
+  {
+   "fieldname": "description_of_the_event",
+   "fieldtype": "Long Text",
+   "label": "Description of the event "
+  },
+  {
+   "default": "0",
+   "fieldname": "first_known_case",
+   "fieldtype": "Check",
+   "label": "First known case "
+  },
+  {
+   "fieldname": "location_on_site",
+   "fieldtype": "Small Text",
+   "label": "Site Specific Location"
+  },
+  {
+   "fieldname": "severity_classification",
+   "fieldtype": "Column Break",
+   "label": "Severity Classification"
+  },
+  {
+   "default": "0",
+   "fieldname": "high",
+   "fieldtype": "Check",
+   "label": "High"
+  },
+  {
+   "default": "0",
+   "fieldname": "medium",
+   "fieldtype": "Check",
+   "label": "Medium"
+  },
+  {
+   "default": "0",
+   "fieldname": "low",
+   "fieldtype": "Check",
+   "label": "Low"
+  },
+  {
+   "default": "0",
+   "fieldname": "has_happened",
+   "fieldtype": "Check",
+   "label": "Has Happened"
+  },
+  {
+   "fieldname": "type",
+   "fieldtype": "Column Break",
+   "label": "Type"
+  },
+  {
+   "fieldname": "impact_details_section",
+   "fieldtype": "Section Break",
+   "label": "Impact details"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Data",
+   "label": "Description of incident/impact"
+  },
+  {
+   "fieldname": "employer",
+   "fieldtype": "Select",
+   "label": "Employer",
+   "options": "\nIsambane Mining\nContractor"
+  },
+  {
+   "fieldname": "life_saving_rules",
+   "fieldtype": "Section Break",
+   "label": "Life Saving Rules"
+  },
+  {
+   "fieldname": "impact_calculation",
+   "fieldtype": "Section Break",
+   "label": "Impact calculation"
+  },
+  {
+   "default": "0",
+   "fieldname": "harm_to_people",
+   "fieldtype": "Check",
+   "label": "Harm to people (Safety/Health)"
+  },
+  {
+   "fieldname": "column_break_vsoi",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "hazard_consequence",
+   "fieldtype": "Select",
+   "label": "Hazard Effect/Consequence",
+   "options": "\n1\n2\n3\n4\n5"
+  },
+  {
+   "fieldname": "likelyhood",
+   "fieldtype": "Select",
+   "label": "Likelihood",
+   "options": "\n1\n2\n3\n4\n5"
+  },
+  {
+   "fieldname": "risk_rating",
+   "fieldtype": "Data",
+   "label": "Risk Rating"
+  },
+  {
+   "default": "0",
+   "fieldname": "environmental_impact",
+   "fieldtype": "Check",
+   "label": "Environmental Impact"
+  },
+  {
+   "default": "0",
+   "fieldname": "business_interruption",
+   "fieldtype": "Check",
+   "label": "Business interruption/Material damage and other losses"
+  },
+  {
+   "default": "0",
+   "fieldname": "legal_and_regulatory",
+   "fieldtype": "Check",
+   "label": "Legal and regulatory"
+  },
+  {
+   "default": "0",
+   "fieldname": "impact_on_community",
+   "fieldtype": "Check",
+   "label": "Impact on Reputation/Social/Community"
+  },
+  {
+   "fieldname": "secure_area",
+   "fieldtype": "Section Break",
+   "label": "Secure Area"
+  },
+  {
+   "fieldname": "barricade",
+   "fieldtype": "Select",
+   "label": "Barricade",
+   "options": "\nYes\nN/A"
+  },
+  {
+   "fieldname": "stabalise",
+   "fieldtype": "Select",
+   "label": "Stabalise",
+   "options": "\nYes\nN/A"
+  },
+  {
+   "fieldname": "procedural_communication",
+   "fieldtype": "Section Break",
+   "label": "Procedural Communication"
+  },
+  {
+   "fieldname": "five_why",
+   "fieldtype": "Attach",
+   "label": "5 Why "
+  },
+  {
+   "fieldname": "internal_communication",
+   "fieldtype": "Heading",
+   "label": "Internal Communication"
+  },
+  {
+   "fieldname": "client_communication",
+   "fieldtype": "Heading",
+   "label": "Client Communication"
+  },
+  {
+   "default": "0",
+   "fieldname": "mine_manager",
+   "fieldtype": "Check",
+   "label": "Mine Manager"
+  },
+  {
+   "default": "0",
+   "fieldname": "chief_safety_officer",
+   "fieldtype": "Check",
+   "label": "Chief Safety Officer"
+  },
+  {
+   "fieldname": "column_break_eobk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "external_communication",
+   "fieldtype": "Heading",
+   "label": "External Communication"
+  },
+  {
+   "default": "0",
+   "fieldname": "department_of_labour",
+   "fieldtype": "Check",
+   "label": "Department of Labour (DOL)"
+  },
+  {
+   "default": "0",
+   "fieldname": "department_of_health",
+   "fieldtype": "Check",
+   "label": "Department of Health (DOH)"
+  },
+  {
+   "default": "0",
+   "fieldname": "engineering_managers",
+   "fieldtype": "Check",
+   "label": "Engineering Manager"
+  },
+  {
+   "fieldname": "region",
+   "fieldtype": "Select",
+   "label": "Region",
+   "options": "\nMiddelburg Complex\nErmelo Complex\nPlot 22"
+  },
+  {
+   "fieldname": "incident_type",
+   "fieldtype": "Select",
+   "label": "Incident Type ",
+   "options": "\nInjury\nTMM/Property Damage"
+  },
+  {
+   "default": "0",
+   "fieldname": "drugs_alcohol",
+   "fieldtype": "Check",
+   "label": "No Alcohol or Drugs"
+  },
+  {
+   "default": "0",
+   "fieldname": "wear_your_ppe",
+   "fieldtype": "Check",
+   "label": "Wear Your PPE"
+  },
+  {
+   "default": "0",
+   "fieldname": "safety_belt",
+   "fieldtype": "Check",
+   "label": "Safety Belt"
+  },
+  {
+   "default": "0",
+   "fieldname": "competent_and_licensed",
+   "fieldtype": "Check",
+   "label": "Competent and Licensed"
+  },
+  {
+   "fieldname": "column_break_ybqj",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "environmental_conditions",
+   "fieldtype": "Check",
+   "label": "Environmental Conditions"
+  },
+  {
+   "default": "0",
+   "fieldname": "procedure_compliance",
+   "fieldtype": "Check",
+   "label": "Procedure Compliance"
+  },
+  {
+   "default": "0",
+   "fieldname": "transports",
+   "fieldtype": "Check",
+   "label": "Transport"
+  },
+  {
+   "fieldname": "column_break_avun",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "safety_devices",
+   "fieldtype": "Check",
+   "label": "Safety Devices"
+  },
+  {
+   "default": "0",
+   "fieldname": "lockout_and_isolate",
+   "fieldtype": "Check",
+   "label": "Lockout and Isolate"
+  },
+  {
+   "default": "0",
+   "fieldname": "incident_reporting",
+   "fieldtype": "Check",
+   "label": "Incident Reporting"
+  },
+  {
+   "default": "0",
+   "fieldname": "control_room",
+   "fieldtype": "Check",
+   "label": "Control Room"
+  },
+  {
+   "default": "0",
+   "fieldname": "safety_officer",
+   "fieldtype": "Check",
+   "label": "Safety Officer"
+  },
+  {
+   "default": "0",
+   "fieldname": "isambane_management",
+   "fieldtype": "Check",
+   "label": "Isambane Management"
+  },
+  {
+   "default": "0",
+   "fieldname": "contracts_manager",
+   "fieldtype": "Check",
+   "label": "Contracts Manager"
+  },
+  {
+   "default": "0",
+   "fieldname": "other_comms",
+   "fieldtype": "Check",
+   "label": "Other"
+  },
+  {
+   "fieldname": "specify_other_comms",
+   "fieldtype": "Data",
+   "label": "Specify Other"
+  },
+  {
+   "default": "0",
+   "fieldname": "department_of_water_and_sanitation",
+   "fieldtype": "Check",
+   "label": "Department of Water and Sanitation (DWS)"
+  },
+  {
+   "default": "0",
+   "fieldname": "other_external",
+   "fieldtype": "Check",
+   "label": "Other"
+  },
+  {
+   "fieldname": "specify_other_external",
+   "fieldtype": "Data",
+   "label": "Specify Other"
+  },
+  {
+   "default": "0",
+   "fieldname": "reportable_incident",
+   "fieldtype": "Check",
+   "label": "Reportable Incident"
+  },
+  {
+   "fieldname": "other_securing",
+   "fieldtype": "Data",
+   "label": "Other"
+  },
+  {
+   "fieldname": "preliminiary_investigation",
+   "fieldtype": "Section Break",
+   "label": "Preliminiary Investigation"
+  },
+  {
+   "fieldname": "investigation_technique",
+   "fieldtype": "Section Break",
+   "label": "Section 11.5 Investigation"
+  },
+  {
+   "fieldname": "investigation_techniques",
+   "fieldtype": "Heading",
+   "label": "Investigation Technique"
+  },
+  {
+   "fieldname": "details_of_damage",
+   "fieldtype": "Tab Break",
+   "label": "Details of TMM/Equipment Damage"
+  },
+  {
+   "fieldname": "equipment",
+   "fieldtype": "Section Break",
+   "label": "Equipment"
+  },
+  {
+   "default": "0",
+   "fieldname": "cylinders",
+   "fieldtype": "Check",
+   "label": "Cylinders"
+  },
+  {
+   "default": "0",
+   "fieldname": "tyres",
+   "fieldtype": "Check",
+   "label": "Tyres"
+  },
+  {
+   "default": "0",
+   "fieldname": "adt_bowl",
+   "fieldtype": "Check",
+   "label": "ADT Bowl"
+  },
+  {
+   "default": "0",
+   "fieldname": "other_damages_tmm",
+   "fieldtype": "Check",
+   "label": "Other"
+  },
+  {
+   "fieldname": "specify_damage",
+   "fieldtype": "Data",
+   "label": "Specify "
+  },
+  {
+   "fieldname": "responsible_supervisor",
+   "fieldtype": "Link",
+   "label": "Responsible Supervisor coy Number",
+   "options": "Employee"
+  },
+  {
+   "fetch_from": "responsible_supervisor.employee_name",
+   "fieldname": "responsible_supervisor_name",
+   "fieldtype": "Read Only",
+   "label": "Responsible Supervisor Name"
+  },
+  {
+   "fetch_from": "responsible_supervisor.date_of_birth",
+   "fieldname": "supervisor_id",
+   "fieldtype": "Read Only",
+   "label": "Supervisor ID"
+  },
+  {
+   "fieldname": "injury_details",
+   "fieldtype": "Table",
+   "label": "Injury Details",
+   "options": "Responsible Person"
+  },
+  {
+   "fieldname": "damage_details",
+   "fieldtype": "Table",
+   "label": "Operator/Employee Details",
+   "options": "Person Responsible for Damages"
+  },
+  {
+   "fieldname": "equipment_details",
+   "fieldtype": "Table",
+   "label": "Equipment Details",
+   "options": "Equipment"
+  },
+  {
+   "fieldname": "departmentx",
+   "fieldtype": "Select",
+   "label": "Department",
+   "options": "\nEngineering\nMining\nDrill and Blast\nSafety\nOther"
+  },
+  {
+   "fieldname": "event_category",
+   "fieldtype": "Select",
+   "label": "Event Category",
+   "options": "\nIncident (INC)\nPlanned Task Observation (PTO)\nVisible Field Leadership (VFL)\nInspection (INS)\nAudit (AUD)"
+  },
+  {
+   "fieldname": "vfl_team_member_details",
+   "fieldtype": "Table",
+   "label": "VFL Team Member Details",
+   "options": "VFL Team"
+  },
+  {
+   "fieldname": "risk_level",
+   "fieldtype": "Data",
+   "label": "Risk Level"
+  },
+  {
+   "default": "0",
+   "fieldname": "fender",
+   "fieldtype": "Check",
+   "label": "Fender"
+  },
+  {
+   "default": "0",
+   "fieldname": "windshield",
+   "fieldtype": "Check",
+   "label": "Windshield"
+  },
+  {
+   "fieldname": "investigation_type_and_attachments",
+   "fieldtype": "Table",
+   "label": "Investigation Type and Attachments",
+   "options": "Preliminary Investigation"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-01-05 08:43:21.416579",
+ "modified_by": "Administrator",
+ "module": "Safety",
+ "name": "Incident Management",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

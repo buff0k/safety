@@ -1,0 +1,95 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-12-15 14:54:45.609621",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "damages",
+  "damages_caused_by",
+  "damages_by_full_name",
+  "damages_caused_by_id",
+  "damages_caused_by_age",
+  "damages_caused_by_gender",
+  "damages_caused_by_years_in_current_position",
+  "damages_caused_by_position",
+  "attach_photo_of_damages"
+ ],
+ "fields": [
+  {
+   "fieldname": "damages",
+   "fieldtype": "Section Break",
+   "label": "Damages"
+  },
+  {
+   "fieldname": "damages_caused_by",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Damages Caused By:",
+   "options": "Employee"
+  },
+  {
+   "fetch_from": "damages_caused_by.employee_name",
+   "fieldname": "damages_by_full_name",
+   "fieldtype": "Read Only",
+   "in_list_view": 1,
+   "label": "Damages By (Full Name)"
+  },
+  {
+   "fetch_from": "damages_caused_by.date_of_birth",
+   "fieldname": "damages_caused_by_id",
+   "fieldtype": "Read Only",
+   "in_list_view": 1,
+   "label": "Damages Caused By (ID)"
+  },
+  {
+   "fieldname": "damages_caused_by_age",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Damages Caused By (Age)"
+  },
+  {
+   "fetch_from": "damages_caused_by.gender",
+   "fieldname": "damages_caused_by_gender",
+   "fieldtype": "Read Only",
+   "in_list_view": 1,
+   "label": "Damages Caused By (Gender)"
+  },
+  {
+   "fieldname": "damages_caused_by_years_in_current_position",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Damages Caused By (Years in current position)",
+   "options": "\n<0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23\n24\n25\n26\n27\n28\n29\n30\n31\n32\n33\n34\n35\n36\n37\n38\n39\n40\n41\n42\n43\n44\n45\n46\n47\n48\n49\n50\n51\n52\n53\n54\n55\n56\n57\n58\n59\n60\n61\n62\n63\n64\n65"
+  },
+  {
+   "fieldname": "damages_caused_by_position",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Damages Caused By (Position)",
+   "options": "\nSite Manager\nPlant Manager\nEngineering Foreman\nProduction Supervisor\nControl Room Operator\nChief Safety Officer\nSafety Officer\nSafety Clerk\nSite Clerk\nEngineering Clerk\nHR Officer\nHR Clerk\nMechanic\nMechanic Assistant\nAuto Electrician\nAuto Electrician Assistant\nBoilermaker\nBoilermaker Assistant\nADT Operator\nDozer Operator\nExcavator Operator\nService Truck Operator\nWater Bowser Operator\nDiesel Bowser Operator\nGrader Operator\nTLB Operator\nFEL Operator\nEngineer\nGES\nEngineer In Training\nProduction Manager In Training\nDrill Operator\nDrill Assistant\nSecurity\nBlaster\nBlasting Assistant\nSurveyor\nElectrician\nElectrician Assistant\nAircon Tech"
+  },
+  {
+   "fieldname": "attach_photo_of_damages",
+   "fieldtype": "Attach",
+   "in_list_view": 1,
+   "label": "Attach Photo of Damages"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-12-15 15:05:29.327438",
+ "modified_by": "Administrator",
+ "module": "Safety",
+ "name": "Person Responsible for Damages",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

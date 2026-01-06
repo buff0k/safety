@@ -1,0 +1,290 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format: Action{action_number}-{incident_number}-{date}",
+ "creation": "2025-12-11 11:22:31.160384",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_zghw",
+  "details",
+  "reactive_actions_taken",
+  "proactive_actions_taken",
+  "action_category",
+  "incident_number",
+  "date",
+  "month",
+  "site",
+  "action_number",
+  "type_internal_external",
+  "captured_by",
+  "captured_by_name",
+  "captured_by_id",
+  "non_conformance",
+  "column_break_kwhr",
+  "department",
+  "engineering",
+  "drill_and_blast",
+  "mining",
+  "safety",
+  "other_department",
+  "area",
+  "select_area",
+  "specify_area",
+  "nonconformancedeviation",
+  "corrective_action",
+  "column_break_zsbq",
+  "dates",
+  "target_date",
+  "complete_date",
+  "responsibilities",
+  "responsible_person",
+  "employee_name",
+  "employee_id",
+  "status",
+  "closing_actions",
+  "specify_closing_actions",
+  "attach_evidence_of_actionns"
+ ],
+ "fields": [
+  {
+   "fieldname": "details",
+   "fieldtype": "Heading",
+   "label": "Details"
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Data",
+   "label": "Date"
+  },
+  {
+   "fieldname": "action_number",
+   "fieldtype": "Int",
+   "label": "Action Number"
+  },
+  {
+   "fieldname": "type_internal_external",
+   "fieldtype": "Select",
+   "label": "Type: Internal/External",
+   "options": "\nInternal\nExternal"
+  },
+  {
+   "fieldname": "captured_by",
+   "fieldtype": "Link",
+   "label": "Captured By: (COY)",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "non_conformance",
+   "fieldtype": "Data",
+   "label": "N/C Category"
+  },
+  {
+   "fieldname": "column_break_kwhr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "department",
+   "fieldtype": "Heading",
+   "label": "Department"
+  },
+  {
+   "default": "0",
+   "fieldname": "engineering",
+   "fieldtype": "Check",
+   "label": "Engineering"
+  },
+  {
+   "default": "0",
+   "fieldname": "mining",
+   "fieldtype": "Check",
+   "label": "Mining"
+  },
+  {
+   "default": "0",
+   "fieldname": "safety",
+   "fieldtype": "Check",
+   "label": "Safety"
+  },
+  {
+   "fieldname": "area",
+   "fieldtype": "Heading",
+   "label": "Area"
+  },
+  {
+   "fieldname": "corrective_action",
+   "fieldtype": "Small Text",
+   "label": "Corrective action"
+  },
+  {
+   "fieldname": "column_break_zsbq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "dates",
+   "fieldtype": "Heading",
+   "label": "Dates"
+  },
+  {
+   "fieldname": "target_date",
+   "fieldtype": "Date",
+   "label": "Target Date"
+  },
+  {
+   "fieldname": "complete_date",
+   "fieldtype": "Date",
+   "label": "Completion Date"
+  },
+  {
+   "fieldname": "responsibilities",
+   "fieldtype": "Heading",
+   "label": "Responsibilities"
+  },
+  {
+   "fieldname": "responsible_person",
+   "fieldtype": "Link",
+   "label": "Responsible person",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "\nComplete: Action have been closed and Non-Conformance rectified\nOpen: No movement on the Non-Conformance raised\nIn Progress: There is movement on the Non-Conformance and a management plan has been opened\nOverdue"
+  },
+  {
+   "fieldname": "site",
+   "fieldtype": "Data",
+   "label": "Site"
+  },
+  {
+   "fieldname": "section_break_zghw",
+   "fieldtype": "Section Break",
+   "label": "Actions"
+  },
+  {
+   "fieldname": "select_area",
+   "fieldtype": "Data",
+   "label": "Select Area"
+  },
+  {
+   "fieldname": "specify_area",
+   "fieldtype": "Data",
+   "label": "Specify Area Further"
+  },
+  {
+   "fieldname": "month",
+   "fieldtype": "Data",
+   "label": "Month"
+  },
+  {
+   "fieldname": "action_category",
+   "fieldtype": "Select",
+   "label": "Action Category",
+   "options": "\nIncident (INC)\nInspection (INS)\nPlanned Task Observation (PTO)\nVisible Field Leadership (VFL)\nAudits (AUD)"
+  },
+  {
+   "fieldname": "incident_number",
+   "fieldtype": "Link",
+   "label": "Incident Number",
+   "options": "Incident Management"
+  },
+  {
+   "fetch_from": "responsible_person.employee_name",
+   "fieldname": "employee_name",
+   "fieldtype": "Read Only",
+   "label": "Employee Name"
+  },
+  {
+   "fetch_from": "responsible_person.date_of_birth",
+   "fieldname": "employee_id",
+   "fieldtype": "Read Only",
+   "label": "Employee ID"
+  },
+  {
+   "default": "0",
+   "fieldname": "reactive_actions_taken",
+   "fieldtype": "Check",
+   "label": "Reactive Actions Taken"
+  },
+  {
+   "default": "0",
+   "fieldname": "proactive_actions_taken",
+   "fieldtype": "Check",
+   "label": "Proactive Actions Taken"
+  },
+  {
+   "fieldname": "nonconformancedeviation",
+   "fieldtype": "Small Text",
+   "label": "Non-Conformance/Deviation"
+  },
+  {
+   "default": "0",
+   "fieldname": "drill_and_blast",
+   "fieldtype": "Check",
+   "label": "Drill and Blast"
+  },
+  {
+   "fieldname": "other_department",
+   "fieldtype": "Data",
+   "label": "Other Department"
+  },
+  {
+   "fetch_from": "captured_by.employee_name",
+   "fieldname": "captured_by_name",
+   "fieldtype": "Read Only",
+   "label": "Captured By: "
+  },
+  {
+   "fetch_from": "captured_by.date_of_birth",
+   "fieldname": "captured_by_id",
+   "fieldtype": "Read Only",
+   "label": "Capture By: (ID)"
+  },
+  {
+   "fieldname": "closing_actions",
+   "fieldtype": "Heading",
+   "label": "Closing Actions"
+  },
+  {
+   "fieldname": "specify_closing_actions",
+   "fieldtype": "Small Text",
+   "label": "Specify Closing Actions If Applicable"
+  },
+  {
+   "fieldname": "attach_evidence_of_actionns",
+   "fieldtype": "Table",
+   "label": "Attach Evidence of Actions",
+   "options": "Evidence"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-01-06 05:20:09.746839",
+ "modified_by": "Administrator",
+ "module": "Safety",
+ "name": "Action Management",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

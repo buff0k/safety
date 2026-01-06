@@ -1,0 +1,48 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-01-05 08:21:17.179729",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "type_of_investigation",
+  "investigation_type",
+  "attach_documents"
+ ],
+ "fields": [
+  {
+   "fieldname": "type_of_investigation",
+   "fieldtype": "Section Break",
+   "label": "Type of Investigation"
+  },
+  {
+   "fieldname": "investigation_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Investigation Type",
+   "options": "\nStoryline\nInvestigation Report\nAffected Person(s) Statement\nIncident Notification\nInduction Records\nTraining/Competence Records\nIssue Based Risk Assessment\nMini Hira\nApplicable Procedure\nSafety Caucus\nInvestigation Attendance Register\nTMM Maintenance Records\nAlcohol and Drug Test\nEvidence of Actions\nMedical Certificate of Fitness\nLicense/Authorisation\nOther Supporting Documents\nAction List\nPlanned Task Observation (PTO)"
+  },
+  {
+   "fieldname": "attach_documents",
+   "fieldtype": "Attach",
+   "in_list_view": 1,
+   "label": "Attach Documents"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-01-05 08:40:50.238067",
+ "modified_by": "Administrator",
+ "module": "Safety",
+ "name": "Preliminary Investigation",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -1,0 +1,70 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-12-15 15:23:14.864507",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "equipment_details",
+  "equipment_id",
+  "serial_number",
+  "registration_number_if_applicable",
+  "make",
+  "attachment_of_damage_tmm"
+ ],
+ "fields": [
+  {
+   "fieldname": "equipment_details",
+   "fieldtype": "Section Break",
+   "label": "Equipment Details"
+  },
+  {
+   "fieldname": "equipment_id",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Equipment ID",
+   "options": "Asset"
+  },
+  {
+   "fieldname": "serial_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Serial Number "
+  },
+  {
+   "fetch_from": "equipment_id.item_code",
+   "fieldname": "make",
+   "fieldtype": "Read Only",
+   "in_list_view": 1,
+   "label": "Make"
+  },
+  {
+   "fieldname": "registration_number_if_applicable",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Registration Number If Applicable "
+  },
+  {
+   "fieldname": "attachment_of_damage_tmm",
+   "fieldtype": "Attach",
+   "in_list_view": 1,
+   "label": "Attachemennt of Damage/TMM"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-12-15 15:30:03.264256",
+ "modified_by": "Administrator",
+ "module": "Safety",
+ "name": "Equipment",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

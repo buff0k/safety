@@ -1,0 +1,239 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format: Flash{incident_number}",
+ "creation": "2025-12-17 09:12:02.206636",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "information",
+  "action_category",
+  "incident_number",
+  "incident_classification",
+  "date_and_time_of_incident",
+  "nature",
+  "site",
+  "occurence",
+  "injuries",
+  "name_of_person",
+  "position",
+  "years_in_current_position",
+  "column_break_wlap",
+  "description_of_incident_impact",
+  "photos_and_attachments",
+  "tmm_equipment_damages",
+  "responsible_person_name",
+  "position_of_person_responsible",
+  "years_in_position",
+  "equipment_details",
+  "equipment_id",
+  "serial_number",
+  "registration_number",
+  "make",
+  "additional_information",
+  "name_of_employer",
+  "applicable_life_saving_rule",
+  "column_break_vuci",
+  "repeat_incident",
+  "potential_severity_classification",
+  "report",
+  "flash_report",
+  "flash"
+ ],
+ "fields": [
+  {
+   "fieldname": "information",
+   "fieldtype": "Section Break",
+   "label": "Information"
+  },
+  {
+   "fieldname": "incident_number",
+   "fieldtype": "Link",
+   "label": "Incident Number",
+   "options": "Incident Management"
+  },
+  {
+   "fieldname": "incident_classification",
+   "fieldtype": "Data",
+   "label": "Incident Classification"
+  },
+  {
+   "fieldname": "date_and_time_of_incident",
+   "fieldtype": "Data",
+   "label": "Date and time of incident"
+  },
+  {
+   "fieldname": "nature",
+   "fieldtype": "Data",
+   "label": "Nature of injury/Damage/Environment"
+  },
+  {
+   "fieldname": "site",
+   "fieldtype": "Data",
+   "label": "Site"
+  },
+  {
+   "fieldname": "occurence",
+   "fieldtype": "Data",
+   "label": "Where Did The Incident Occur"
+  },
+  {
+   "fieldname": "name_of_person",
+   "fieldtype": "Data",
+   "label": "Name of injured/affected person"
+  },
+  {
+   "fieldname": "name_of_employer",
+   "fieldtype": "Data",
+   "label": "Name of Employer"
+  },
+  {
+   "fieldname": "position",
+   "fieldtype": "Data",
+   "label": "Position"
+  },
+  {
+   "fieldname": "years_in_current_position",
+   "fieldtype": "Data",
+   "label": "Years in current position"
+  },
+  {
+   "fieldname": "potential_severity_classification",
+   "fieldtype": "Data",
+   "label": "Potential Severity Classification"
+  },
+  {
+   "fieldname": "repeat_incident",
+   "fieldtype": "Data",
+   "label": "Repeat Incident"
+  },
+  {
+   "fieldname": "applicable_life_saving_rule",
+   "fieldtype": "Data",
+   "label": "Applicable Life Saving Rule"
+  },
+  {
+   "fieldname": "column_break_wlap",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "description_of_incident_impact",
+   "fieldtype": "Small Text",
+   "label": "Description of Incident/Impact"
+  },
+  {
+   "fieldname": "photos_and_attachments",
+   "fieldtype": "Table",
+   "label": "Photos and Attachments",
+   "options": "Incident Photos"
+  },
+  {
+   "fieldname": "report",
+   "fieldtype": "Tab Break",
+   "label": "Report"
+  },
+  {
+   "fieldname": "flash_report",
+   "fieldtype": "Section Break",
+   "label": "Flash Report"
+  },
+  {
+   "fieldname": "flash",
+   "fieldtype": "HTML",
+   "label": "Flash"
+  },
+  {
+   "fieldname": "additional_information",
+   "fieldtype": "Section Break",
+   "label": "Additional Information"
+  },
+  {
+   "fieldname": "column_break_vuci",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "injuries",
+   "fieldtype": "Heading",
+   "label": "Injury"
+  },
+  {
+   "fieldname": "tmm_equipment_damages",
+   "fieldtype": "Heading",
+   "label": "TMM/Equipment Damages"
+  },
+  {
+   "fieldname": "responsible_person_name",
+   "fieldtype": "Data",
+   "label": "Employee/Operator Name"
+  },
+  {
+   "fieldname": "position_of_person_responsible",
+   "fieldtype": "Data",
+   "label": "Position of Employee/Operator"
+  },
+  {
+   "fieldname": "years_in_position",
+   "fieldtype": "Data",
+   "label": "Years in Position of Employee/Operator"
+  },
+  {
+   "fieldname": "equipment_details",
+   "fieldtype": "Section Break",
+   "label": "Equipment Details"
+  },
+  {
+   "fieldname": "equipment_id",
+   "fieldtype": "Data",
+   "label": "Equipment ID"
+  },
+  {
+   "fieldname": "serial_number",
+   "fieldtype": "Data",
+   "label": "Serial Number"
+  },
+  {
+   "fieldname": "registration_number",
+   "fieldtype": "Data",
+   "label": "Registration Number if Applicable"
+  },
+  {
+   "fieldname": "make",
+   "fieldtype": "Data",
+   "label": "Make"
+  },
+  {
+   "fieldname": "action_category",
+   "fieldtype": "Select",
+   "label": "Action Category",
+   "options": "\nIncident (INC)\nInspection (INS)\nPlanned Task Observation (PTO)\nVisible Field Leadership (VFL)\nAudits (AUD)"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-12-18 11:17:29.101064",
+ "modified_by": "Administrator",
+ "module": "Safety",
+ "name": "Flash Reports",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
