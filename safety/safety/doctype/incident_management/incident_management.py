@@ -1,13 +1,26 @@
 import frappe
 from frappe.model.document import Document
 from datetime import date
+from frappe.utils import get_datetime
+from typing import Optional
 
 
 class IncidentManagement(Document):
 
+    # --------------------------------------------------
+    # LIFECYCLE HOOKS
+    # --------------------------------------------------
     def before_insert(self):
-        if not self.incident_number:
-            self.incident_number = get_next_incident_number(self.event_category)
+        if (
+            not self.incident_number
+            and self.event_category
+            and self.datetime_incident
+        ):
+            self.incident_number = get_next_incident_number(
+                event_category=self.event_category,
+                datetime_incident=self.datetime_incident
+            )
+
         self.calculate_all()
         self.cleanup_vfl_team()
         self.cleanup_attachments()
@@ -16,7 +29,7 @@ class IncidentManagement(Document):
         self.calculate_all()
         self.cleanup_vfl_team()
         self.cleanup_attachments()
-        self.validate_preliminary_investigation_attachments()
+
     # --------------------------------------------------
     # CENTRAL CALCULATIONS
     # --------------------------------------------------
@@ -193,47 +206,29 @@ class IncidentManagement(Document):
             }.get(consequence))
 
         self.description = "\n".join(filter(None, descriptions))
-    # --------------------------------------------------
-    # PRELIMINARY INVESTIGATION ATTACHMENT VALIDATION
-    # --------------------------------------------------
-    def validate_preliminary_investigation_attachments(self):
-
-        mapping = {
-            "storyline": ["attach_one", "attach_five", "attach_six"],
-            "investigation_report": ["attach_two", "attach_three", "attach_four"],
-            "affected_person_statement": ["attach_seven", "attach_eight", "attach_nine"],
-            "incident_notification": ["attach_ten", "attach_eleven", "attach_twelve"],
-            "induction_records": ["attach_nine", "attach_ten", "attach_eleven"],
-            "training_records": ["attach_twelve", "attach_thirteen", "attach_fourteen"],
-            "issue_based_risk_assessment": ["attach_fifteen", "attach_sixteen", "attach_seventeen"],
-            "mini_hira": ["attach_eighteen"],
-            "applicable_procedure": ["attach_nineteen", "attach_twenty", "attach_twenty_one"],
-            "planned_task_observation": ["attach_twenty_two", "attach_twenty_three", "attach_twenty_four"],
-            "safety_caucus": ["attach_twenty_five", "attach_twenty_six", "attach_twenty_seven"],
-            "investigation_register": ["attach_twenty_eight", "attach_twenty_nine", "attach_thirty"],
-            "tmm_records": ["attach_thirty_one", "attach_thirty_two", "attach_thirty_three"],
-            "alcohol_and_drug_test": ["attach_thirty_four", "attach_thirty_five", "attach_thirty_six"],
-            "action_list": ["attach_thrity_seven", "attach_thirty_eight", "attach_thirty_nine"],
-            "evidence_of_actions": ["attach_forty", "attach_forty_one", "attach_forty_two"],
-            "medical_certificate_of_fitness": ["attach_forty_three"],
-            "license_authorisation": ["attach_forty_four", "attach_forty_five", "attach_forty_six"]
-        }
-
-        for check_field, attachments in mapping.items():
-
-            if self.get(check_field):
-
-                if not any(self.get(a) for a in attachments):
-                    frappe.throw(
-                        f"At least one attachment is required when '{check_field.replace('_', ' ').title()}' is selected."
-                    )
 
 
 # ======================================================
-# INCIDENT NUMBER GENERATOR
+# INCIDENT NUMBER GENERATOR (v16 COMPATIBLE)
 # ======================================================
-@frappe.whitelist()
-def get_next_incident_number(event_category=None):
+@frappe.whitelist(methods=["POST"])
+def get_next_incident_number(
+    *,
+    event_category: Optional[str] = None,
+    datetime_incident: Optional[str] = None
+) -> str:
+    """
+    Generate a globally sequential Incident Number.
+
+    Format:
+        YYYY-MM/IS/<PREFIX>/<SEQUENCE>
+
+    Sequence:
+        Global, never resets
+    """
+
+    if not event_category or not datetime_incident:
+        frappe.throw("event_category and datetime_incident are required")
 
     category_map = {
         "Planned Task Observation (PTO)": "PTO",
@@ -245,17 +240,23 @@ def get_next_incident_number(event_category=None):
 
     prefix = category_map.get(event_category, "GEN")
 
-    last = frappe.db.sql("""
+    dt = get_datetime(datetime_incident)
+    year_month = dt.strftime("%Y-%m")
+
+    last = frappe.db.sql(
+        """
         SELECT incident_number
         FROM `tabIncident Management`
-        WHERE incident_number REGEXP '^IS/.+/[0-9]{5}$'
+        WHERE incident_number REGEXP '/[0-9]{5}$'
         ORDER BY CAST(SUBSTRING_INDEX(incident_number, '/', -1) AS UNSIGNED) DESC
         LIMIT 1
         FOR UPDATE
-    """)
+        """,
+        as_dict=False
+    )
 
     next_num = 1
     if last and last[0][0]:
         next_num = int(last[0][0].split("/")[-1]) + 1
 
-    return f"IS/{prefix}/{next_num:05d}"
+    return f"{year_month}/IS/{prefix}/{next_num:05d}"

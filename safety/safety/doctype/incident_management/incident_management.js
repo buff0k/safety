@@ -1,21 +1,25 @@
 frappe.ui.form.on("Incident Management", {
 
     // --------------------------------------------------
-    // INCIDENT NUMBER (CATEGORY AWARE)
+    // INCIDENT NUMBER (CATEGORY + DATETIME AWARE)
     // --------------------------------------------------
     event_category(frm) {
         handle_event_category_view(frm);
         toggle_vfl_team_table(frm);
 
-        if (frm.doc.event_category && !frm.doc.incident_number) {
+        if (!frm.doc.incident_number) {
+            generate_incident_number(frm);
+        }
+    },
+
+    datetime_incident(frm) {
+        if (!frm.doc.incident_number) {
             generate_incident_number(frm);
         }
     },
 
     site(frm) {
-        if (frm.doc.site && frm.doc.event_category && !frm.doc.incident_number) {
-            generate_incident_number(frm);
-        }
+        // site no longer triggers numbering
     },
 
     // --------------------------------------------------
@@ -99,9 +103,17 @@ frappe.ui.form.on("Incident Management", {
 // INCIDENT NUMBER HELPER
 // =====================================================
 function generate_incident_number(frm) {
+
+    if (!frm.doc.event_category || !frm.doc.datetime_incident) {
+        return;
+    }
+
     frappe.call({
         method: "safety.safety.doctype.incident_management.incident_management.get_next_incident_number",
-        args: { event_category: frm.doc.event_category },
+        args: {
+            event_category: frm.doc.event_category,
+            datetime_incident: frm.doc.datetime_incident
+        },
         callback(r) {
             if (r.message) {
                 frm.set_value("incident_number", r.message);
@@ -109,6 +121,7 @@ function generate_incident_number(frm) {
         }
     });
 }
+
 
 
 // =====================================================
@@ -373,44 +386,7 @@ function populate_impact_description(frm) {
 }
 
 
-// =====================================================
-// ATTACHMENT VISIBILITY ENGINE
-// =====================================================
-function toggle_all_attachments(frm) {
 
-    const map = {
-        storyline: ["attach_one", "attach_five", "attach_six"],
-        investigation_report: ["attach_two", "attach_three", "attach_four"],
-        affected_person_statement: ["attach_seven", "attach_eight", "attach_nine"],
-        incident_notification: ["attach_ten", "attach_eleven", "attach_twelve"],
-        induction_records: ["attach_nine", "attach_ten", "attach_eleven"],
-        training_records: ["attach_twelve", "attach_thirteen", "attach_fourteen"],
-        issue_based_risk_assessment: ["attach_fifteen", "attach_sixteen", "attach_seventeen"],
-        mini_hira: ["attach_eighteen"],
-        applicable_procedure: ["attach_nineteen", "attach_twenty", "attach_twenty_one"],
-        planned_task_observation: ["attach_twenty_two", "attach_twenty_three", "attach_twenty_four"],
-        safety_caucus: ["attach_twenty_five", "attach_twenty_six", "attach_twenty_seven"],
-        investigation_register: ["attach_twenty_eight", "attach_twenty_nine", "attach_thirty"],
-        tmm_records: ["attach_thirty_one", "attach_thirty_two", "attach_thirty_three"],
-        alcohol_and_drug_test: ["attach_thirty_four", "attach_thirty_five", "attach_thirty_six"],
-        action_list: ["attach_thrity_seven", "attach_thirty_eight", "attach_thirty_nine"],
-        evidence_of_actions: ["attach_forty", "attach_forty_one", "attach_forty_two"],
-        medical_certificate_of_fitness: ["attach_forty_three"],
-        license_authorisation: ["attach_forty_four", "attach_forty_five", "attach_forty_six"],
-        other_supporting_documents: ["attach_forty_seven", "attach_forty_eight"]
-    };
-
-    Object.keys(map).forEach(check_field => {
-        const show = frm.doc[check_field];
-
-        map[check_field].forEach(attach_field => {
-            frm.set_df_property(attach_field, "hidden", show ? 0 : 1);
-            if (!show) {
-                frm.set_value(attach_field, null);
-            }
-        });
-    });
-}
 // =====================================================
 // CHILD TABLE AGE CALCULATION (UI ONLY)
 // =====================================================
