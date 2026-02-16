@@ -23,6 +23,7 @@
   "description_of_the_event",
   "incident_type",
   "employer",
+  "company",
   "injury_details",
   "damage_details",
   "responsible_supervisor",
@@ -352,7 +353,7 @@
    "fieldname": "site",
    "fieldtype": "Link",
    "label": "Site",
-   "options": "Location",
+   "options": "Branch",
    "reqd": 1
   },
   {
@@ -568,9 +569,11 @@
   },
   {
    "fieldname": "employer",
-   "fieldtype": "Select",
+   "fieldtype": "Link",
    "label": "Employer",
-   "options": "\nIsambane Mining\nContractor"
+   "link_filters": "[[\"DocType\",\"name\",\"in\",[\"Supplier\",\"Company\"]]]",
+   "options": "DocType",
+   "reqd": 1
   },
   {
    "fieldname": "life_saving_rules",
@@ -982,16 +985,23 @@
    "fieldtype": "Table",
    "label": "Investigation Type and Attachments",
    "options": "Preliminary Investigation"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Dynamic Link",
+   "label": "Company",
+   "options": "employer",
+   "reqd": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-01-06 14:02:00.911717",
+ "modified": "2026-02-16 15:38:06.958370",
  "modified_by": "Administrator",
  "module": "Safety",
  "name": "Incident Management",
- "naming_rule": "Expression",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {
