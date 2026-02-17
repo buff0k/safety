@@ -1,0 +1,75 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-02-17 05:28:00.364641",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "sites_start_dates",
+  "site",
+  "start_date",
+  "ltifr_target",
+  "ltifr",
+  "color",
+  "complex"
+ ],
+ "fields": [
+  {
+   "fieldname": "sites_start_dates",
+   "fieldtype": "Section Break",
+   "label": "Sites and Start Dates"
+  },
+  {
+   "fieldname": "site",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Site",
+   "options": "Branch"
+  },
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Start Date"
+  },
+  {
+   "fieldname": "ltifr_target",
+   "fieldtype": "Float",
+   "label": "LTIFR Target",
+   "precision": "2"
+  },
+  {
+   "fieldname": "color",
+   "fieldtype": "Color",
+   "label": "Color"
+  },
+  {
+   "fieldname": "complex",
+   "fieldtype": "Select",
+   "label": "Complex",
+   "options": "\nMiddelburg\nErmelo\nOther\nPlot 22"
+  },
+  {
+   "fieldname": "ltifr",
+   "fieldtype": "Float",
+   "label": "LTIFR",
+   "precision": "2"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-02-17 13:53:30.259044",
+ "modified_by": "Administrator",
+ "module": "Safety",
+ "name": "Site Start Date Child",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

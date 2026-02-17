@@ -1,0 +1,70 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-02-17 05:30:15.421078",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "start_date_sites",
+  "company_ltifr_target",
+  "company_ltifr_actual",
+  "company_colour",
+  "site_and_start_date"
+ ],
+ "fields": [
+  {
+   "fieldname": "start_date_sites",
+   "fieldtype": "Section Break",
+   "label": "Start Date for Sites"
+  },
+  {
+   "fieldname": "site_and_start_date",
+   "fieldtype": "Table",
+   "label": "Sites and Start Dates",
+   "options": "Site Start Date Child"
+  },
+  {
+   "fieldname": "company_ltifr_target",
+   "fieldtype": "Float",
+   "label": "Company LTIFR Target",
+   "precision": "2"
+  },
+  {
+   "fieldname": "company_ltifr_actual",
+   "fieldtype": "Float",
+   "label": "Company LTIFR Actual",
+   "precision": "2"
+  },
+  {
+   "fieldname": "company_colour",
+   "fieldtype": "Color",
+   "label": "Company Colour"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2026-02-17 14:20:12.682518",
+ "modified_by": "Administrator",
+ "module": "Safety",
+ "name": "Site Start Dates",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}
