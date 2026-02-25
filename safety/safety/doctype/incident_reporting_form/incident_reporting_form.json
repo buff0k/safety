@@ -1,0 +1,148 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-02-25 10:01:12.899609",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "select_incident_number",
+  "company_name",
+  "reporting_name_surname",
+  "reporting_coy_number",
+  "responsible_manager_isambane",
+  "responsible_manager_contractor",
+  "injured_name_and_surname",
+  "injured_person_coy_number",
+  "where_did_the_incident_happen",
+  "date_of_incident",
+  "safety",
+  "health",
+  "hygiene",
+  "environment",
+  "community",
+  "description_of_incident",
+  "immediate_actions_taken"
+ ],
+ "fields": [
+  {
+   "default": "Isambane Mining",
+   "fieldname": "company_name",
+   "fieldtype": "Select",
+   "label": "Company Name ",
+   "options": "\nIsambane Mining"
+  },
+  {
+   "fieldname": "reporting_name_surname",
+   "fieldtype": "Data",
+   "label": "Reporting Person Name and Surname "
+  },
+  {
+   "fieldname": "reporting_coy_number",
+   "fieldtype": "Data",
+   "label": "Reporting Person COY Number "
+  },
+  {
+   "fieldname": "responsible_manager_isambane",
+   "fieldtype": "Data",
+   "label": "Responsible Manager / Foreman (Isambane)"
+  },
+  {
+   "fieldname": "responsible_manager_contractor",
+   "fieldtype": "Data",
+   "label": "Responsible Manager / Foreman (Contractor)"
+  },
+  {
+   "fieldname": "injured_name_and_surname",
+   "fieldtype": "Data",
+   "label": "Injured / Involved Person Name and Surname "
+  },
+  {
+   "fieldname": "injured_person_coy_number",
+   "fieldtype": "Data",
+   "label": "Injured / Involved Person COY Number"
+  },
+  {
+   "fieldname": "select_incident_number",
+   "fieldtype": "Link",
+   "label": "Select Incident Number ",
+   "options": "Incident Management"
+  },
+  {
+   "fieldname": "where_did_the_incident_happen",
+   "fieldtype": "Data",
+   "label": "Where did the Incident Happen"
+  },
+  {
+   "fieldname": "date_of_incident",
+   "fieldtype": "Data",
+   "label": "Date and Time of Incident "
+  },
+  {
+   "default": "0",
+   "fieldname": "safety",
+   "fieldtype": "Check",
+   "label": "Safety"
+  },
+  {
+   "default": "0",
+   "fieldname": "health",
+   "fieldtype": "Check",
+   "label": "Health "
+  },
+  {
+   "default": "0",
+   "fieldname": "hygiene",
+   "fieldtype": "Check",
+   "label": "Hygiene"
+  },
+  {
+   "default": "0",
+   "fieldname": "environment",
+   "fieldtype": "Check",
+   "label": "Environment "
+  },
+  {
+   "default": "0",
+   "fieldname": "community",
+   "fieldtype": "Check",
+   "label": "Community"
+  },
+  {
+   "fieldname": "description_of_incident",
+   "fieldtype": "Small Text",
+   "label": "Full Description of Incident "
+  },
+  {
+   "fieldname": "immediate_actions_taken",
+   "fieldtype": "Small Text",
+   "label": "Immediate Actions Taken "
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-02-25 10:27:49.176847",
+ "modified_by": "Administrator",
+ "module": "Safety",
+ "name": "Incident Reporting Form",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

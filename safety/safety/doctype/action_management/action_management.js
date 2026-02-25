@@ -4,16 +4,35 @@ frappe.ui.form.on("Action Management", {
         frm.toggle_display("action_category", true);
         frm.toggle_display("incident_number", true);
 
+        // NEW: enforce dynamic options on load
+        update_action_category_options(frm);
+
         set_incident_query(frm);
 
         // 🔒 Enforce overdue rule when form loads
         enforce_overdue_status(frm);
     },
 
+    refresh(frm) {
+        // NEW: keep options correct on refresh too
+        update_action_category_options(frm);
+    },
+
     reactive_actions_taken(frm) {
         if (frm.doc.reactive_actions_taken) {
             frm.set_value("proactive_actions_taken", 0);
             frm.set_value("action_number", null);
+
+            // NEW: update options + force value
+            update_action_category_options(frm);
+
+            // For reactive we force Incident (INC)
+            if (frm.doc.action_category !== "Incident (INC)") {
+                frm.set_value("action_category", "Incident (INC)");
+            }
+        } else {
+            // If unticked, re-evaluate based on other checkbox
+            update_action_category_options(frm);
         }
     },
 
@@ -21,12 +40,26 @@ frappe.ui.form.on("Action Management", {
         if (frm.doc.proactive_actions_taken) {
             frm.set_value("reactive_actions_taken", 0);
             frm.set_value("action_number", null);
+
+            // NEW: update options + clear invalid
+            update_action_category_options(frm);
+
+            // Proactive must not be Incident (INC)
+            if (frm.doc.action_category === "Incident (INC)") {
+                frm.set_value("action_category", null);
+            }
+        } else {
+            update_action_category_options(frm);
         }
     },
 
     action_category(frm) {
         frm.set_value("incident_number", null);
         frm.set_value("action_number", null);
+
+        // NEW: ensure the selected value is valid for current checkbox state
+        update_action_category_options(frm);
+
         set_incident_query(frm);
 
         if (frm.doc.proactive_actions_taken && frm.doc.action_category) {
@@ -106,6 +139,50 @@ frappe.ui.form.on("Action Management", {
 });
 
 /* ---------------- Helper Functions ---------------- */
+
+function update_action_category_options(frm) {
+    const field = "action_category";
+
+    const ALL = [
+        "Incident (INC)",
+        "Inspection (INS)",
+        "Planned Task Observation (PTO)",
+        "Visible Field Leadership (VFL)",
+        "Audits (AUD)"
+    ];
+
+    const REACTIVE_ONLY = ["Incident (INC)"];
+
+    const PROACTIVE_ONLY = [
+        "Inspection (INS)",
+        "Planned Task Observation (PTO)",
+        "Visible Field Leadership (VFL)",
+        "Audits (AUD)"
+    ];
+
+    let allowed = ALL;
+
+    if (frm.doc.reactive_actions_taken) {
+        allowed = REACTIVE_ONLY;
+    } else if (frm.doc.proactive_actions_taken) {
+        allowed = PROACTIVE_ONLY;
+    }
+
+    // Frappe Select expects newline-separated options
+    frm.set_df_property(field, "options", allowed.join("\n"));
+
+    // If current value is not allowed, clear it (unless reactive, where we force it)
+    if (frm.doc[field] && !allowed.includes(frm.doc[field])) {
+        frm.set_value(field, null);
+    }
+
+    // For reactive, force the value (avoid empty select)
+    if (frm.doc.reactive_actions_taken && frm.doc[field] !== "Incident (INC)") {
+        frm.set_value(field, "Incident (INC)");
+    }
+
+    frm.refresh_field(field);
+}
 
 function enforce_overdue_status(frm) {
     if (!frm.doc.target_date) return;

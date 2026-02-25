@@ -1,0 +1,56 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-02-24 11:07:25.130511",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "personal_information",
+  "company_number",
+  "full_name",
+  "personal_info"
+ ],
+ "fields": [
+  {
+   "fieldname": "personal_information",
+   "fieldtype": "Section Break",
+   "label": "Personal Information"
+  },
+  {
+   "fieldname": "company_number",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Company Number",
+   "options": "Employee"
+  },
+  {
+   "fetch_from": "company_number.employee_name",
+   "fieldname": "full_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Full Name "
+  },
+  {
+   "fieldname": "personal_info",
+   "fieldtype": "Attach",
+   "in_list_view": 1,
+   "label": "Attach Personal Information"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-02-24 12:02:25.110301",
+ "modified_by": "Administrator",
+ "module": "Safety",
+ "name": "Mock Drill Child",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -6,15 +6,39 @@ from datetime import datetime
 class ActionManagement(Document):
 
     def before_insert(self):
+        self.validate_action_category_rules()  # NEW
         self.populate_from_incident()
         self.set_action_number()
         self.set_month_from_date()
         self.enforce_overdue_status()
 
     def validate(self):
+        self.validate_action_category_rules()  # NEW
         self.populate_from_incident()
         self.set_month_from_date()
         self.enforce_overdue_status()
+
+    # --------------------------------------------------
+    # NEW: SERVER-SIDE ENFORCEMENT FOR CATEGORY OPTIONS
+    # --------------------------------------------------
+    def validate_action_category_rules(self):
+        reactive = bool(self.reactive_actions_taken)
+        proactive = bool(self.proactive_actions_taken)
+
+        if reactive and proactive:
+            frappe.throw("Please select either Reactive or Proactive Actions Taken, not both.")
+
+        if reactive:
+            # Reactive: force / validate INC only
+            if self.action_category and self.action_category != "Incident (INC)":
+                frappe.throw('For Reactive actions, Action Category must be "Incident (INC)".')
+            # If empty, set it (matches your UI intent)
+            self.action_category = "Incident (INC)"
+
+        if proactive:
+            # Proactive: INC not allowed
+            if self.action_category == "Incident (INC)":
+                frappe.throw('For Proactive actions, "Incident (INC)" is not allowed as Action Category.')
 
     def enforce_overdue_status(self):
         if not self.target_date:
@@ -34,7 +58,6 @@ class ActionManagement(Document):
 
         if today > target_date and self.status != COMPLETE_STATUS:
             self.status = "Overdue"
-
 
     def populate_from_incident(self):
         if not self.reactive_actions_taken or not self.incident_number:

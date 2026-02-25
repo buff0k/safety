@@ -5,7 +5,7 @@ frappe.ui.form.on("Incident Management", {
     // --------------------------------------------------
     event_category(frm) {
         handle_event_category_view(frm);
-        toggle_vfl_team_table(frm);
+        toggle_vfl_team_tables(frm);
 
         if (!frm.doc.incident_number) {
             generate_incident_number(frm);
@@ -82,7 +82,7 @@ frappe.ui.form.on("Incident Management", {
         handle_event_category_view(frm);
         toggle_investigation_attachments(frm);
         toggle_incident_type_fields(frm);
-        toggle_vfl_team_table(frm);
+        toggle_vfl_team_tables(frm);
         calculate_risk_rating(frm);
         apply_risk_level_style(frm);
         populate_impact_description(frm);
@@ -123,9 +123,8 @@ function generate_incident_number(frm) {
 }
 
 
-
 // =====================================================
-// EVENT CATEGORY VIEW HANDLER (SAFE)
+// EVENT CATEGORY VIEW HANDLER (FIXED FOR VFL TAB)
 // =====================================================
 function handle_event_category_view(frm) {
 
@@ -138,7 +137,8 @@ function handle_event_category_view(frm) {
         "Audit (AUD)"
     ];
 
-    const allowed_fields = [
+    // Base fields you want visible for ALL restricted categories (Incident information tab fields)
+    const base_allowed_fields = [
         "event_category",
         "region",
         "site",
@@ -150,18 +150,107 @@ function handle_event_category_view(frm) {
         "incident_number",
         "description_of_the_event",
         "employer",
-        "vfl_team_member_details"
+        "vfl_team_member_details" // keep if you use it
     ];
 
+    // Fields that live on the VFL tab (make them visible when event_category === VFL)
+    const vfl_tab_fields = [
+        // Tab itself + its layout
+        "visible_felt_leadership",
+        "details",
+        "location",
+        "date",
+        "duration",
+        "description_of_activity",
+        "vfl_team_members",
+
+        // Headings / section breaks / layout that support the VFL questions
+        "1_personal_protective_equipment",
+        "2_position_of_people",
+        "reaction_of_people",
+        "tools_and_equipment",
+        "procedures",
+        "orderliness",
+        "communication",
+        "hards",
+        "competent",
+
+        "section_break_payz",
+        "section_break_luuj",
+        "section_break_xpfg",
+
+        // VFL question fields (selects)
+        "incorrect_ppe",
+        "not_trained_on_ppe",
+        "ppe_not_used",
+        "wrong_type_of_ppe",
+        "ppe_safe_used",
+
+        "striking",
+        "caught_between_objects",
+        "falling",
+        "extreme_temperature",
+        "conatcing_electric",
+        "inhaling_swallowing",
+        "repetitive_motion",
+        "akward_position",
+        "correct_position",
+
+        "adjusting_ppe",
+        "adjusting_position",
+        "rearrenging_jobs",
+        "stopping_activities",
+
+        "not_right_for_the_job",
+        "not_used_correctly",
+        "not_in_good_safe_position",
+        "good_safe_position",
+
+        "procedures_not_available",
+        "procedure_not_adequate",
+        "procedure_not_known",
+        "procedure_not_understood",
+        "procedure_not_followed_or_known",
+        "procedure_known_available_followed",
+
+        "housekeeping_standard_not_known",
+        "housekeeping_standard_not_understood",
+        "housekeeping_standard_not_followed",
+        "no_changes",
+        "good_hoousekeeping",
+
+        "no_communication",
+        "no_discussion_of_task_at_hand",
+        "good_communication",
+
+        "hazard_not_removed",
+        "hazards_not_reported",
+        "potential_hazard_not_recognized",
+        "good_hira",
+
+        "not_authorised",
+        "not_competent",
+        "not_trained",
+        "fully_competent"
+    ];
+
+    // If NOT restricted => show everything
     if (!restricted_categories.includes(frm.doc.event_category)) {
         frm.fields.forEach(f => {
             if (f.df.fieldname) {
                 frm.set_df_property(f.df.fieldname, "hidden", 0);
             }
         });
+
+        // also ensure restricted tabs are visible again
+        ["immediate_actions", "investigation"].forEach(tab => {
+            if (frm.fields_dict[tab]) frm.set_df_property(tab, "hidden", 0);
+        });
+
         return;
     }
 
+    // Restricted category => hide all NON-LAYOUT fields
     frm.fields.forEach(f => {
         if (
             f.df.fieldname &&
@@ -171,11 +260,35 @@ function handle_event_category_view(frm) {
         }
     });
 
-    allowed_fields.forEach(field => {
-        frm.set_df_property(field, "hidden", 0);
+    // Always show base allowed fields
+    base_allowed_fields.forEach(field => {
+        if (frm.fields_dict[field]) frm.set_df_property(field, "hidden", 0);
     });
 
-    ensure_parent_layout_visible(frm, allowed_fields);
+    // If VFL => show all VFL tab fields too + hide irrelevant tabs (optional)
+    if (frm.doc.event_category === "Visible Field Leadership (VFL)") {
+
+        vfl_tab_fields.forEach(field => {
+            if (frm.fields_dict[field]) frm.set_df_property(field, "hidden", 0);
+        });
+
+        // Optional (as per your request): hide tabs that can be hidden
+        ["immediate_actions", "investigation"].forEach(tab => {
+            if (frm.fields_dict[tab]) frm.set_df_property(tab, "hidden", 1);
+        });
+    } else {
+        // Non-VFL restricted categories: keep these tabs visible (or hide if you want)
+        ["immediate_actions", "investigation"].forEach(tab => {
+            if (frm.fields_dict[tab]) frm.set_df_property(tab, "hidden", 0);
+        });
+    }
+
+    // Ensure parent layout containers are visible for everything we allowed
+    const all_allowed = (frm.doc.event_category === "Visible Field Leadership (VFL)")
+        ? [...base_allowed_fields, ...vfl_tab_fields]
+        : [...base_allowed_fields];
+
+    ensure_parent_layout_visible(frm, all_allowed);
 }
 
 
@@ -203,21 +316,27 @@ function ensure_parent_layout_visible(frm, fieldnames) {
 
 
 // =====================================================
-// VFL TEAM VISIBILITY
+// VFL TEAM VISIBILITY (HANDLE BOTH TABLES)
 // =====================================================
-function toggle_vfl_team_table(frm) {
+function toggle_vfl_team_tables(frm) {
 
-    const field = "vfl_team_member_details";
+    const tables = ["vfl_team_member_details", "vfl_team_members"];
 
     if (frm.doc.event_category === "Visible Field Leadership (VFL)") {
-        frm.set_df_property(field, "hidden", 0);
+        tables.forEach(t => {
+            if (frm.fields_dict[t]) frm.set_df_property(t, "hidden", 0);
+        });
     } else {
-        frm.set_df_property(field, "hidden", 1);
+        tables.forEach(t => {
+            if (!frm.fields_dict[t]) return;
 
-        if (frm.doc[field] && frm.doc[field].length) {
-            frm.clear_table(field);
-            frm.refresh_field(field);
-        }
+            frm.set_df_property(t, "hidden", 1);
+
+            if (frm.doc[t] && frm.doc[t].length) {
+                frm.clear_table(t);
+                frm.refresh_field(t);
+            }
+        });
     }
 }
 
@@ -293,6 +412,8 @@ function apply_risk_level_style(frm) {
         input.css({ color: "green", fontWeight: "bold" });
     }
 }
+
+
 // =====================================================
 // INVESTIGATION ATTACHMENTS (5 WHY / FISHBONE / ICAM)
 // =====================================================
@@ -386,7 +507,6 @@ function populate_impact_description(frm) {
 }
 
 
-
 // =====================================================
 // CHILD TABLE AGE CALCULATION (UI ONLY)
 // =====================================================
@@ -442,6 +562,8 @@ function calculate_child_age(cdt, cdn, source_field, target_field) {
         `${years} years ${months} months`
     );
 }
+
+
 // =====================================================
 // PRELIMINARY INVESTIGATION ATTACHMENT VALIDATION (UI)
 // =====================================================

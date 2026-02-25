@@ -71,11 +71,12 @@ class IncidentManagement(Document):
                     self.set(field, None)
 
     # --------------------------------------------------
-    # VFL TEAM ENFORCEMENT
+    # VFL TEAM ENFORCEMENT (CLEAR BOTH TABLES WHEN NOT VFL)
     # --------------------------------------------------
     def cleanup_vfl_team(self):
         if self.event_category != "Visible Field Leadership (VFL)":
             self.set("vfl_team_member_details", [])
+            self.set("vfl_team_members", [])
 
     # --------------------------------------------------
     # CHILD TABLE AGE CALCULATIONS
@@ -92,10 +93,13 @@ class IncidentManagement(Document):
                 today, row.damages_caused_by_id
             )
 
+        # VFL table on Incident information tab
         for row in self.get("vfl_team_member_details", []):
-            row.age_of_team_member = self._calculate_age(
-                today, row.team_member_id
-            )
+            row.age_of_team_member = self._calculate_age(today, row.team_member_id)
+
+        # VFL table on Visible Felt Leadership tab
+        for row in self.get("vfl_team_members", []):
+            row.age_of_team_member = self._calculate_age(today, row.team_member_id)
 
     def _calculate_age(self, today, dob):
         if not dob:

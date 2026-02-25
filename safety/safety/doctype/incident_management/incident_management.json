@@ -154,7 +154,81 @@
   "drilling",
   "column_break_tcdr",
   "oth",
-  "specify_oth"
+  "specify_oth",
+  "visible_felt_leadership",
+  "details",
+  "location",
+  "date",
+  "duration",
+  "description_of_activity",
+  "column_break_qixw",
+  "vfl_team_members",
+  "section_break_payz",
+  "1_personal_protective_equipment",
+  "incorrect_ppe",
+  "not_trained_on_ppe",
+  "ppe_not_used",
+  "wrong_type_of_ppe",
+  "ppe_safe_used",
+  "column_break_esog",
+  "2_position_of_people",
+  "striking",
+  "caught_between_objects",
+  "falling",
+  "extreme_temperature",
+  "conatcing_electric",
+  "inhaling_swallowing",
+  "repetitive_motion",
+  "akward_position",
+  "correct_position",
+  "column_break_qvqz",
+  "reaction_of_people",
+  "adjusting_ppe",
+  "adjusting_position",
+  "rearrenging_jobs",
+  "stopping_activities",
+  "section_break_luuj",
+  "tools_and_equipment",
+  "not_right_for_the_job",
+  "not_used_correctly",
+  "not_in_good_safe_position",
+  "good_safe_position",
+  "column_break_ffut",
+  "procedures",
+  "procedures_not_available",
+  "procedure_not_adequate",
+  "procedure_not_known",
+  "procedure_not_understood",
+  "procedure_not_followed_or_known",
+  "procedure_known_available_followed",
+  "column_break_kayy",
+  "orderliness",
+  "housekeeping_standard_not_known",
+  "housekeeping_standard_not_understood",
+  "housekeeping_standard_not_followed",
+  "no_changes",
+  "good_hoousekeeping",
+  "section_break_xpfg",
+  "communication",
+  "no_communication",
+  "no_discussion_of_task_at_hand",
+  "good_communication",
+  "column_break_oefp",
+  "hards",
+  "hazard_not_removed",
+  "hazards_not_reported",
+  "potential_hazard_not_recognized",
+  "good_hira",
+  "column_break_wqfv",
+  "competent",
+  "not_authorised",
+  "not_competent",
+  "not_trained",
+  "fully_competent",
+  "section_break_nnfl",
+  "description_comment",
+  "further_action_required",
+  "estimated_risk"
  ],
  "fields": [
   {
@@ -992,12 +1066,420 @@
    "label": "Company",
    "options": "employer",
    "reqd": 1
+  },
+  {
+   "fieldname": "visible_felt_leadership",
+   "fieldtype": "Tab Break",
+   "label": "Visible Felt Leadership"
+  },
+  {
+   "fieldname": "details",
+   "fieldtype": "Section Break",
+   "label": "Details"
+  },
+  {
+   "fieldname": "location",
+   "fieldtype": "Link",
+   "label": "Site",
+   "options": "Branch"
+  },
+  {
+   "fieldname": "column_break_qixw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "vfl_team_members",
+   "fieldtype": "Table",
+   "label": "VFL Team Members",
+   "options": "VFL Team"
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "fieldname": "duration",
+   "fieldtype": "Duration",
+   "label": "Duration of Observation"
+  },
+  {
+   "fieldname": "description_of_activity",
+   "fieldtype": "Select",
+   "label": "Description of Activity",
+   "options": "\nEngineering\nMining\nDrill and Blast\nSafety\nOther"
+  },
+  {
+   "fieldname": "incorrect_ppe",
+   "fieldtype": "Select",
+   "label": "1.1 Incorrect Usage of PPE",
+   "options": "\nRisk\nSafe"
+  },
+  {
+   "fieldname": "column_break_esog",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "1_personal_protective_equipment",
+   "fieldtype": "Heading",
+   "label": "1. Personal Protective Equipment"
+  },
+  {
+   "fieldname": "2_position_of_people",
+   "fieldtype": "Heading",
+   "label": "2. Position of People"
+  },
+  {
+   "fieldname": "section_break_payz",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_qvqz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "reaction_of_people",
+   "fieldtype": "Heading",
+   "label": "3. Reaction of People"
+  },
+  {
+   "fieldname": "section_break_luuj",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "tools_and_equipment",
+   "fieldtype": "Heading",
+   "label": "4. Tools and Equipment"
+  },
+  {
+   "fieldname": "column_break_ffut",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "procedures",
+   "fieldtype": "Heading",
+   "label": "5. Procedures"
+  },
+  {
+   "fieldname": "column_break_kayy",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "orderliness",
+   "fieldtype": "Heading",
+   "label": "6. Orderliness"
+  },
+  {
+   "fieldname": "section_break_xpfg",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "communication",
+   "fieldtype": "Heading",
+   "label": "7. Communication"
+  },
+  {
+   "fieldname": "column_break_oefp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "hards",
+   "fieldtype": "Heading",
+   "label": "8. Hazard"
+  },
+  {
+   "fieldname": "column_break_wqfv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "competent",
+   "fieldtype": "Heading",
+   "label": "9. Competent"
+  },
+  {
+   "fieldname": "not_trained_on_ppe",
+   "fieldtype": "Select",
+   "label": "1.2 Not trained in the usage of PPE",
+   "options": "\nSafe\nRisk"
+  },
+  {
+   "fieldname": "ppe_not_used",
+   "fieldtype": "Select",
+   "label": "1.3 PPE not used",
+   "options": "\nSafe\nRisk"
+  },
+  {
+   "fieldname": "wrong_type_of_ppe",
+   "fieldtype": "Select",
+   "label": "1.4 Wrong type of PPE for the task",
+   "options": "\nSafe\nRisk"
+  },
+  {
+   "fieldname": "ppe_safe_used",
+   "fieldtype": "Select",
+   "label": "1.5 PPE Safe / Corrected used",
+   "options": "\nSafe\nRisk"
+  },
+  {
+   "fieldname": "striking",
+   "fieldtype": "Select",
+   "label": "2.1 Striking",
+   "options": "\nSafe\nRisk"
+  },
+  {
+   "fieldname": "caught_between_objects",
+   "fieldtype": "Select",
+   "label": "2.2 Caught in or between Objects",
+   "options": "\nSafe\nRisk"
+  },
+  {
+   "fieldname": "falling",
+   "fieldtype": "Select",
+   "label": "2.3 Falling",
+   "options": "\nSafe\nRisk"
+  },
+  {
+   "fieldname": "extreme_temperature",
+   "fieldtype": "Select",
+   "label": "2.4 Contract extreme Temperature",
+   "options": "\nSafe\nRisk"
+  },
+  {
+   "fieldname": "conatcing_electric",
+   "fieldtype": "Select",
+   "label": "2.5 Contacting Electric Current",
+   "options": "\nSafe\nRisk"
+  },
+  {
+   "fieldname": "inhaling_swallowing",
+   "fieldtype": "Select",
+   "label": "2.6 Inhaling/Swallowing Hazardous Substance",
+   "options": "\nSafe\nRisk"
+  },
+  {
+   "fieldname": "repetitive_motion",
+   "fieldtype": "Select",
+   "label": "2.7 Repetitive Motion",
+   "options": "\nSafe\nRisk"
+  },
+  {
+   "fieldname": "akward_position",
+   "fieldtype": "Select",
+   "label": "2.8 Akward Postion",
+   "options": "\nSafe\nRisk"
+  },
+  {
+   "fieldname": "correct_position",
+   "fieldtype": "Select",
+   "label": "2.9 Correct Position",
+   "options": "\nSafe\nRisk"
+  },
+  {
+   "fieldname": "adjusting_ppe",
+   "fieldtype": "Select",
+   "label": "3.1 Adjusting PPE",
+   "options": "\nSafe\nRisk"
+  },
+  {
+   "fieldname": "adjusting_position",
+   "fieldtype": "Select",
+   "label": "3.2 Adjusting Position",
+   "options": "\nSafe\nRisk"
+  },
+  {
+   "fieldname": "rearrenging_jobs",
+   "fieldtype": "Select",
+   "label": "3.3 Rearrenging Jobs",
+   "options": "\nSafe\nRisk"
+  },
+  {
+   "fieldname": "stopping_activities",
+   "fieldtype": "Select",
+   "label": "3.4 Stopping Activities ",
+   "options": "\nSafe\nRisk"
+  },
+  {
+   "fieldname": "not_right_for_the_job",
+   "fieldtype": "Select",
+   "label": "4.1 Not Right for the Job",
+   "options": "\nSafe\nRisk"
+  },
+  {
+   "fieldname": "not_used_correctly",
+   "fieldtype": "Select",
+   "label": "4.2 Not used Correctly",
+   "options": "\nSafe\nRisk"
+  },
+  {
+   "fieldname": "not_in_good_safe_position",
+   "fieldtype": "Select",
+   "label": "4.3 Not in Good, Safe Position",
+   "options": "\nSafe\nRisk"
+  },
+  {
+   "fieldname": "good_safe_position",
+   "fieldtype": "Select",
+   "label": "4.4 In good safe position",
+   "options": "\nSafe\nRisk"
+  },
+  {
+   "fieldname": "procedures_not_available",
+   "fieldtype": "Select",
+   "label": "5.1 Procedures not Available ",
+   "options": "\nSafe\nRisk"
+  },
+  {
+   "fieldname": "procedure_not_adequate",
+   "fieldtype": "Select",
+   "label": "5.2 Procedure not Adequate",
+   "options": "\nSafe\nRisk"
+  },
+  {
+   "fieldname": "procedure_not_known",
+   "fieldtype": "Select",
+   "label": "5.3 Procedure not Known",
+   "options": "\nSafe\nRisk"
+  },
+  {
+   "fieldname": "procedure_not_understood",
+   "fieldtype": "Select",
+   "label": "5.4 Procedure not Understood",
+   "options": "\nSafe\nRisk"
+  },
+  {
+   "fieldname": "procedure_not_followed_or_known",
+   "fieldtype": "Select",
+   "label": "5.5 Procedures not followed and known",
+   "options": "\nSafe\nRisk"
+  },
+  {
+   "fieldname": "procedure_known_available_followed",
+   "fieldtype": "Select",
+   "label": "5.6 Procedure Available Known and Folllowed",
+   "options": "\nSafe\nRisk"
+  },
+  {
+   "fieldname": "housekeeping_standard_not_known",
+   "fieldtype": "Select",
+   "label": "6.1 Housekeeping Standard Not Known",
+   "options": "\nSafe\nRisk"
+  },
+  {
+   "fieldname": "housekeeping_standard_not_understood",
+   "fieldtype": "Select",
+   "label": "6.2 Housekeeping Standard not Understood",
+   "options": "\nSafe\nRisk"
+  },
+  {
+   "fieldname": "housekeeping_standard_not_followed",
+   "fieldtype": "Select",
+   "label": "6.3 Housekeeping Standard not Followed",
+   "options": "\nSafe\nRisk"
+  },
+  {
+   "fieldname": "no_changes",
+   "fieldtype": "Select",
+   "label": "6.4 No Changes ",
+   "options": "\nSafe\nRisk"
+  },
+  {
+   "fieldname": "good_hoousekeeping",
+   "fieldtype": "Select",
+   "label": "6.5 Good Housekeeping ",
+   "options": "\nSafe\nRisk"
+  },
+  {
+   "fieldname": "no_communication",
+   "fieldtype": "Select",
+   "label": "7.1 No Communication",
+   "options": "\nSafe\nRisk"
+  },
+  {
+   "fieldname": "no_discussion_of_task_at_hand",
+   "fieldtype": "Select",
+   "label": "7.2 No Discussion of task at start of the job",
+   "options": "\nSafe\nRisk"
+  },
+  {
+   "fieldname": "good_communication",
+   "fieldtype": "Select",
+   "label": "7.3 Good Communication",
+   "options": "\nSafe\nRisk"
+  },
+  {
+   "fieldname": "hazard_not_removed",
+   "fieldtype": "Select",
+   "label": "8.1 Hazard not removed",
+   "options": "\nSafe\nRisk"
+  },
+  {
+   "fieldname": "hazards_not_reported",
+   "fieldtype": "Select",
+   "label": "8.2 Hazards not Reported",
+   "options": "\nSafe\nRisk"
+  },
+  {
+   "fieldname": "potential_hazard_not_recognized",
+   "fieldtype": "Select",
+   "label": "8.3 Potential Hazard not recognized",
+   "options": "\nSafe\nRisk"
+  },
+  {
+   "fieldname": "good_hira",
+   "fieldtype": "Select",
+   "label": "8.4 Good HIRA",
+   "options": "\nSafe\nRisk"
+  },
+  {
+   "fieldname": "not_authorised",
+   "fieldtype": "Select",
+   "label": "9.1 Not Authorised",
+   "options": "\nSafe\nRisk"
+  },
+  {
+   "fieldname": "not_competent",
+   "fieldtype": "Select",
+   "label": "9.2 Not Competent",
+   "options": "\nSafe\nRisk"
+  },
+  {
+   "fieldname": "not_trained",
+   "fieldtype": "Select",
+   "label": "9.3 Not Trained",
+   "options": "\nSafe\nRisk"
+  },
+  {
+   "fieldname": "fully_competent",
+   "fieldtype": "Select",
+   "label": "9.4 Fully Competent",
+   "options": "\nSafe\nRisk"
+  },
+  {
+   "fieldname": "section_break_nnfl",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "description_comment",
+   "fieldtype": "Small Text",
+   "label": "Unsafe Act Comment / Description"
+  },
+  {
+   "fieldname": "further_action_required",
+   "fieldtype": "Select",
+   "label": "Further Action Required ",
+   "options": "\nYes\nNo"
+  },
+  {
+   "fieldname": "estimated_risk",
+   "fieldtype": "Select",
+   "label": "Estimated Risk",
+   "options": "\nSignificant\nMinor\nModerate\nMajor\nExtreme"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-02-16 15:38:06.958370",
+ "modified": "2026-02-25 09:48:26.895714",
  "modified_by": "Administrator",
  "module": "Safety",
  "name": "Incident Management",

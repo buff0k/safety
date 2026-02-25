@@ -1,0 +1,133 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format: {unique_drill_document_number}",
+ "creation": "2026-02-24 11:30:53.440930",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "mock_drills",
+  "branch",
+  "date",
+  "time_started",
+  "time_stopped",
+  "planned_unplanned",
+  "procedure_tested",
+  "unique_drill_document_number",
+  "scenario",
+  "suggested_improvements",
+  "mock_drill"
+ ],
+ "fields": [
+  {
+   "fieldname": "mock_drills",
+   "fieldtype": "Section Break",
+   "label": "Mock Drill"
+  },
+  {
+   "fieldname": "unique_drill_document_number",
+   "fieldtype": "Data",
+   "label": "Unique Drill Document Number"
+  },
+  {
+   "fieldname": "mock_drill",
+   "fieldtype": "Table",
+   "label": "People Involved",
+   "options": "Mock Drill Child"
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "fieldname": "time_started",
+   "fieldtype": "Time",
+   "label": "Time Started"
+  },
+  {
+   "fieldname": "time_stopped",
+   "fieldtype": "Time",
+   "label": "Time Stopped"
+  },
+  {
+   "fieldname": "planned_unplanned",
+   "fieldtype": "Select",
+   "label": "Planned or Unplanned",
+   "options": "\nPlanned\nUnplanned"
+  },
+  {
+   "fieldname": "procedure_tested",
+   "fieldtype": "Select",
+   "label": "Procedure tested as per schedule/procedure",
+   "options": "\nAccidents\nMedical Emergencies\nFires/Explosion\nGas Leaks\nHazardous material or chemical spillage\nBurst pipes and floods / Heavy storms/ Tornadoes/Lighting\nDusty Conditions\nCracks and instability of structures\nSlope instability /\nCollapse of High walls.\nVehicle Accidents\nUncontrolled on-site explosions.\nDam failure, (Client dependent)"
+  },
+  {
+   "fieldname": "scenario",
+   "fieldtype": "Small Text",
+   "label": "Scenario"
+  },
+  {
+   "fieldname": "suggested_improvements",
+   "fieldtype": "Small Text",
+   "label": "Suggested Improvements"
+  },
+  {
+   "fieldname": "branch",
+   "fieldtype": "Link",
+   "label": "Site",
+   "options": "Branch"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-02-24 12:28:59.610370",
+ "modified_by": "Administrator",
+ "module": "Safety",
+ "name": "Drill Document-Mock Doc",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Safety Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Safety User",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}
