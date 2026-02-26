@@ -147,6 +147,8 @@
   "windshield",
   "other_damages_tmm",
   "specify_damage",
+  "column_break_cefz",
+  "type_of_tmm_incident",
   "task_classify_tab",
   "task_classify",
   "maintenance_of_equipment",
@@ -167,6 +169,7 @@
   "transporting_of_people_by",
   "material_handling",
   "oth",
+  "drilling",
   "specify_oth",
   "visible_felt_leadership",
   "details",
@@ -304,7 +307,7 @@
    "fieldname": "shift",
    "fieldtype": "Select",
    "label": "Shift",
-   "options": "\nDay\nA\nB\nC"
+   "options": "\nDay 1\nDay 2\nDay 3\nNight 1\nNight 2\nNight 3"
   },
   {
    "fieldname": "reporting_person_coy_number",
@@ -1498,7 +1501,7 @@
    "default": "0",
    "fieldname": "dig_drill_dredge",
    "fieldtype": "Check",
-   "label": "Digging / Drilling / Dredging"
+   "label": "Digging / Dredging"
   },
   {
    "default": "0",
@@ -1564,12 +1567,28 @@
    "fieldtype": "Select",
    "label": "Nature of the Injury",
    "options": "\nAmputation\nAbrasion\nBurn (Flame)\nBurn (Chemical)\nBurn (Steam/hot substance)\nConcussion\nCrushing (Injury)\nContusion/bruise\nDislocation\nDrowning\nBurn (Electric)\nFracture\nForgein body/splinter\nHeat Exhaustion\nHeatstroke\nLaceration\nMultiple Injury\nPoisoning\nPuncture\nAsphyxiation\nSprain/Strain\nOther"
+  },
+  {
+   "fieldname": "column_break_cefz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "type_of_tmm_incident",
+   "fieldtype": "Select",
+   "label": "Type of TMM Incident ",
+   "options": "\nADT overturned (Bowl)\nADT overturned (Head)\nADT overturned (Head &Bowl)\nTMM overturned on it side\nTMM drove into/onto safety berm\nTMM drove into a stationary TMM\nTMM reverse into a stationary TMM\nTMM drove into a structure\nTMM reverse into a structure\nTMM Moved forward - damage\nTMM Moved forward - no damage\nTMM running out of control\nTMM hooked overhead powerline\nTMM Smoldering (Smoke Only)\nTMM Fire (Engine)\nTMM Fire (Complete Machine)\nTMM Damaged (Other)\nTMM Damaged by rocks\nTMM Struck by lightning\nLDV Struck by Lightning\nLDV Overturned\nLDV Drove into/onto safety berm\nLDV reverse into a stationary LDV\nLDV Drove forward into structure\nLDV Reverse into structure/Equipment\nLDV Fire\nLDV Other (Animals)\nPrivate Vehicle Other"
+  },
+  {
+   "default": "0",
+   "fieldname": "drilling",
+   "fieldtype": "Check",
+   "label": "Drilling"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-02-26 05:47:35.183665",
+ "modified": "2026-02-26 15:04:43.525182",
  "modified_by": "Administrator",
  "module": "Safety",
  "name": "Incident Management",

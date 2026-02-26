@@ -1,7 +1,7 @@
 {
  "app": "safety",
  "charts": [],
- "content": "[{\"id\":\"WM46gAsu6s\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Safety</span>\",\"col\":12}},{\"id\":\"YDdwWE9CLa\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Safety Dashboard\",\"col\":12}},{\"id\":\"tzg3OQoghB\",\"type\":\"card\",\"data\":{\"card_name\":\"Incident Management\",\"col\":4}},{\"id\":\"NMU_17QV6G\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}},{\"id\":\"8UkM4wQ-4X\",\"type\":\"card\",\"data\":{\"card_name\":\"Setup\",\"col\":4}},{\"id\":\"G2o10gRBsg\",\"type\":\"card\",\"data\":{\"card_name\":\"Emergency Preparedness\",\"col\":4}}]",
+ "content": "[{\"id\":\"WM46gAsu6s\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Safety</span>\",\"col\":12}},{\"id\":\"YDdwWE9CLa\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Safety Dashboard\",\"col\":6}},{\"id\":\"XIn5aw_5EN\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Action Manager\",\"col\":6}},{\"id\":\"tzg3OQoghB\",\"type\":\"card\",\"data\":{\"card_name\":\"Incident Management\",\"col\":4}},{\"id\":\"NMU_17QV6G\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}},{\"id\":\"8UkM4wQ-4X\",\"type\":\"card\",\"data\":{\"card_name\":\"Setup\",\"col\":4}},{\"id\":\"G2o10gRBsg\",\"type\":\"card\",\"data\":{\"card_name\":\"Emergency Preparedness\",\"col\":4}},{\"id\":\"WpjrZUuEsC\",\"type\":\"card\",\"data\":{\"card_name\":\"Visible Field Leadership\",\"col\":4}}]",
  "creation": "2025-03-19 11:24:52.276925",
  "custom_blocks": [],
  "docstatus": 0,
@@ -36,8 +36,8 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Emergency Preparedness",
-   "link_count": 4,
+   "label": "Visible Field Leadership",
+   "link_count": 1,
    "link_type": "DocType",
    "onboard": 0,
    "type": "Card Break"
@@ -45,39 +45,9 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Emergency Schedule",
+   "label": "VFL",
    "link_count": 0,
-   "link_to": "Emergency Preparedness",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Mock Drill  / Drill Document",
-   "link_count": 0,
-   "link_to": "Drill Document-Mock Doc",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Emergency Preparedness Guide",
-   "link_count": 0,
-   "link_to": "Emergency Preparedness Guide",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Process Flow",
-   "link_count": 0,
-   "link_to": "Emergency Preparedness Process Flow",
+   "link_to": "Visible Field Leadership",
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
@@ -86,7 +56,7 @@
    "hidden": 0,
    "is_query_report": 0,
    "label": "Incident Management",
-   "link_count": 4,
+   "link_count": 3,
    "link_type": "DocType",
    "onboard": 0,
    "type": "Card Break"
@@ -97,16 +67,6 @@
    "label": "Incident Management",
    "link_count": 0,
    "link_to": "Incident Management",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Action Management",
-   "link_count": 0,
-   "link_to": "Action Management",
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
@@ -134,8 +94,57 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Reports",
+   "label": "Emergency Preparedness",
    "link_count": 4,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Process Flow",
+   "link_count": 0,
+   "link_to": "Emergency Preparedness Process Flow",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Emergency Preparedness Guide",
+   "link_count": 0,
+   "link_to": "Emergency Preparedness Guide",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Emergency Schedule",
+   "link_count": 0,
+   "link_to": "Emergency Preparedness",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Mock Drill  / Drill Document",
+   "link_count": 0,
+   "link_to": "Drill Document-Mock Doc",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Reports",
+   "link_count": 11,
    "link_type": "DocType",
    "onboard": 0,
    "type": "Card Break"
@@ -179,9 +188,79 @@
    "link_type": "Report",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Type of TMM Incident",
+   "link_count": 0,
+   "link_to": "Type of TMM Incident",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "TMM vs Injury",
+   "link_count": 0,
+   "link_to": "TMM vs Injury",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Injury Type",
+   "link_count": 0,
+   "link_to": "Injury Type",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Tasks Performed when Injured",
+   "link_count": 0,
+   "link_to": "Task Performed when Injured",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Body Part Injured",
+   "link_count": 0,
+   "link_to": "Body Part Injured",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "TMM/Injury Day of Month",
+   "link_count": 0,
+   "link_to": "TMM and Injury per day of the Month",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "TMM / Injury Per shift",
+   "link_count": 0,
+   "link_to": "TMM and Injury per shift",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2026-02-26 05:57:15.780776",
+ "modified": "2026-02-26 15:12:11.148202",
  "modified_by": "Administrator",
  "module": "Safety",
  "name": "Safety",
@@ -203,6 +282,14 @@
  ],
  "sequence_id": 46.0,
  "shortcuts": [
+  {
+   "color": "Orange",
+   "doc_view": "List",
+   "label": "Action Manager",
+   "link_to": "Action Management",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
   {
    "color": "Grey",
    "doc_view": "List",

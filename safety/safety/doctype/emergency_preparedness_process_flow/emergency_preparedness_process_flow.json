@@ -24,7 +24,7 @@
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2026-02-24 11:59:57.154272",
+ "modified": "2026-02-26 06:42:33.504295",
  "modified_by": "Administrator",
  "module": "Safety",
  "name": "Emergency Preparedness Process Flow",
@@ -37,6 +37,25 @@
    "print": 1,
    "read": 1,
    "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Safety Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Safety User",
    "share": 1,
    "write": 1
   }
