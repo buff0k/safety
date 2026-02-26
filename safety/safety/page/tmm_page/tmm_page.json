@@ -1,0 +1,38 @@
+{
+ "content": null,
+ "creation": "2026-02-26 05:23:17.457992",
+ "docstatus": 0,
+ "doctype": "Page",
+ "idx": 0,
+ "modified": "2026-02-26 05:23:17.457992",
+ "modified_by": "Administrator",
+ "module": "Safety",
+ "name": "tmm-page",
+ "owner": "Administrator",
+ "page_name": "tmm-page",
+ "roles": [
+  {
+   "role": "Safety Manager"
+  },
+  {
+   "role": "Safety User"
+  },
+  {
+   "role": "Production Manager"
+  },
+  {
+   "role": "Production User"
+  },
+  {
+   "role": "Engineering Manager"
+  },
+  {
+   "role": "Engineering User"
+  }
+ ],
+ "script": null,
+ "standard": "Yes",
+ "style": null,
+ "system_page": 0,
+ "title": "TMM Page"
+}

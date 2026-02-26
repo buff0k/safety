@@ -17,25 +17,6 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Reports",
-   "link_count": 1,
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 1,
-   "label": "Site Safe Days",
-   "link_count": 0,
-   "link_to": "Site Safe Days",
-   "link_type": "Report",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
    "label": "Setup",
    "link_count": 1,
    "link_type": "DocType",
@@ -149,9 +130,58 @@
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Reports",
+   "link_count": 4,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Site Safe Days",
+   "link_count": 0,
+   "link_to": "Site Safe Days",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "TMM Day of Week Incidents",
+   "link_count": 0,
+   "link_to": "Day of the Week",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "TMM Time of Day",
+   "link_count": 0,
+   "link_to": "TMM Time of Day",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "TMM Date of Month ",
+   "link_count": 0,
+   "link_to": "TMM Date of the Month",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2026-02-25 10:15:40.800189",
+ "modified": "2026-02-26 05:57:15.780776",
  "modified_by": "Administrator",
  "module": "Safety",
  "name": "Safety",

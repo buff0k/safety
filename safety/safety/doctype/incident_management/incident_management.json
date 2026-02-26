@@ -132,9 +132,12 @@
   "legs",
   "feet",
   "back",
+  "trunk",
   "column_break_qdws",
   "others",
   "specify",
+  "nature_of_the_injury_section",
+  "nature_of_the_injury",
   "details_of_damage",
   "equipment",
   "cylinders",
@@ -146,13 +149,23 @@
   "specify_damage",
   "task_classify_tab",
   "task_classify",
-  "engineering",
+  "maintenance_of_equipment",
+  "repairing_equipment",
+  "assembling_equipment",
+  "installation_erection_of_equipment",
+  "construction_building",
+  "manufacturing",
   "lifting",
-  "material_handling",
-  "transport",
-  "blasting",
-  "drilling",
+  "transport_material_equipment_by",
+  "maintenance_housekeeping",
+  "dig_drill_dredge",
   "column_break_tcdr",
+  "preparing_the_face",
+  "charging",
+  "blasting",
+  "transport_rock_mineral_ore",
+  "transporting_of_people_by",
+  "material_handling",
   "oth",
   "specify_oth",
   "visible_felt_leadership",
@@ -523,42 +536,6 @@
    "fieldname": "task_classify",
    "fieldtype": "Section Break",
    "label": "Task Classify"
-  },
-  {
-   "default": "0",
-   "fieldname": "engineering",
-   "fieldtype": "Check",
-   "label": "Engineering"
-  },
-  {
-   "default": "0",
-   "fieldname": "lifting",
-   "fieldtype": "Check",
-   "label": "Lifting"
-  },
-  {
-   "default": "0",
-   "fieldname": "material_handling",
-   "fieldtype": "Check",
-   "label": "Material Handling"
-  },
-  {
-   "default": "0",
-   "fieldname": "transport",
-   "fieldtype": "Check",
-   "label": "Transport"
-  },
-  {
-   "default": "0",
-   "fieldname": "blasting",
-   "fieldtype": "Check",
-   "label": "Blasting"
-  },
-  {
-   "default": "0",
-   "fieldname": "drilling",
-   "fieldtype": "Check",
-   "label": "Drilling"
   },
   {
    "fieldname": "column_break_tcdr",
@@ -1474,12 +1451,125 @@
    "fieldtype": "Select",
    "label": "Estimated Risk",
    "options": "\nSignificant\nMinor\nModerate\nMajor\nExtreme"
+  },
+  {
+   "default": "0",
+   "fieldname": "maintenance_of_equipment",
+   "fieldtype": "Check",
+   "label": "Maintenance of Equipment "
+  },
+  {
+   "default": "0",
+   "fieldname": "repairing_equipment",
+   "fieldtype": "Check",
+   "label": "Repairing Equipment"
+  },
+  {
+   "default": "0",
+   "fieldname": "assembling_equipment",
+   "fieldtype": "Check",
+   "label": "Assembling Equipment"
+  },
+  {
+   "default": "0",
+   "fieldname": "installation_erection_of_equipment",
+   "fieldtype": "Check",
+   "label": "Installation and erection of equipment (pipes, winches)"
+  },
+  {
+   "default": "0",
+   "fieldname": "construction_building",
+   "fieldtype": "Check",
+   "label": "Construction ? Building  / Permanent Structure"
+  },
+  {
+   "default": "0",
+   "fieldname": "manufacturing",
+   "fieldtype": "Check",
+   "label": "Manufacturing"
+  },
+  {
+   "default": "0",
+   "fieldname": "lifting",
+   "fieldtype": "Check",
+   "label": "Lifting"
+  },
+  {
+   "default": "0",
+   "fieldname": "dig_drill_dredge",
+   "fieldtype": "Check",
+   "label": "Digging / Drilling / Dredging"
+  },
+  {
+   "default": "0",
+   "fieldname": "preparing_the_face",
+   "fieldtype": "Check",
+   "label": "Preparing the Face"
+  },
+  {
+   "default": "0",
+   "fieldname": "charging",
+   "fieldtype": "Check",
+   "label": "Charging"
+  },
+  {
+   "default": "0",
+   "fieldname": "blasting",
+   "fieldtype": "Check",
+   "label": "Blasting"
+  },
+  {
+   "default": "0",
+   "fieldname": "transport_rock_mineral_ore",
+   "fieldtype": "Check",
+   "label": "Transporting of rock / mineral /ore by "
+  },
+  {
+   "default": "0",
+   "fieldname": "transporting_of_people_by",
+   "fieldtype": "Check",
+   "label": "Transporting of people by "
+  },
+  {
+   "default": "0",
+   "fieldname": "transport_material_equipment_by",
+   "fieldtype": "Check",
+   "label": "Transporting of materials / equipment by"
+  },
+  {
+   "default": "0",
+   "fieldname": "maintenance_housekeeping",
+   "fieldtype": "Check",
+   "label": "General Maintenance or Housekeeping"
+  },
+  {
+   "default": "0",
+   "fieldname": "material_handling",
+   "fieldtype": "Check",
+   "label": "Material Handling"
+  },
+  {
+   "default": "0",
+   "fieldname": "trunk",
+   "fieldtype": "Check",
+   "label": "Trunk"
+  },
+  {
+   "fieldname": "nature_of_the_injury_section",
+   "fieldtype": "Section Break",
+   "label": "Nature of the Injury"
+  },
+  {
+   "fieldname": "nature_of_the_injury",
+   "fieldtype": "Select",
+   "label": "Nature of the Injury",
+   "options": "\nAmputation\nAbrasion\nBurn (Flame)\nBurn (Chemical)\nBurn (Steam/hot substance)\nConcussion\nCrushing (Injury)\nContusion/bruise\nDislocation\nDrowning\nBurn (Electric)\nFracture\nForgein body/splinter\nHeat Exhaustion\nHeatstroke\nLaceration\nMultiple Injury\nPoisoning\nPuncture\nAsphyxiation\nSprain/Strain\nOther"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-02-25 09:48:26.895714",
+ "modified": "2026-02-26 05:47:35.183665",
  "modified_by": "Administrator",
  "module": "Safety",
  "name": "Incident Management",
