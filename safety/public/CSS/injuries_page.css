@@ -1,0 +1,111 @@
+.injuries-dashboard-root {
+	padding-bottom: 24px;
+}
+
+/* Top filter bar like your screenshot */
+.injuries-topbar {
+	display: flex;
+	gap: 12px;
+	align-items: flex-end;
+	flex-wrap: wrap;
+	margin-bottom: 10px;
+}
+
+.injuries-topbar .control {
+	min-width: 220px;
+	margin-bottom: 0;
+}
+
+/* push buttons to the right */
+.injuries-actions {
+	margin-left: auto;
+	display: flex;
+	gap: 8px;
+	align-items: center;
+}
+
+/* Pill tabs like your screenshot */
+.injuries-tabbar {
+	display: inline-flex;
+	gap: 6px;
+	background: transparent;
+	margin-bottom: 12px;
+}
+
+.injuries-tabbar .injuries-tab {
+	border: 1px solid var(--border-color, #d1d8dd);
+	background: #fff;
+	color: #111;
+	padding: 6px 10px;
+	border-radius: 8px;
+	font-size: 12px;
+	line-height: 1;
+	cursor: pointer;
+}
+
+.injuries-tabbar .injuries-tab.active {
+	background: #111;
+	color: #fff;
+	border-color: #111;
+}
+
+/* Panels */
+.injuries-panel {
+	display: none;
+}
+.injuries-panel.active {
+	display: block;
+}
+
+/* Grid like your dashboard */
+.injuries-grid {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 12px;
+}
+
+@media (max-width: 1100px) {
+	.injuries-grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* Cards */
+.injuries-card {
+	border: 1px solid var(--border-color, #d1d8dd);
+	border-radius: 10px;
+	background: var(--card-bg, #fff);
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+	overflow: hidden;
+}
+
+.injuries-card-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 10px 12px;
+	border-bottom: 1px solid var(--border-color, #d1d8dd);
+	background: rgba(0, 0, 0, 0.02);
+}
+
+.injuries-card-title {
+	font-weight: 600;
+	font-size: 13px;
+}
+
+.injuries-card-body {
+	padding: 10px 12px 12px 12px;
+}
+
+.injuries-card-status {
+	margin-bottom: 8px;
+	font-size: 12px;
+}
+
+.injuries-loading {
+	opacity: 0.85;
+}
+
+.injuries-chart-host {
+	width: 100%;
+}
