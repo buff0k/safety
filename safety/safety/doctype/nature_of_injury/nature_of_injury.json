@@ -7,7 +7,6 @@
  "engine": "InnoDB",
  "field_order": [
   "nature_of_the_injury",
-  "ammended_from",
   "nature_of_injury"
  ],
  "fields": [
@@ -17,22 +16,17 @@
    "label": "Nature of the Injury"
   },
   {
-   "fieldname": "ammended_from",
-   "fieldtype": "Link",
-   "label": "Ammended From",
-   "options": "Nature of Injury"
-  },
-  {
    "fieldname": "nature_of_injury",
-   "fieldtype": "Data",
-   "label": "Nature of Injury"
+   "fieldtype": "Link",
+   "label": "Nature of Injury",
+   "options": "Injury Nature"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2026-03-10 09:08:53.651714",
+ "modified": "2026-03-10 13:33:34.522210",
  "modified_by": "Administrator",
  "module": "Safety",
  "name": "Nature of Injury",

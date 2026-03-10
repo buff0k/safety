@@ -8,7 +8,6 @@
  "engine": "InnoDB",
  "field_order": [
   "external_communication_required",
-  "ammended_from",
   "external_comms_required"
  ],
  "fields": [
@@ -18,22 +17,17 @@
    "label": "External Communication Required"
   },
   {
-   "fieldname": "ammended_from",
-   "fieldtype": "Link",
-   "label": "Ammended From",
-   "options": "External Communication"
-  },
-  {
    "fieldname": "external_comms_required",
-   "fieldtype": "Data",
-   "label": "External Communication Required"
+   "fieldtype": "Link",
+   "label": "External Communication Required",
+   "options": "External Communication for Incident"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2026-03-10 08:06:11.502325",
+ "modified": "2026-03-10 13:26:12.065963",
  "modified_by": "Administrator",
  "module": "Safety",
  "name": "External Communication",

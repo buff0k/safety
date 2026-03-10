@@ -8,7 +8,6 @@
  "engine": "InnoDB",
  "field_order": [
   "applicable_life_saving_rules",
-  "ammended_from",
   "specify_life_saving_rule"
  ],
  "fields": [
@@ -18,16 +17,11 @@
    "label": "Applicable Life Saving Rules"
   },
   {
-   "fieldname": "ammended_from",
-   "fieldtype": "Link",
-   "label": "Ammended From",
-   "options": "Life Saving Rules"
-  },
-  {
    "fieldname": "specify_life_saving_rule",
-   "fieldtype": "Data",
+   "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Specify Life Saving Rule",
+   "options": "Life Saving Rule",
    "reqd": 1
   }
  ],
@@ -35,7 +29,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2026-03-10 07:12:11.598697",
+ "modified": "2026-03-10 13:14:45.796632",
  "modified_by": "Administrator",
  "module": "Safety",
  "name": "Life Saving Rules",

@@ -1,37 +1,29 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "format: {describe_type_of_impact}",
- "creation": "2026-03-10 08:10:14.405778",
+ "creation": "2026-03-10 13:57:41.020549",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "type_of_impact",
-  "describe_type_of_impact"
+  "task_classified"
  ],
  "fields": [
   {
-   "fieldname": "type_of_impact",
-   "fieldtype": "Section Break",
-   "label": "Type of Impact"
-  },
-  {
-   "fieldname": "describe_type_of_impact",
+   "fieldname": "task_classified",
    "fieldtype": "Link",
-   "label": "Describe Type of Impact",
-   "options": "Impact of Incident"
+   "label": "Task Classified",
+   "options": "Classify the Task"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2026-03-10 13:29:07.996863",
+ "modified": "2026-03-10 13:58:17.696250",
  "modified_by": "Administrator",
  "module": "Safety",
- "name": "Type of Impact",
- "naming_rule": "Expression (old style)",
+ "name": "Task Classify",
  "owner": "Administrator",
  "permissions": [],
  "row_format": "Dynamic",

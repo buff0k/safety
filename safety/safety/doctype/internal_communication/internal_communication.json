@@ -8,7 +8,6 @@
  "engine": "InnoDB",
  "field_order": [
   "specify_communication",
-  "ammended_from",
   "internal_comms_types"
  ],
  "fields": [
@@ -18,22 +17,17 @@
    "label": "Specify Communication"
   },
   {
-   "fieldname": "ammended_from",
-   "fieldtype": "Link",
-   "label": "Ammended From",
-   "options": "Internal Communication"
-  },
-  {
    "fieldname": "internal_comms_types",
-   "fieldtype": "Data",
-   "label": "Internal Communication Types"
+   "fieldtype": "Link",
+   "label": "Internal Communication Types",
+   "options": "Internal Communication for Incidents"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2026-03-10 07:27:59.423373",
+ "modified": "2026-03-10 13:19:01.958808",
  "modified_by": "Administrator",
  "module": "Safety",
  "name": "Internal Communication",

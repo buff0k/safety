@@ -7,8 +7,7 @@
  "engine": "InnoDB",
  "field_order": [
   "classify_severity",
-  "classify",
-  "ammended_from"
+  "classify"
  ],
  "fields": [
   {
@@ -18,21 +17,16 @@
   },
   {
    "fieldname": "classify",
-   "fieldtype": "Data",
-   "label": "Classify Severity"
-  },
-  {
-   "fieldname": "ammended_from",
    "fieldtype": "Link",
-   "label": "Ammended From",
-   "options": "Safety Incident Severity Classification"
+   "label": "Classify Severity",
+   "options": "Severity Classification"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2026-03-10 07:08:33.133585",
+ "modified": "2026-03-10 13:11:13.012759",
  "modified_by": "Administrator",
  "module": "Safety",
  "name": "Safety Incident Severity Classification",

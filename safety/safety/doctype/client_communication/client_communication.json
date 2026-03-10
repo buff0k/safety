@@ -8,7 +8,6 @@
  "engine": "InnoDB",
  "field_order": [
   "client_communication_required",
-  "ammended_from",
   "client_comms_required"
  ],
  "fields": [
@@ -18,22 +17,17 @@
    "label": "Specify Client Communication Required"
   },
   {
-   "fieldname": "ammended_from",
-   "fieldtype": "Link",
-   "label": "Ammended From",
-   "options": "Client Communication"
-  },
-  {
    "fieldname": "client_comms_required",
-   "fieldtype": "Data",
-   "label": "Client Communication Required"
+   "fieldtype": "Link",
+   "label": "Client Communication Required",
+   "options": "Client Communication for Incident"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2026-03-10 07:31:31.690701",
+ "modified": "2026-03-10 13:23:40.276712",
  "modified_by": "Administrator",
  "module": "Safety",
  "name": "Client Communication",
