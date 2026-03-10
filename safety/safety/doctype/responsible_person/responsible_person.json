@@ -70,7 +70,7 @@
    "label": "Attach Photo of Injured"
   },
   {
-   "fetch_from": "injured_person_coy_number.date_of_birth",
+   "fetch_from": "injured_person_coy_number.za_id_number",
    "fieldname": "injured_id",
    "fieldtype": "Read Only",
    "in_list_view": 1,
@@ -81,7 +81,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2025-12-17 09:57:20.226915",
+ "modified": "2026-03-10 06:47:27.937048",
  "modified_by": "Administrator",
  "module": "Safety",
  "name": "Responsible Person",

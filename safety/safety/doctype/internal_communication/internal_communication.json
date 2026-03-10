@@ -1,0 +1,48 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format: {internal_comms_types}",
+ "creation": "2026-03-10 07:24:34.934181",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "specify_communication",
+  "ammended_from",
+  "internal_comms_types"
+ ],
+ "fields": [
+  {
+   "fieldname": "specify_communication",
+   "fieldtype": "Section Break",
+   "label": "Specify Communication"
+  },
+  {
+   "fieldname": "ammended_from",
+   "fieldtype": "Link",
+   "label": "Ammended From",
+   "options": "Internal Communication"
+  },
+  {
+   "fieldname": "internal_comms_types",
+   "fieldtype": "Data",
+   "label": "Internal Communication Types"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-03-10 07:27:59.423373",
+ "modified_by": "Administrator",
+ "module": "Safety",
+ "name": "Internal Communication",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

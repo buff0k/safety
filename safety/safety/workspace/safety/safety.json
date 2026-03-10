@@ -55,45 +55,6 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Incident Management",
-   "link_count": 3,
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Incident Management",
-   "link_count": 0,
-   "link_to": "Incident Management",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Flash Reports",
-   "link_count": 0,
-   "link_to": "Flash Reports",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Incident Reporting Form",
-   "link_count": 0,
-   "link_to": "Incident Reporting Form",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
    "label": "Emergency Preparedness",
    "link_count": 4,
    "link_type": "DocType",
@@ -258,9 +219,58 @@
    "link_type": "Report",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Incident Management",
+   "link_count": 4,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Incident Management",
+   "link_count": 0,
+   "link_to": "Incident Management",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Incident Report",
+   "link_count": 0,
+   "link_to": "Incident Report",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Flash Reports",
+   "link_count": 0,
+   "link_to": "Flash Reports",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Incident Reporting Form",
+   "link_count": 0,
+   "link_to": "Incident Reporting Form",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2026-02-27 07:27:45.330855",
+ "modified": "2026-03-10 09:30:46.024712",
  "modified_by": "Administrator",
  "module": "Safety",
  "name": "Safety",

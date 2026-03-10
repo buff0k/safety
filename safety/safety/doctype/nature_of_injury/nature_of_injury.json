@@ -1,0 +1,46 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-03-10 09:07:41.121741",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "nature_of_the_injury",
+  "ammended_from",
+  "nature_of_injury"
+ ],
+ "fields": [
+  {
+   "fieldname": "nature_of_the_injury",
+   "fieldtype": "Section Break",
+   "label": "Nature of the Injury"
+  },
+  {
+   "fieldname": "ammended_from",
+   "fieldtype": "Link",
+   "label": "Ammended From",
+   "options": "Nature of Injury"
+  },
+  {
+   "fieldname": "nature_of_injury",
+   "fieldtype": "Data",
+   "label": "Nature of Injury"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-03-10 09:08:53.651714",
+ "modified_by": "Administrator",
+ "module": "Safety",
+ "name": "Nature of Injury",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -1,0 +1,586 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format: {incident_number}",
+ "creation": "2026-03-10 06:20:28.510523",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "incident_information",
+  "event_logging_section",
+  "event_category",
+  "region",
+  "site",
+  "location_on_site",
+  "departmentx",
+  "shift",
+  "datetime_incident",
+  "reporting_person_coy_number",
+  "reporting_person_name",
+  "employee_id",
+  "column_break_wqcz",
+  "incident_number",
+  "description_of_the_event",
+  "incident_type",
+  "employer",
+  "company",
+  "responsible_supervisor",
+  "responsible_supervisor_name",
+  "supervisor_id",
+  "classification",
+  "classify_incident",
+  "type",
+  "select_type_of_incident",
+  "repeat_incident",
+  "has_happened",
+  "first_known_case",
+  "severity_classification",
+  "select_severity",
+  "life_saving_rules",
+  "life_save_rule",
+  "immediate_actions",
+  "emergency_preparedness",
+  "first_aid",
+  "summoned_ambulance",
+  "column_break_ofsj",
+  "procedural_communication",
+  "internal_communication",
+  "column_break_qobm",
+  "client_communication",
+  "column_break_jbmu",
+  "external_communication",
+  "impact",
+  "impact_calculation",
+  "type_of_impact",
+  "column_break_ehue",
+  "hazard_consequence",
+  "likelyhood",
+  "risk_rating",
+  "risk_level",
+  "impact_details_section",
+  "description",
+  "investigation",
+  "investigation_requirement",
+  "is_the_investigation_required",
+  "preliminiary_investigation",
+  "investigation_type_and_attachments",
+  "investigation_technique",
+  "investigation_techniques",
+  "specify_type",
+  "five_why",
+  "fishbone",
+  "icam",
+  "details_of_injury",
+  "injured_details",
+  "injured_detail",
+  "body_part",
+  "select_type_of_body_part",
+  "nature_of_the_injury_sections",
+  "nature_of_the_injury",
+  "details_of_damage",
+  "person_responsible_for_damages",
+  "responsible_for_damages",
+  "equipment_detail",
+  "equipment_details",
+  "equipment",
+  "type_of_damage",
+  "task_classify_tab",
+  "task_classify",
+  "specify_task"
+ ],
+ "fields": [
+  {
+   "fieldname": "incident_information",
+   "fieldtype": "Tab Break",
+   "label": "Incident Information"
+  },
+  {
+   "fieldname": "event_logging_section",
+   "fieldtype": "Section Break",
+   "label": "Event Logging"
+  },
+  {
+   "default": "Incident (INC)",
+   "fieldname": "event_category",
+   "fieldtype": "Data",
+   "label": "Event Category"
+  },
+  {
+   "fieldname": "region",
+   "fieldtype": "Link",
+   "label": "Region",
+   "options": "Area Setup"
+  },
+  {
+   "fieldname": "site",
+   "fieldtype": "Link",
+   "label": "Site ",
+   "options": "Branch"
+  },
+  {
+   "fieldname": "location_on_site",
+   "fieldtype": "Small Text",
+   "label": "Site Specific Location"
+  },
+  {
+   "fieldname": "departmentx",
+   "fieldtype": "Link",
+   "label": "Department",
+   "options": "Department"
+  },
+  {
+   "fieldname": "shift",
+   "fieldtype": "Select",
+   "label": "Shift",
+   "options": "\nDay 1\nDay 2\nDay 3\nNight 1\nNight 2\nNight 3"
+  },
+  {
+   "fieldname": "datetime_incident",
+   "fieldtype": "Datetime",
+   "label": "Date and Time of the Event"
+  },
+  {
+   "fieldname": "reporting_person_coy_number",
+   "fieldtype": "Link",
+   "label": "Reporting person coy number",
+   "options": "Employee"
+  },
+  {
+   "fetch_from": "reporting_person_coy_number.employee_name",
+   "fieldname": "reporting_person_name",
+   "fieldtype": "Read Only",
+   "label": "Reporting person name"
+  },
+  {
+   "fetch_from": "reporting_person_coy_number.za_id_number",
+   "fieldname": "employee_id",
+   "fieldtype": "Read Only",
+   "label": "Reporting Person ID"
+  },
+  {
+   "fieldname": "column_break_wqcz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "incident_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Incident Number",
+   "reqd": 1
+  },
+  {
+   "fieldname": "description_of_the_event",
+   "fieldtype": "Long Text",
+   "label": "Description of the event "
+  },
+  {
+   "fieldname": "incident_type",
+   "fieldtype": "Link",
+   "label": "Incident Type ",
+   "options": "Safety Incident Type"
+  },
+  {
+   "fieldname": "employer",
+   "fieldtype": "Link",
+   "label": "Employer",
+   "link_filters": "[[\"DocType\",\"name\",\"in\",[\"Supplier\",\"Company\"]]]",
+   "options": "DocType",
+   "reqd": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Dynamic Link",
+   "label": "Company",
+   "options": "employer",
+   "reqd": 1
+  },
+  {
+   "fieldname": "responsible_supervisor",
+   "fieldtype": "Link",
+   "label": "Responsible Supervisor coy Number",
+   "options": "Employee"
+  },
+  {
+   "fetch_from": "responsible_supervisor.employee_name",
+   "fieldname": "responsible_supervisor_name",
+   "fieldtype": "Read Only",
+   "label": "Responsible Supervisor Name"
+  },
+  {
+   "fetch_from": "responsible_supervisor.za_id_number",
+   "fieldname": "supervisor_id",
+   "fieldtype": "Read Only",
+   "label": "Supervisor ID"
+  },
+  {
+   "fieldname": "classification",
+   "fieldtype": "Tab Break",
+   "label": "Classification"
+  },
+  {
+   "fieldname": "classify_incident",
+   "fieldtype": "Section Break",
+   "label": "Classify Incident"
+  },
+  {
+   "fieldname": "type",
+   "fieldtype": "Column Break",
+   "label": "Type"
+  },
+  {
+   "fieldname": "select_type_of_incident",
+   "fieldtype": "Table MultiSelect",
+   "label": "Select Type Of Incident",
+   "options": "Safety Incident Classification"
+  },
+  {
+   "fieldname": "repeat_incident",
+   "fieldtype": "Column Break",
+   "label": "Repeat Incident"
+  },
+  {
+   "default": "0",
+   "fieldname": "has_happened",
+   "fieldtype": "Check",
+   "label": "Has Happened"
+  },
+  {
+   "default": "0",
+   "fieldname": "first_known_case",
+   "fieldtype": "Check",
+   "label": "First known case "
+  },
+  {
+   "fieldname": "severity_classification",
+   "fieldtype": "Column Break",
+   "label": "Severity Classification"
+  },
+  {
+   "fieldname": "select_severity",
+   "fieldtype": "Table MultiSelect",
+   "label": "Select Severity",
+   "options": "Safety Incident Severity Classification"
+  },
+  {
+   "fieldname": "life_saving_rules",
+   "fieldtype": "Section Break",
+   "label": "Life Saving Rules"
+  },
+  {
+   "fieldname": "life_save_rule",
+   "fieldtype": "Table MultiSelect",
+   "label": "Life Saving Rules",
+   "options": "Life Saving Rules"
+  },
+  {
+   "fieldname": "immediate_actions",
+   "fieldtype": "Tab Break",
+   "label": "Immediate Actions"
+  },
+  {
+   "fieldname": "emergency_preparedness",
+   "fieldtype": "Section Break",
+   "label": "Emergency Preparedness"
+  },
+  {
+   "fieldname": "first_aid",
+   "fieldtype": "Select",
+   "label": "First Aid Administered",
+   "options": "\nYes\nN/A"
+  },
+  {
+   "fieldname": "summoned_ambulance",
+   "fieldtype": "Select",
+   "label": "Summoned Ambulance",
+   "options": "\nYes\nN/A"
+  },
+  {
+   "fieldname": "procedural_communication",
+   "fieldtype": "Section Break",
+   "label": "Procedural Communication"
+  },
+  {
+   "fieldname": "internal_communication",
+   "fieldtype": "Table MultiSelect",
+   "label": "Internal Communication",
+   "options": "Internal Communication"
+  },
+  {
+   "fieldname": "column_break_ofsj",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_qobm",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "client_communication",
+   "fieldtype": "Table MultiSelect",
+   "label": "Client Communication",
+   "options": "Client Communication"
+  },
+  {
+   "fieldname": "column_break_jbmu",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "external_communication",
+   "fieldtype": "Table MultiSelect",
+   "label": "External Communication",
+   "options": "External Communication"
+  },
+  {
+   "fieldname": "impact",
+   "fieldtype": "Tab Break",
+   "label": "Impact"
+  },
+  {
+   "fieldname": "impact_calculation",
+   "fieldtype": "Section Break",
+   "label": "Impact calculation"
+  },
+  {
+   "fieldname": "type_of_impact",
+   "fieldtype": "Table MultiSelect",
+   "label": "Type of Impact",
+   "options": "Type of Impact"
+  },
+  {
+   "fieldname": "column_break_ehue",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "hazard_consequence",
+   "fieldtype": "Select",
+   "label": "Hazard Effect/Consequence",
+   "options": "\n1\n2\n3\n4\n5"
+  },
+  {
+   "fieldname": "likelyhood",
+   "fieldtype": "Select",
+   "label": "Likelihood",
+   "options": "\n1\n2\n3\n4\n5"
+  },
+  {
+   "fieldname": "risk_rating",
+   "fieldtype": "Data",
+   "label": "Risk Rating"
+  },
+  {
+   "fieldname": "risk_level",
+   "fieldtype": "Data",
+   "label": "Risk Level"
+  },
+  {
+   "fieldname": "impact_details_section",
+   "fieldtype": "Section Break",
+   "label": "Impact details"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Data",
+   "label": "Description of incident/impact"
+  },
+  {
+   "fieldname": "investigation",
+   "fieldtype": "Tab Break",
+   "label": "Investigation"
+  },
+  {
+   "fieldname": "investigation_requirement",
+   "fieldtype": "Section Break",
+   "label": "Investigation requirement "
+  },
+  {
+   "fieldname": "is_the_investigation_required",
+   "fieldtype": "Select",
+   "label": "Is the investigation required",
+   "options": "\nYes\nNo"
+  },
+  {
+   "fieldname": "preliminiary_investigation",
+   "fieldtype": "Section Break",
+   "label": "Preliminiary Investigation"
+  },
+  {
+   "fieldname": "investigation_type_and_attachments",
+   "fieldtype": "Table",
+   "label": "Investigation Type and Attachments",
+   "options": "Preliminary Investigation"
+  },
+  {
+   "fieldname": "investigation_technique",
+   "fieldtype": "Section Break",
+   "label": "Section 11.5 Investigation"
+  },
+  {
+   "fieldname": "investigation_techniques",
+   "fieldtype": "Heading",
+   "label": "Investigation Technique"
+  },
+  {
+   "fieldname": "specify_type",
+   "fieldtype": "Select",
+   "label": "Specify Type",
+   "options": "\n5 Why\nFishbone\nICAM"
+  },
+  {
+   "fieldname": "five_why",
+   "fieldtype": "Attach",
+   "label": "5 Why "
+  },
+  {
+   "fieldname": "fishbone",
+   "fieldtype": "Attach",
+   "label": "Fishbone"
+  },
+  {
+   "fieldname": "icam",
+   "fieldtype": "Attach",
+   "label": "ICAM"
+  },
+  {
+   "fieldname": "details_of_injury",
+   "fieldtype": "Tab Break",
+   "label": "Details of Injury"
+  },
+  {
+   "fieldname": "body_part",
+   "fieldtype": "Section Break",
+   "label": "Body Part"
+  },
+  {
+   "fieldname": "select_type_of_body_part",
+   "fieldtype": "Table MultiSelect",
+   "label": "Select Type of Body Part",
+   "options": "Body Part"
+  },
+  {
+   "fieldname": "nature_of_the_injury_sections",
+   "fieldtype": "Section Break",
+   "label": "Nature of the Injury"
+  },
+  {
+   "fieldname": "nature_of_the_injury",
+   "fieldtype": "Table MultiSelect",
+   "label": "Nature of the Injury",
+   "options": "Nature of Injury"
+  },
+  {
+   "fieldname": "details_of_damage",
+   "fieldtype": "Tab Break",
+   "label": "Details of TMM/Equipment Damage"
+  },
+  {
+   "fieldname": "equipment",
+   "fieldtype": "Section Break",
+   "label": "Equipment"
+  },
+  {
+   "fieldname": "type_of_damage",
+   "fieldtype": "Table MultiSelect",
+   "label": "Type of TMM Incident",
+   "options": "Equipment Damage Type"
+  },
+  {
+   "fieldname": "task_classify_tab",
+   "fieldtype": "Tab Break",
+   "label": "Task Classification"
+  },
+  {
+   "fieldname": "task_classify",
+   "fieldtype": "Section Break",
+   "label": "Task Classify"
+  },
+  {
+   "fieldname": "specify_task",
+   "fieldtype": "Table MultiSelect",
+   "label": "Specify Task",
+   "options": "Task Classification"
+  },
+  {
+   "fieldname": "injured_details",
+   "fieldtype": "Section Break",
+   "label": "Injured Details"
+  },
+  {
+   "fieldname": "injured_detail",
+   "fieldtype": "Table",
+   "label": "Injured Details",
+   "options": "Responsible Person"
+  },
+  {
+   "fieldname": "person_responsible_for_damages",
+   "fieldtype": "Section Break",
+   "label": "Person Responsible For Damages"
+  },
+  {
+   "fieldname": "responsible_for_damages",
+   "fieldtype": "Table",
+   "label": "Responsible For Damages",
+   "options": "Person Responsible for Damages"
+  },
+  {
+   "fieldname": "equipment_detail",
+   "fieldtype": "Section Break",
+   "label": "Equipment Details"
+  },
+  {
+   "fieldname": "equipment_details",
+   "fieldtype": "Table",
+   "label": "Equipment Details",
+   "options": "Equipment"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-03-10 09:39:18.953488",
+ "modified_by": "Administrator",
+ "module": "Safety",
+ "name": "Incident Report",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Safety Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Safety User",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}
