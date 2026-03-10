@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "format: {define_incident }",
+ "autoname": "format: {define_incident}",
  "creation": "2026-03-10 12:59:22.397649",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -24,7 +24,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-03-10 13:01:21.737936",
+ "modified": "2026-03-10 14:11:06.275811",
  "modified_by": "Administrator",
  "module": "Safety",
  "name": "Classify Incident",

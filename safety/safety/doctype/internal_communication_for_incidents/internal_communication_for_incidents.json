@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "format: {specify_internal_communication}",
  "creation": "2026-03-10 13:15:57.522534",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -23,10 +24,11 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-03-10 13:18:35.793586",
+ "modified": "2026-03-10 14:17:16.351332",
  "modified_by": "Administrator",
  "module": "Safety",
  "name": "Internal Communication for Incidents",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {
