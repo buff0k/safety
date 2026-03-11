@@ -18,12 +18,12 @@ def is_checked(v) -> bool:
         return False
 
 
-def normalize_text(value):
-    return (cstr(value) if value is not None else "").strip().lower()
-
-
 def cstr(value):
     return str(value) if value is not None else ""
+
+
+def normalize_text(value):
+    return cstr(value).strip().lower()
 
 
 def row_to_values(row):
@@ -67,9 +67,22 @@ def extract_table_values(doc, fieldname):
     return out
 
 
+def has_any_exact_or_contains(values, exact=None, contains=None):
+    exact = [normalize_text(v) for v in (exact or [])]
+    contains = [normalize_text(v) for v in (contains or [])]
+
+    normalized_values = [normalize_text(v) for v in values if v not in (None, "")]
+    blob = " | ".join(normalized_values)
+
+    exact_hit = any(v in exact for v in normalized_values) if exact else False
+    contains_hit = any(token in blob for token in contains) if contains else False
+
+    return exact_hit or contains_hit
+
+
 def get_incident_flags_from_report(doc):
     """
-    Map new Incident Report structure to the old report categories:
+    Map new Incident Report structure to old report categories:
       - lti
       - mtc
       - fac
@@ -77,37 +90,72 @@ def get_incident_flags_from_report(doc):
       - env
       - tif = lti or mtc or fac
 
-    This uses table-multiselect values and text matching because the new doctype
-    replaced old boolean fields with structured child records.
+    The new doctype stores these through child rows / table multiselects, so we read:
+      - select_type_of_incident
+      - type_of_damage
+      - type_of_impact
+      - incident_type
     """
     type_values = extract_table_values(doc, "select_type_of_incident")
     damage_values = extract_table_values(doc, "type_of_damage")
     impact_values = extract_table_values(doc, "type_of_impact")
     incident_type_value = cstr(doc.get("incident_type"))
 
-    all_values = " | ".join(type_values + damage_values + impact_values + [incident_type_value]).lower()
+    all_values = type_values + damage_values + impact_values + [incident_type_value]
 
-    def has_any(*needles):
-        return any(n.lower() in all_values for n in needles)
-
-    lti = has_any("lti", "lost time injury")
-    mtc = has_any("mtc", "medical treatment case", "medical treatment")
-    fac = has_any("fac", "first aid case", "first aid")
-    pdi = has_any(
-        "property damage",
-        "damage",
-        "tmm",
-        "equipment damage",
-        "vehicle damage",
-        "machine damage"
+    lti = has_any_exact_or_contains(
+        all_values,
+        exact=["lti", "lost time injury"],
+        contains=["lti", "lost time injury"]
     )
-    env = has_any(
-        "environment",
-        "environmental",
-        "environmental incident",
-        "environmental impact",
-        "spill",
-        "pollution"
+
+    mtc = has_any_exact_or_contains(
+        all_values,
+        exact=["mtc", "medical treatment case"],
+        contains=["mtc", "medical treatment case", "medical treatment"]
+    )
+
+    fac = has_any_exact_or_contains(
+        all_values,
+        exact=["fac", "first aid case"],
+        contains=["fac", "first aid case", "first aid"]
+    )
+
+    # Important: PDI / Property Damage handling
+    # Your screenshots suggest both forms exist, so support BOTH exactly.
+    pdi = has_any_exact_or_contains(
+        all_values,
+        exact=[
+            "pdi",
+            "property damage",
+            "tmm",
+            "equipment damage"
+        ],
+        contains=[
+            "pdi",
+            "property damage",
+            "tmm",
+            "equipment damage",
+            "vehicle damage",
+            "machine damage"
+        ]
+    )
+
+    env = has_any_exact_or_contains(
+        all_values,
+        exact=[
+            "environmental incident",
+            "environmental impact",
+            "environment"
+        ],
+        contains=[
+            "environmental incident",
+            "environmental impact",
+            "environment",
+            "environmental",
+            "spill",
+            "pollution"
+        ]
     )
 
     tif = lti or mtc or fac
@@ -203,6 +251,7 @@ def execute(filters=None):
     company_ltifr_target = cfg.get("_company_ltifr_target")
     company_ltifr_actual = cfg.get("_company_ltifr_actual")
 
+    # If no site filter, include all configured sites
     if not selected_sites:
         selected_sites = [k for k, v in cfg.items() if isinstance(v, dict)]
 
@@ -211,6 +260,7 @@ def execute(filters=None):
 
     columns = get_columns()
 
+    # Include 1 day before start (streak depends on previous day)
     query_from = add_days(from_date, -1) if from_date else add_days(to_date, -365)
 
     incidents = fetch_incidents(
@@ -247,6 +297,7 @@ def execute(filters=None):
             )
         )
 
+    # Company summary at bottom
     data.extend(
         build_company_summary(
             selected_sites=selected_sites,
@@ -271,7 +322,7 @@ def get_columns():
         {"label": _("TIF Days"), "fieldname": "tif_days", "fieldtype": "Int", "width": 110},
         {"label": _("Medical Treatment Case"), "fieldname": "mtc_days", "fieldtype": "Int", "width": 180},
         {"label": _("First Aid case"), "fieldname": "fac_days", "fieldtype": "Int", "width": 140},
-        {"label": _("Property Damage"), "fieldname": "pdi_days", "fieldtype": "Int", "width": 140},
+        {"label": _("PDI"), "fieldname": "pdi_days", "fieldtype": "Int", "width": 140},
         {"label": _("Environmental Incident"), "fieldname": "env_days", "fieldtype": "Int", "width": 190},
 
         {"label": _("Number of LTI's"), "fieldname": "num_lti", "fieldtype": "Int", "width": 140},
@@ -282,6 +333,7 @@ def get_columns():
 
         {"label": _("LTIFR Target"), "fieldname": "ltifr_target", "fieldtype": "Float", "width": 120},
         {"label": _("LTIFR"), "fieldname": "ltifr", "fieldtype": "Float", "width": 90},
+
         {"label": _("FFPS"), "fieldname": "ffps", "fieldtype": "Float", "width": 90},
         {"label": _("FFMS"), "fieldname": "ffms", "fieldtype": "Float", "width": 90},
 
@@ -342,7 +394,7 @@ def fetch_incidents(sites, date_from, date_to, employer=None, company=None):
                 "env": False,
                 "tif": False,
                 "counts": {"lti": 0, "mtc": 0, "fac": 0, "pdi": 0, "env": 0},
-                "names": [],
+                "links": [],
             }
 
         flags = get_incident_flags_from_report(doc)
@@ -360,8 +412,10 @@ def fetch_incidents(sites, date_from, date_to, employer=None, company=None):
         out[site][d]["counts"]["pdi"] += 1 if flags["pdi"] else 0
         out[site][d]["counts"]["env"] += 1 if flags["env"] else 0
 
-        display_name = doc.get("incident_number") or doc.get("name")
-        out[site][d]["names"].append(display_name)
+        out[site][d]["links"].append({
+            "docname": doc.name,
+            "label": doc.get("incident_number") or doc.name
+        })
 
     return out
 
@@ -396,7 +450,7 @@ def build_site_daily_rows(site, start_date, end_date, site_start_date, ltifr_tar
         totals["pdi"] += c.get("pdi", 0)
         totals["env"] += c.get("env", 0)
 
-        incident_links_html = build_incident_links_html(today.get("names") or [])
+        incident_links_html = build_incident_links_html(today.get("links") or [])
 
         data.append({
             "site": site,
@@ -436,15 +490,21 @@ def build_site_daily_rows(site, start_date, end_date, site_start_date, ltifr_tar
     return data
 
 
-def build_incident_links_html(docnames):
-    if not docnames:
+def build_incident_links_html(link_rows):
+    if not link_rows:
         return ""
 
     parts = []
-    for name in docnames:
-        url = get_url_to_form("Incident Report", name)
-        safe_name = frappe.utils.escape_html(name)
-        parts.append(f"<div><a href='{url}' target='_blank'>View {safe_name}</a></div>")
+    for row in link_rows:
+        docname = row.get("docname")
+        label = row.get("label") or docname
+
+        if not docname:
+            continue
+
+        url = get_url_to_form("Incident Report", docname)
+        safe_label = frappe.utils.escape_html(label)
+        parts.append(f"<div><a href='{url}' target='_blank'>View {safe_label}</a></div>")
 
     return "".join(parts)
 
@@ -475,7 +535,7 @@ def build_company_summary(selected_sites, cfg, from_date, to_date, incidents_by_
                     "pdi": False,
                     "env": False,
                     "counts": {"lti": 0, "mtc": 0, "fac": 0, "pdi": 0, "env": 0},
-                    "names": [],
+                    "links": [],
                 }
 
             for k in ["lti", "tif", "mtc", "fac", "pdi", "env"]:
@@ -483,6 +543,8 @@ def build_company_summary(selected_sites, cfg, from_date, to_date, incidents_by_
 
             for k in ["lti", "mtc", "fac", "pdi", "env"]:
                 merged[d]["counts"][k] += (info.get("counts") or {}).get(k, 0)
+
+            merged[d]["links"].extend(info.get("links") or [])
 
     out = []
     out.extend(
