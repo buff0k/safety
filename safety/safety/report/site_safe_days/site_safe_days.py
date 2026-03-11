@@ -18,6 +18,110 @@ def is_checked(v) -> bool:
         return False
 
 
+def normalize_text(value):
+    return (cstr(value) if value is not None else "").strip().lower()
+
+
+def cstr(value):
+    return str(value) if value is not None else ""
+
+
+def row_to_values(row):
+    """
+    Extract readable scalar values from a child row / table multiselect row.
+    """
+    if not row:
+        return []
+
+    if hasattr(row, "as_dict"):
+        row = row.as_dict()
+
+    system_fields = {
+        "name", "owner", "creation", "modified", "modified_by",
+        "parent", "parentfield", "parenttype", "idx", "docstatus"
+    }
+
+    values = []
+    for key, val in row.items():
+        if key in system_fields:
+            continue
+        if isinstance(val, (str, int, float)) and val not in ("", None):
+            values.append(str(val).strip())
+
+    return values
+
+
+def extract_table_values(doc, fieldname):
+    """
+    Returns list of readable row values from a child table / Table MultiSelect.
+    """
+    rows = doc.get(fieldname) or []
+    out = []
+
+    for row in rows:
+        values = row_to_values(row)
+        for val in values:
+            if val and val not in out:
+                out.append(val)
+
+    return out
+
+
+def get_incident_flags_from_report(doc):
+    """
+    Map new Incident Report structure to the old report categories:
+      - lti
+      - mtc
+      - fac
+      - pdi
+      - env
+      - tif = lti or mtc or fac
+
+    This uses table-multiselect values and text matching because the new doctype
+    replaced old boolean fields with structured child records.
+    """
+    type_values = extract_table_values(doc, "select_type_of_incident")
+    damage_values = extract_table_values(doc, "type_of_damage")
+    impact_values = extract_table_values(doc, "type_of_impact")
+    incident_type_value = cstr(doc.get("incident_type"))
+
+    all_values = " | ".join(type_values + damage_values + impact_values + [incident_type_value]).lower()
+
+    def has_any(*needles):
+        return any(n.lower() in all_values for n in needles)
+
+    lti = has_any("lti", "lost time injury")
+    mtc = has_any("mtc", "medical treatment case", "medical treatment")
+    fac = has_any("fac", "first aid case", "first aid")
+    pdi = has_any(
+        "property damage",
+        "damage",
+        "tmm",
+        "equipment damage",
+        "vehicle damage",
+        "machine damage"
+    )
+    env = has_any(
+        "environment",
+        "environmental",
+        "environmental incident",
+        "environmental impact",
+        "spill",
+        "pollution"
+    )
+
+    tif = lti or mtc or fac
+
+    return {
+        "lti": lti,
+        "mtc": mtc,
+        "fac": fac,
+        "pdi": pdi,
+        "env": env,
+        "tif": tif,
+    }
+
+
 # --------------------------
 # Site Start Dates singleton
 # --------------------------
@@ -25,16 +129,16 @@ def get_site_start_config():
     """
     Site Start Dates (Singleton) fields used:
       - company_ltifr_target (Float)
-      - company_ltifr_actual (Float)   <-- NEW (your field)
-      - company_colour (Data)          <-- NEW (your field, hex)
+      - company_ltifr_actual (Float)
+      - company_colour (Data)
 
     Child table Site Start Date Child fields used:
       - site (Link Branch)
       - start_date (Date)
       - ltifr_target (Float)
-      - ltifr (Float)                 <-- for per-site LTIFR column
-      - complex (Data/Select)         <-- used by get_today_snapshot
-      - color (Data)                  <-- used by get_today_snapshot
+      - ltifr (Float)
+      - complex (Data/Select)
+      - color (Data)
     """
     doc = frappe.get_single("Site Start Dates")
 
@@ -54,7 +158,7 @@ def get_site_start_config():
         out[site] = {
             "start_date": getdate(start_date),
             "ltifr_target": row.get("ltifr_target"),
-            "ltifr": row.get("ltifr"),  # per-site LTIFR (requested)
+            "ltifr": row.get("ltifr"),
         }
 
     return out
@@ -99,7 +203,6 @@ def execute(filters=None):
     company_ltifr_target = cfg.get("_company_ltifr_target")
     company_ltifr_actual = cfg.get("_company_ltifr_actual")
 
-    # If no site filter, include all configured sites (excluding internal keys)
     if not selected_sites:
         selected_sites = [k for k, v in cfg.items() if isinstance(v, dict)]
 
@@ -108,10 +211,15 @@ def execute(filters=None):
 
     columns = get_columns()
 
-    # Include 1 day before start (streak depends on previous day)
     query_from = add_days(from_date, -1) if from_date else add_days(to_date, -365)
 
-    incidents = fetch_incidents(selected_sites, query_from, to_date)
+    incidents = fetch_incidents(
+        sites=selected_sites,
+        date_from=query_from,
+        date_to=to_date,
+        employer=filters.get("employer"),
+        company=filters.get("company"),
+    )
 
     data = []
 
@@ -139,7 +247,6 @@ def execute(filters=None):
             )
         )
 
-    # Company summary at bottom (Company LTIFR Target + Actual)
     data.extend(
         build_company_summary(
             selected_sites=selected_sites,
@@ -174,12 +281,7 @@ def get_columns():
         {"label": _("Environmental Incidents"), "fieldname": "num_env", "fieldtype": "Int", "width": 190},
 
         {"label": _("LTIFR Target"), "fieldname": "ltifr_target", "fieldtype": "Float", "width": 120},
-
-        # LTIFR column:
-        # - Per site: Site Start Date Child.ltifr
-        # - Company: Site Start Dates.company_ltifr_actual
         {"label": _("LTIFR"), "fieldname": "ltifr", "fieldtype": "Float", "width": 90},
-
         {"label": _("FFPS"), "fieldname": "ffps", "fieldtype": "Float", "width": 90},
         {"label": _("FFMS"), "fieldname": "ffms", "fieldtype": "Float", "width": 90},
 
@@ -194,25 +296,28 @@ def get_columns():
     ]
 
 
-def fetch_incidents(sites, date_from, date_to):
+def fetch_incidents(sites, date_from, date_to, employer=None, company=None):
+    filters = {
+        "site": ["in", sites],
+        "event_category": "Incident (INC)",
+        "docstatus": ["in", [0, 1]],
+        "datetime_incident": ["between", [f"{date_from} 00:00:00", f"{date_to} 23:59:59"]],
+    }
+
+    if employer:
+        filters["employer"] = employer
+    if company:
+        filters["company"] = company
+
     rows = frappe.get_all(
-        "Incident Management",
-        filters={
-            "site": ["in", sites],
-            "event_category": "Incident (INC)",
-            "docstatus": ["in", [0, 1]],
-            "datetime_incident": ["between", [f"{date_from} 00:00:00", f"{date_to} 23:59:59"]],
-        },
+        "Incident Report",
+        filters=filters,
         fields=[
             "name",
+            "incident_number",
             "site",
             "datetime_incident",
-            "lti",
-            "medical_treatment_case",
-            "first_aid_case",
-            "property_damage",
-            "tmm",
-            "environmental_impact",
+            "incident_type",
         ],
         order_by="datetime_incident asc",
     )
@@ -220,42 +325,43 @@ def fetch_incidents(sites, date_from, date_to):
     out = {s: {} for s in sites}
 
     for r in rows:
-        d = getdate(r["datetime_incident"])
-        site = r["site"]
+        doc = frappe.get_doc("Incident Report", r["name"])
+
+        d = getdate(doc.get("datetime_incident"))
+        site = doc.get("site")
 
         if site not in out:
             out[site] = {}
 
         if d not in out[site]:
             out[site][d] = {
-                "lti": False, "mtc": False, "fac": False, "pdi": False, "env": False, "tif": False,
+                "lti": False,
+                "mtc": False,
+                "fac": False,
+                "pdi": False,
+                "env": False,
+                "tif": False,
                 "counts": {"lti": 0, "mtc": 0, "fac": 0, "pdi": 0, "env": 0},
                 "names": [],
             }
 
-        docname = r["name"]
+        flags = get_incident_flags_from_report(doc)
 
-        lti = is_checked(r.get("lti"))
-        mtc = is_checked(r.get("medical_treatment_case"))
-        fac = is_checked(r.get("first_aid_case"))
-        pdi = is_checked(r.get("property_damage")) or is_checked(r.get("tmm"))
-        env = is_checked(r.get("environmental_impact"))
-        tif = lti or mtc or fac
+        out[site][d]["lti"] |= flags["lti"]
+        out[site][d]["mtc"] |= flags["mtc"]
+        out[site][d]["fac"] |= flags["fac"]
+        out[site][d]["pdi"] |= flags["pdi"]
+        out[site][d]["env"] |= flags["env"]
+        out[site][d]["tif"] |= flags["tif"]
 
-        out[site][d]["lti"] |= lti
-        out[site][d]["mtc"] |= mtc
-        out[site][d]["fac"] |= fac
-        out[site][d]["pdi"] |= pdi
-        out[site][d]["env"] |= env
-        out[site][d]["tif"] |= tif
+        out[site][d]["counts"]["lti"] += 1 if flags["lti"] else 0
+        out[site][d]["counts"]["mtc"] += 1 if flags["mtc"] else 0
+        out[site][d]["counts"]["fac"] += 1 if flags["fac"] else 0
+        out[site][d]["counts"]["pdi"] += 1 if flags["pdi"] else 0
+        out[site][d]["counts"]["env"] += 1 if flags["env"] else 0
 
-        out[site][d]["counts"]["lti"] += 1 if lti else 0
-        out[site][d]["counts"]["mtc"] += 1 if mtc else 0
-        out[site][d]["counts"]["fac"] += 1 if fac else 0
-        out[site][d]["counts"]["pdi"] += 1 if pdi else 0
-        out[site][d]["counts"]["env"] += 1 if env else 0
-
-        out[site][d]["names"].append(docname)
+        display_name = doc.get("incident_number") or doc.get("name")
+        out[site][d]["names"].append(display_name)
 
     return out
 
@@ -336,7 +442,7 @@ def build_incident_links_html(docnames):
 
     parts = []
     for name in docnames:
-        url = get_url_to_form("Incident Management", name)
+        url = get_url_to_form("Incident Report", name)
         safe_name = frappe.utils.escape_html(name)
         parts.append(f"<div><a href='{url}' target='_blank'>View {safe_name}</a></div>")
 
@@ -362,7 +468,12 @@ def build_company_summary(selected_sites, cfg, from_date, to_date, incidents_by_
         for d, info in (incidents_by_site.get(site) or {}).items():
             if d not in merged:
                 merged[d] = {
-                    "lti": False, "tif": False, "mtc": False, "fac": False, "pdi": False, "env": False,
+                    "lti": False,
+                    "tif": False,
+                    "mtc": False,
+                    "fac": False,
+                    "pdi": False,
+                    "env": False,
                     "counts": {"lti": 0, "mtc": 0, "fac": 0, "pdi": 0, "env": 0},
                     "names": [],
                 }
@@ -380,8 +491,8 @@ def build_company_summary(selected_sites, cfg, from_date, to_date, incidents_by_
             start_date=start,
             end_date=to_date,
             site_start_date=company_start,
-            ltifr_target=company_ltifr_target,   # Target from singleton
-            ltifr_value=company_ltifr_actual,    # Actual from singleton (your new field)
+            ltifr_target=company_ltifr_target,
+            ltifr_value=company_ltifr_actual,
             incidents=merged,
         )
     )
@@ -401,12 +512,11 @@ def get_today_snapshot(filters=None):
     Adds:
       - complex_by_site: from Site Start Date Child.complex
       - color_by_site: from Site Start Date Child.color (hex)
-      - company_colour: from Site Start Dates.company_colour (hex)  <-- NEW
+      - company_colour: from Site Start Dates.company_colour (hex)
         and maps it as color_by_site["Company"]
     """
     from frappe.utils import getdate
 
-    # normalize filters
     if filters is None:
         filters = {}
     elif isinstance(filters, str):
@@ -449,7 +559,6 @@ def get_today_snapshot(filters=None):
     except Exception:
         pass
 
-    # Ensure company is always available to the dashboard
     if "Company" in by_site:
         complex_by_site.setdefault("Company", "Company")
         if company_colour:

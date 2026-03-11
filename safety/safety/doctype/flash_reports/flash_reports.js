@@ -1,21 +1,36 @@
 frappe.ui.form.on("Flash Reports", {
+    onload(frm) {
+        setup_incident_number_query(frm);
+    },
+
+    refresh(frm) {
+        setup_incident_number_query(frm);
+
+        if (!frm.is_new() && !frm.doc.flash_sent) {
+            frm.add_custom_button("Send Flash Report", () => {
+                frappe.call({
+                    method: "safety.safety.doctype.flash_reports.flash_reports.send_flash_report",
+                    args: { name: frm.doc.name },
+                    freeze: true,
+                    callback() {
+                        frappe.msgprint("Flash Report sent successfully.");
+                        frm.reload_doc();
+                    }
+                });
+            });
+        }
+
+        if (!frm.is_new()) {
+            build_flash_html(frm);
+        }
+    },
 
     // ------------------------------------------------
     // FILTER INCIDENT NUMBER
     // ------------------------------------------------
     action_category(frm) {
         frm.set_value("incident_number", null);
-
-        if (!frm.doc.action_category) return;
-
-        frm.set_query("incident_number", () => {
-            return {
-                query: "safety.safety.doctype.flash_reports.flash_reports.incident_link_query",
-                filters: {
-                    action_category: frm.doc.action_category
-                }
-            };
-        });
+        setup_incident_number_query(frm);
     },
 
     // ------------------------------------------------
@@ -31,7 +46,7 @@ frappe.ui.form.on("Flash Reports", {
             },
             callback(r) {
                 if (!r.message) {
-                    frappe.msgprint("No matching Incident Management record found.");
+                    frappe.msgprint("No matching Incident Report record found.");
                     return;
                 }
 
@@ -57,7 +72,6 @@ frappe.ui.form.on("Flash Reports", {
                 frm.set_value("repeat_incident", d.repeat_incident);
                 frm.set_value("applicable_life_saving_rule", d.applicable_life_saving_rule);
 
-                // ✅ EQUIPMENT POPULATES NOW
                 frm.set_value("equipment_id", d.equipment_id);
                 frm.set_value("serial_number", d.serial_number);
                 frm.set_value("registration_number", d.registration_number);
@@ -73,28 +87,19 @@ frappe.ui.form.on("Flash Reports", {
         if (!frm.is_new()) {
             build_flash_html(frm);
         }
-    },
-
-    refresh(frm) {
-        if (!frm.is_new() && !frm.doc.flash_sent) {
-            frm.add_custom_button("Send Flash Report", () => {
-                frappe.call({
-                    method: "safety.safety.doctype.flash_reports.flash_reports.send_flash_report",
-                    args: { name: frm.doc.name },
-                    freeze: true,
-                    callback() {
-                        frappe.msgprint("Flash Report sent successfully.");
-                        frm.reload_doc();
-                    }
-                });
-            });
-        }
-
-        if (!frm.is_new()) {
-            build_flash_html(frm);
-        }
     }
 });
+
+function setup_incident_number_query(frm) {
+    frm.set_query("incident_number", () => {
+        return {
+            query: "safety.safety.doctype.flash_reports.flash_reports.incident_link_query",
+            filters: {
+                action_category: frm.doc.action_category || ""
+            }
+        };
+    });
+}
 
 function build_flash_html(frm) {
     frappe.call({
@@ -109,16 +114,15 @@ function build_flash_html(frm) {
         }
     });
 }
+
 // =====================================================
 // INCIDENT PHOTOS – AUTO POPULATE DATE & TIME
 // =====================================================
 
 frappe.ui.form.on("Incident Photos", {
     photos_and_attachments(frm, cdt, cdn) {
-
         const row = locals[cdt][cdn];
 
-        // Only set if attachment exists and date not already set
         if (row.photos_and_attachments && !row.date_and_time_of_photo) {
             frappe.model.set_value(
                 cdt,

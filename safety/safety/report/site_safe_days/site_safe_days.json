@@ -57,7 +57,7 @@
  "name": "Site Safe Days",
  "owner": "Administrator",
  "prepared_report": 0,
- "ref_doctype": "Incident Management",
+ "ref_doctype": "Incident Report",
  "report_name": "Site Safe Days",
  "report_type": "Script Report",
  "roles": [

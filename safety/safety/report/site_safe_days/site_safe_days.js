@@ -53,7 +53,6 @@ frappe.query_reports["Site Safe Days"] = {
     // ----------------------------------------------------
     // Auto-refresh exactly on the hour (HH:00), then hourly
     // ----------------------------------------------------
-    // Avoid stacking timers if report is opened multiple times
     if (report._isd_refresh_timer) {
       clearInterval(report._isd_refresh_timer);
       report._isd_refresh_timer = null;
@@ -73,26 +72,22 @@ frappe.query_reports["Site Safe Days"] = {
       }
     };
 
-    // milliseconds until next exact hour
     const ms_until_next_hour = () => {
       const now = new Date();
       const next = new Date(now);
-      next.setMinutes(0, 0, 0);        // HH:00:00.000
-      next.setHours(now.getHours() + 1); // next hour
+      next.setMinutes(0, 0, 0);
+      next.setHours(now.getHours() + 1);
       return Math.max(0, next.getTime() - now.getTime());
     };
 
-    // 1) wait until next hour boundary
     report._isd_refresh_timeout = setTimeout(() => {
       refresh_if_visible();
 
-      // 2) then refresh every hour exactly
       report._isd_refresh_timer = setInterval(() => {
         refresh_if_visible();
       }, 60 * 60 * 1000);
     }, ms_until_next_hour());
 
-    // Clear timers when leaving the report view
     if (!report._isd_route_hooked) {
       report._isd_route_hooked = true;
 
@@ -124,17 +119,14 @@ frappe.query_reports["Site Safe Days"] = {
   formatter: function (value, row, column, data, default_formatter) {
     value = default_formatter(value, row, column, data);
 
-    // Bigger font everywhere (1–1.5 sizes, safe)
     const big = (html) =>
       `<span style="font-size:14px; line-height:1.25;">${html}</span>`;
 
     if (!data) return big(value);
 
-    // Do not highlight group/separator rows
     if (data.site === "Company" && !data.date) return big(value);
     if (!data.date) return big(value);
 
-    // Map report columns -> incident flags set by Python
     const flag_map = {
       "lti_free_days": "incident_lti_today",
       "tif_days": "incident_tif_today",

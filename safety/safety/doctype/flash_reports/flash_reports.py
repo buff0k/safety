@@ -9,129 +9,260 @@ class FlashReports(Document):
         self.set_photo_timestamps()
 
     def set_photo_timestamps(self):
-
         for row in self.get("photos_and_attachments", []):
             if row.photos_and_attachments and not row.date_and_time_of_photo:
                 row.date_and_time_of_photo = now()
 
+
+# ------------------------------------------------------------------
+# HELPERS
+# ------------------------------------------------------------------
+def _first_non_empty(row, fieldnames):
+    if not row:
+        return None
+
+    for fieldname in fieldnames:
+        value = row.get(fieldname)
+        if value not in (None, "", []):
+            return value
+
+    return None
+
+
+def _extract_table_multiselect_values(doc, table_fieldname):
+    """
+    Generic reader for Table MultiSelect / child table rows.
+    Returns a list of readable values from each row.
+    """
+    rows = doc.get(table_fieldname) or []
+    values = []
+
+    system_fields = {
+        "name", "owner", "creation", "modified", "modified_by",
+        "parent", "parentfield", "parenttype", "idx", "docstatus"
+    }
+
+    for row in rows:
+        row_dict = row.as_dict() if hasattr(row, "as_dict") else dict(row)
+
+        picked = None
+
+        # Prefer obvious label/value style fields first
+        preferred_fields = [
+            "incident_type",
+            "severity",
+            "life_saving_rule",
+            "body_part",
+            "nature_of_injury",
+            "type_of_damage",
+            "task",
+            "description",
+            "title",
+            "name1",
+            "value",
+            "item",
+            "type"
+        ]
+
+        for field in preferred_fields:
+            if row_dict.get(field) not in (None, "", []):
+                picked = row_dict.get(field)
+                break
+
+        # Otherwise pick the first meaningful scalar field
+        if picked is None:
+            for key, val in row_dict.items():
+                if key in system_fields:
+                    continue
+                if isinstance(val, (str, int, float)) and val not in ("", None):
+                    picked = val
+                    break
+
+        if picked not in (None, ""):
+            values.append(str(picked))
+
+    # remove duplicates while preserving order
+    seen = set()
+    clean_values = []
+    for value in values:
+        if value not in seen:
+            seen.add(value)
+            clean_values.append(value)
+
+    return clean_values
+
+
+def _join_table_multiselect(doc, table_fieldname):
+    return ", ".join(_extract_table_multiselect_values(doc, table_fieldname))
 
 
 # ------------------------------------------------------------------
 # LINK FIELD QUERY — FILTER INCIDENT NUMBER
 # ------------------------------------------------------------------
 @frappe.whitelist()
+@frappe.validate_and_sanitize_search_inputs
 def incident_link_query(doctype, txt, searchfield, start, page_len, filters):
-    action_category = filters.get("action_category")
+    action_category = (filters or {}).get("action_category")
 
-    prefix_map = {
-        "Incident (INC)": "IS/INC/",
-        "Inspection (INS)": "IS/INS/",
-        "Planned Task Observation (PTO)": "IS/PTO/",
-        "Visible Field Leadership (VFL)": "IS/VFL/",
-        "Audits (AUD)": "IS/AUD/"
+    conditions = ["docstatus < 2"]
+    values = {
+        "txt": f"%{txt}%",
+        "start": start,
+        "page_len": page_len
     }
 
-    prefix = prefix_map.get(action_category)
-    if not prefix:
-        return []
+    # New Incident Report uses event_category
+    if action_category:
+        conditions.append("event_category = %(action_category)s")
+        values["action_category"] = action_category
+
+    where_clause = " AND ".join(conditions)
 
     return frappe.db.sql(
-        """
-        SELECT name, name
-        FROM `tabIncident Management`
-        WHERE name LIKE %(prefix)s
-          AND name LIKE %(txt)s
-        ORDER BY modified DESC
+        f"""
+        SELECT
+            name,
+            COALESCE(incident_number, name) AS incident_number
+        FROM `tabIncident Report`
+        WHERE {where_clause}
+          AND (
+              name LIKE %(txt)s
+              OR incident_number LIKE %(txt)s
+          )
+        ORDER BY creation DESC
         LIMIT %(start)s, %(page_len)s
         """,
-        {
-            "prefix": f"{prefix}%",
-            "txt": f"%{txt}%",
-            "start": start,
-            "page_len": page_len
-        }
+        values
     )
 
 
 # ------------------------------------------------------------------
-# FETCH INCIDENT DATA (FIXED EQUIPMENT CHILD TABLE)
+# FETCH INCIDENT DATA FROM INCIDENT REPORT
 # ------------------------------------------------------------------
 @frappe.whitelist()
 def get_flash_report_data(incident_number):
-    im = frappe.get_doc("Incident Management", incident_number)
+    ir = frappe.get_doc("Incident Report", incident_number)
 
     # ---------------- INCIDENT CLASSIFICATION ----------------
-    type_map = {
-        "tmm": "TMM",
-        "property_damage": "Property Damage",
-        "fatality": "Fatality",
-        "lti": "LTI",
-        "medical_treatment_case": "MTC",
-        "first_aid_case": "FAC"
-    }
+    incident_classification = _join_table_multiselect(ir, "select_type_of_incident")
 
-    incident_classification = ", ".join(
-        label for field, label in type_map.items() if im.get(field)
-    )
+    # ---------------- POTENTIAL SEVERITY ----------------
+    potential_severity = _join_table_multiselect(ir, "select_severity")
 
-    severity_map = {"high": "High", "medium": "Medium", "low": "Low"}
-    potential_severity = ", ".join(
-        label for field, label in severity_map.items() if im.get(field)
-    )
+    # ---------------- REPEAT INCIDENT ----------------
+    repeat_values = []
+    if ir.get("has_happened"):
+        repeat_values.append("Has Happened")
+    if ir.get("first_known_case"):
+        repeat_values.append("First Known Case")
+    repeat_incident = ", ".join(repeat_values)
 
-    repeat_map = {
-        "has_happened": "Has Happened",
-        "first_known_case": "First Known Case"
-    }
-
-    repeat_incident = ", ".join(
-        label for field, label in repeat_map.items() if im.get(field)
-    )
-
-    life_saving_rules_map = {
-        "drugs_alcohol": "No Alcohol or Drugs",
-        "wear_your_ppe": "Wear Your PPE",
-        "safety_belt": "Safety Belt",
-        "competent_and_licensed": "Competent and Licensed"
-    }
-
-    life_saving_rules = ", ".join(
-        label for field, label in life_saving_rules_map.items() if im.get(field)
-    )
+    # ---------------- LIFE SAVING RULES ----------------
+    life_saving_rules = _join_table_multiselect(ir, "life_save_rule")
 
     # ---------------- INJURED PERSON ----------------
     injured_name = injured_position = injured_years = None
-    if im.get("injury_details"):
-        row = im.injury_details[0]
-        injured_name = row.injured_person_name
-        injured_position = row.position_of_injured
-        injured_years = row.years_in_current_position
+    if ir.get("injured_detail"):
+        row = ir.get("injured_detail")[0]
+        injured_name = _first_non_empty(row, [
+            "injured_person_name",
+            "name_of_person",
+            "employee_name",
+            "full_name",
+            "person_name",
+            "responsible_person_name"
+        ])
+        injured_position = _first_non_empty(row, [
+            "position_of_injured",
+            "position",
+            "designation"
+        ])
+        injured_years = _first_non_empty(row, [
+            "years_in_current_position",
+            "years_in_position",
+            "years"
+        ])
 
     # ---------------- RESPONSIBLE PERSON ----------------
     damage_name = damage_position = damage_years = None
-    if im.get("damage_details"):
-        row = im.damage_details[0]
-        damage_name = row.damages_by_full_name
-        damage_position = row.damages_caused_by_position
-        damage_years = row.damages_caused_by_years_in_current_position
+    if ir.get("responsible_for_damages"):
+        row = ir.get("responsible_for_damages")[0]
+        damage_name = _first_non_empty(row, [
+            "damages_by_full_name",
+            "responsible_person_name",
+            "employee_name",
+            "full_name",
+            "person_name"
+        ])
+        damage_position = _first_non_empty(row, [
+            "damages_caused_by_position",
+            "position_of_person_responsible",
+            "position",
+            "designation"
+        ])
+        damage_years = _first_non_empty(row, [
+            "damages_caused_by_years_in_current_position",
+            "years_in_position",
+            "years_in_current_position",
+            "years"
+        ])
 
-    # ---------------- EQUIPMENT (✅ FIXED) ----------------
+    # ---------------- EQUIPMENT ----------------
     equipment_id = serial_number = registration_number = make = None
+    if ir.get("equipment_details"):
+        row = ir.get("equipment_details")[0]
+        equipment_id = _first_non_empty(row, [
+            "equipment_id",
+            "equipment",
+            "equipment_number",
+            "equipment_name"
+        ])
+        serial_number = _first_non_empty(row, [
+            "serial_number",
+            "serial_no"
+        ])
+        registration_number = _first_non_empty(row, [
+            "registration_number_if_applicable",
+            "registration_number",
+            "registration_no"
+        ])
+        make = _first_non_empty(row, [
+            "make",
+            "manufacturer"
+        ])
 
-    if im.get("equipment_details"):
-        row = im.equipment_details[0]
-        equipment_id = row.equipment_id
-        serial_number = row.serial_number
-        registration_number = row.registration_number_if_applicable
-        make = row.make
+    # ---------------- NATURE ----------------
+    nature_parts = []
+
+    if ir.get("incident_type"):
+        nature_parts.append(str(ir.get("incident_type")))
+
+    injury_nature = _join_table_multiselect(ir, "nature_of_the_injury")
+    if injury_nature:
+        nature_parts.append(injury_nature)
+
+    damage_type = _join_table_multiselect(ir, "type_of_damage")
+    if damage_type:
+        nature_parts.append(damage_type)
+
+    nature = ", ".join([x for x in nature_parts if x])
+
+    # ---------------- EMPLOYER DISPLAY ----------------
+    employer_display = ir.get("company") or ir.get("employer")
+
+    # ---------------- DESCRIPTION ----------------
+    description_of_incident_impact = (
+        ir.get("description")
+        or ir.get("description_of_the_event")
+    )
 
     return {
         "incident_classification": incident_classification,
-        "date_and_time_of_incident": im.datetime_incident,
-        "nature": incident_classification,
-        "site": im.site,
-        "occurence": im.location_on_site,
-        "description_of_incident_impact": im.description_of_the_event,
+        "date_and_time_of_incident": ir.get("datetime_incident"),
+        "nature": nature,
+        "site": ir.get("site"),
+        "occurence": ir.get("location_on_site"),
+        "description_of_incident_impact": description_of_incident_impact,
 
         "name_of_person": injured_name,
         "position": injured_position,
@@ -141,12 +272,11 @@ def get_flash_report_data(incident_number):
         "position_of_person_responsible": damage_position,
         "years_in_position": damage_years,
 
-        "name_of_employer": im.employer,
+        "name_of_employer": employer_display,
         "potential_severity_classification": potential_severity,
         "repeat_incident": repeat_incident,
         "applicable_life_saving_rule": life_saving_rules,
 
-        # EQUIPMENT VALUES
         "equipment_id": equipment_id,
         "serial_number": serial_number,
         "registration_number": registration_number,
