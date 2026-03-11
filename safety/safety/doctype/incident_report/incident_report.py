@@ -1,6 +1,6 @@
 import frappe
 from frappe.model.document import Document
-from datetime import date
+from datetime import date, datetime
 from frappe.utils import get_datetime
 from typing import Optional
 
@@ -40,19 +40,24 @@ class IncidentReport(Document):
 
     # --------------------------------------------------
     # CHILD TABLE AGE CALCULATIONS
+    # Assumes injured_id / damages_caused_by_id contain SA ID numbers
     # --------------------------------------------------
     def calculate_child_ages(self):
         today = date.today()
 
         for row in self.get("injured_detail", []):
-            row.age_of_injured = self._calculate_age(today, row.injured_id)
+            row.age_of_injured = self._calculate_age(today, row.get("injured_id"))
 
         for row in self.get("responsible_for_damages", []):
             row.damages_caused_by_age = self._calculate_age(
-                today, row.damages_caused_by_id
+                today, row.get("damages_caused_by_id")
             )
 
-    def _calculate_age(self, today, dob):
+    def _calculate_age(self, today, value):
+        if not value:
+            return None
+
+        dob = self._extract_dob(value, today=today)
         if not dob:
             return None
 
@@ -67,6 +72,56 @@ class IncidentReport(Document):
             months += 12
 
         return f"{years} years {months} months"
+
+    def _extract_dob(self, value, today=None):
+        """
+        Supports:
+        - date
+        - datetime
+        - ISO date string
+        - SA ID number string (YYMMDD......)
+        """
+        if not value:
+            return None
+
+        if today is None:
+            today = date.today()
+
+        if isinstance(value, datetime):
+            return value.date()
+
+        if isinstance(value, date):
+            return value
+
+        value = str(value).strip()
+
+        # --------------------------------------------------
+        # Try SA ID number first
+        # e.g. 8910235165083 -> 1989-10-23
+        # --------------------------------------------------
+        if len(value) >= 6 and value[:6].isdigit():
+            yy = int(value[:2])
+            mm = int(value[2:4])
+            dd = int(value[4:6])
+
+            current_yy = today.year % 100
+            year = 1900 + yy if yy > current_yy else 2000 + yy
+
+            try:
+                return date(year, mm, dd)
+            except ValueError:
+                pass
+
+        # --------------------------------------------------
+        # Fallback: normal date string
+        # --------------------------------------------------
+        for fmt in ("%Y-%m-%d", "%Y-%m-%d %H:%M:%S"):
+            try:
+                return datetime.strptime(value, fmt).date()
+            except ValueError:
+                continue
+
+        return None
 
     # --------------------------------------------------
     # RISK MATRIX
@@ -104,8 +159,7 @@ class IncidentReport(Document):
             self.risk_level = None
 
     # --------------------------------------------------
-    # IMPACT → DESCRIPTION
-    # NEW VERSION: reads from child table / table multiselect
+    # IMPACT -> DESCRIPTION
     # --------------------------------------------------
     def populate_impact_description(self):
         if not self.hazard_consequence:
@@ -134,11 +188,11 @@ class IncidentReport(Document):
 
             elif "environment" in key:
                 descriptions.append({
-                    1: "Minimal environmental harm – L1 incident",
-                    2: "Material environmental harm – L2 incident remediable short term",
-                    3: "Serious environmental harm – L2 incident remediable within LOM",
-                    4: "Major environmental harm – L2 incident remediable post LOM",
-                    5: "Extreme environmental harm – L3 incident irreversible"
+                    1: "Minimal environmental harm - L1 incident",
+                    2: "Material environmental harm - L2 incident remediable short term",
+                    3: "Serious environmental harm - L2 incident remediable within LOM",
+                    4: "Major environmental harm - L2 incident remediable post LOM",
+                    5: "Extreme environmental harm - L3 incident irreversible"
                 }.get(consequence))
 
             elif (
@@ -203,7 +257,6 @@ class IncidentReport(Document):
 
     # --------------------------------------------------
     # ATTACHMENT CLEANUP
-    # Clears investigation technique attachments not selected
     # --------------------------------------------------
     def cleanup_attachments(self):
         allowed = {
@@ -220,7 +273,6 @@ class IncidentReport(Document):
 
     # --------------------------------------------------
     # PRELIMINARY INVESTIGATION CHILD ROW VALIDATION
-    # Requires at least one attachment per row
     # --------------------------------------------------
     def validate_preliminary_investigation_rows(self):
         for idx, row in enumerate(self.get("investigation_type_and_attachments", []), start=1):

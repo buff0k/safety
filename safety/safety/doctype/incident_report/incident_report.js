@@ -165,8 +165,7 @@ function toggle_investigation_attachments(frm) {
 
 
 // =====================================================
-// IMPACT → DESCRIPTION POPULATION
-// NEW VERSION: reads from child table / table multiselect
+// IMPACT -> DESCRIPTION POPULATION
 // =====================================================
 function populate_impact_description(frm) {
     if (!frm.doc.hazard_consequence) {
@@ -193,11 +192,11 @@ function populate_impact_description(frm) {
 
         else if (key.includes("environment")) {
             descriptions.push({
-                1: "Minimal environmental harm – L1 incident",
-                2: "Material environmental harm – L2 incident remediable short term",
-                3: "Serious environmental harm – L2 incident remediable within LOM",
-                4: "Major environmental harm – L2 incident remediable post LOM",
-                5: "Extreme environmental harm – L3 incident irreversible"
+                1: "Minimal environmental harm - L1 incident",
+                2: "Material environmental harm - L2 incident remediable short term",
+                3: "Serious environmental harm - L2 incident remediable within LOM",
+                4: "Major environmental harm - L2 incident remediable post LOM",
+                5: "Extreme environmental harm - L3 incident irreversible"
             }[consequence]);
         }
 
@@ -246,7 +245,6 @@ function populate_impact_description(frm) {
 
 // =====================================================
 // GENERIC TABLE MULTISELECT VALUE READER
-// Tries to extract the linked/meaningful value from each row
 // =====================================================
 function get_table_values(rows) {
     const ignore = new Set([
@@ -280,6 +278,7 @@ function normalize_text(value) {
 
 // =====================================================
 // CHILD TABLE AGE CALCULATION (UI ONLY)
+// SA ID NUMBER VERSION
 // =====================================================
 
 // Responsible Person
@@ -298,15 +297,20 @@ frappe.ui.form.on("Person Responsible for Damages", {
 
 function calculate_child_age(cdt, cdn, source_field, target_field) {
     const row = locals[cdt][cdn];
+    const rawValue = (row[source_field] || "").toString().trim();
 
-    if (!row[source_field]) {
+    if (!rawValue) {
         frappe.model.set_value(cdt, cdn, target_field, "");
         return;
     }
 
-    const dob = frappe.datetime.str_to_obj(row[source_field]);
-    const today = frappe.datetime.str_to_obj(frappe.datetime.get_today());
+    const dob = extract_dob_from_value(rawValue);
+    if (!dob) {
+        frappe.model.set_value(cdt, cdn, target_field, "");
+        return;
+    }
 
+    const today = new Date();
     let years = today.getFullYear() - dob.getFullYear();
     let months = today.getMonth() - dob.getMonth();
 
@@ -327,10 +331,42 @@ function calculate_child_age(cdt, cdn, source_field, target_field) {
     );
 }
 
+function extract_dob_from_value(value) {
+    value = (value || "").toString().trim();
+
+    // SA ID number
+    if (/^\d{6,}$/.test(value)) {
+        const yy = parseInt(value.slice(0, 2), 10);
+        const mm = parseInt(value.slice(2, 4), 10) - 1;
+        const dd = parseInt(value.slice(4, 6), 10);
+
+        const today = new Date();
+        const currentYY = today.getFullYear() % 100;
+        const fullYear = yy > currentYY ? 1900 + yy : 2000 + yy;
+
+        const dob = new Date(fullYear, mm, dd);
+
+        if (
+            dob.getFullYear() === fullYear &&
+            dob.getMonth() === mm &&
+            dob.getDate() === dd
+        ) {
+            return dob;
+        }
+    }
+
+    // Fallback normal date string
+    const parsed = new Date(value);
+    if (!isNaN(parsed.getTime())) {
+        return parsed;
+    }
+
+    return null;
+}
+
 
 // =====================================================
 // PRELIMINARY INVESTIGATION ROW VALIDATION
-// NEW VERSION: validates child table rows instead of fixed fields
 // =====================================================
 function validate_preliminary_investigation_rows(frm) {
     const rows = frm.doc.investigation_type_and_attachments || [];

@@ -50,7 +50,7 @@
    "fieldname": "incident_number",
    "fieldtype": "Link",
    "label": "Incident Number",
-   "options": "Incident Management"
+   "options": "Incident Report"
   },
   {
    "fieldname": "incident_classification",
@@ -211,11 +211,11 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-01-06 14:02:28.177196",
+ "modified": "2026-03-10 15:52:17.157445",
  "modified_by": "Administrator",
  "module": "Safety",
  "name": "Flash Reports",
- "naming_rule": "Expression",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {
