@@ -40,7 +40,6 @@ frappe.query_reports["Site Safe Days"] = {
   ],
 
   onload: async function (report) {
-    // Default from_date to earliest configured Site Start Date
     const r = await frappe.call({
       method: "safety.safety.report.site_safe_days.site_safe_days.get_default_from_date",
       args: { sites: [] }
@@ -50,9 +49,6 @@ frappe.query_reports["Site Safe Days"] = {
       report.set_filter_value("from_date", r.message);
     }
 
-    // ----------------------------------------------------
-    // Auto-refresh exactly on the hour (HH:00), then hourly
-    // ----------------------------------------------------
     if (report._isd_refresh_timer) {
       clearInterval(report._isd_refresh_timer);
       report._isd_refresh_timer = null;

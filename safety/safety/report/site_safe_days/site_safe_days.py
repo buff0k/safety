@@ -10,25 +10,13 @@ from datetime import timedelta
 # --------------------------
 # Helpers
 # --------------------------
-def is_checked(v) -> bool:
-    """Frappe Check fields can come back as 0/1 or '0'/'1'. Avoid bool('0') == True."""
-    try:
-        return int(v or 0) == 1
-    except Exception:
-        return False
-
-
-def cstr(value):
-    return str(value) if value is not None else ""
-
-
 def normalize_text(value):
-    return cstr(value).strip().lower()
+    return str(value or "").strip().lower()
 
 
 def row_to_values(row):
     """
-    Extract readable scalar values from a child row / table multiselect row.
+    Extract readable scalar values from a child row / Table MultiSelect row.
     """
     if not row:
         return []
@@ -53,109 +41,62 @@ def row_to_values(row):
 
 def extract_table_values(doc, fieldname):
     """
-    Returns list of readable row values from a child table / Table MultiSelect.
+    Returns unique readable values from child rows / Table MultiSelect.
     """
     rows = doc.get(fieldname) or []
     out = []
 
     for row in rows:
-        values = row_to_values(row)
-        for val in values:
+        for val in row_to_values(row):
             if val and val not in out:
                 out.append(val)
 
     return out
 
 
-def has_any_exact_or_contains(values, exact=None, contains=None):
-    exact = [normalize_text(v) for v in (exact or [])]
-    contains = [normalize_text(v) for v in (contains or [])]
-
-    normalized_values = [normalize_text(v) for v in values if v not in (None, "")]
-    blob = " | ".join(normalized_values)
-
-    exact_hit = any(v in exact for v in normalized_values) if exact else False
-    contains_hit = any(token in blob for token in contains) if contains else False
-
-    return exact_hit or contains_hit
+def has_exact_value(values, target_values):
+    normalized_values = {normalize_text(v) for v in values if v not in (None, "")}
+    normalized_targets = {normalize_text(v) for v in target_values}
+    return bool(normalized_values.intersection(normalized_targets))
 
 
 def get_incident_flags_from_report(doc):
     """
-    Map new Incident Report structure to old report categories:
-      - lti
-      - mtc
-      - fac
-      - pdi
-      - env
-      - tif = lti or mtc or fac
+    Reset logic based on the NEW Incident Report doctype:
 
-    The new doctype stores these through child rows / table multiselects, so we read:
-      - select_type_of_incident
-      - type_of_damage
-      - type_of_impact
-      - incident_type
+    - LTI / MTC / FAC come from select_type_of_incident
+    - PDI comes from select_type_of_incident when:
+        * Trackless Mobile Machinery
+        * Property Damage
+    - ENV comes from type_of_impact when:
+        * Environmental Impact
     """
-    type_values = extract_table_values(doc, "select_type_of_incident")
-    damage_values = extract_table_values(doc, "type_of_damage")
-    impact_values = extract_table_values(doc, "type_of_impact")
-    incident_type_value = cstr(doc.get("incident_type"))
+    incident_types = extract_table_values(doc, "select_type_of_incident")
+    impact_types = extract_table_values(doc, "type_of_impact")
 
-    all_values = type_values + damage_values + impact_values + [incident_type_value]
-
-    lti = has_any_exact_or_contains(
-        all_values,
-        exact=["lti", "lost time injury"],
-        contains=["lti", "lost time injury"]
+    lti = has_exact_value(
+        incident_types,
+        ["LTI", "Lost Time Injury"]
     )
 
-    mtc = has_any_exact_or_contains(
-        all_values,
-        exact=["mtc", "medical treatment case"],
-        contains=["mtc", "medical treatment case", "medical treatment"]
+    mtc = has_exact_value(
+        incident_types,
+        ["MTC", "Medical Treatment Case"]
     )
 
-    fac = has_any_exact_or_contains(
-        all_values,
-        exact=["fac", "first aid case"],
-        contains=["fac", "first aid case", "first aid"]
+    fac = has_exact_value(
+        incident_types,
+        ["FAC", "First Aid Case", "First Aid"]
     )
 
-    # Important: PDI / Property Damage handling
-    # Your screenshots suggest both forms exist, so support BOTH exactly.
-    pdi = has_any_exact_or_contains(
-        all_values,
-        exact=[
-            "pdi",
-            "property damage",
-            "tmm",
-            "equipment damage"
-        ],
-        contains=[
-            "pdi",
-            "property damage",
-            "tmm",
-            "equipment damage",
-            "vehicle damage",
-            "machine damage"
-        ]
+    pdi = has_exact_value(
+        incident_types,
+        ["Trackless Mobile Machinery", "Property Damage", "PDI"]
     )
 
-    env = has_any_exact_or_contains(
-        all_values,
-        exact=[
-            "environmental incident",
-            "environmental impact",
-            "environment"
-        ],
-        contains=[
-            "environmental incident",
-            "environmental impact",
-            "environment",
-            "environmental",
-            "spill",
-            "pollution"
-        ]
+    env = has_exact_value(
+        impact_types,
+        ["Environmental Impact"]
     )
 
     tif = lti or mtc or fac
@@ -251,7 +192,6 @@ def execute(filters=None):
     company_ltifr_target = cfg.get("_company_ltifr_target")
     company_ltifr_actual = cfg.get("_company_ltifr_actual")
 
-    # If no site filter, include all configured sites
     if not selected_sites:
         selected_sites = [k for k, v in cfg.items() if isinstance(v, dict)]
 
@@ -260,7 +200,6 @@ def execute(filters=None):
 
     columns = get_columns()
 
-    # Include 1 day before start (streak depends on previous day)
     query_from = add_days(from_date, -1) if from_date else add_days(to_date, -365)
 
     incidents = fetch_incidents(
@@ -297,7 +236,6 @@ def execute(filters=None):
             )
         )
 
-    # Company summary at bottom
     data.extend(
         build_company_summary(
             selected_sites=selected_sites,
@@ -369,7 +307,6 @@ def fetch_incidents(sites, date_from, date_to, employer=None, company=None):
             "incident_number",
             "site",
             "datetime_incident",
-            "incident_type",
         ],
         order_by="datetime_incident asc",
     )
@@ -568,15 +505,6 @@ def build_company_summary(selected_sites, cfg, from_date, to_date, incidents_by_
 
 @frappe.whitelist()
 def get_today_snapshot(filters=None):
-    """
-    Runs Site Safe Days report and returns ONLY today's rows.
-
-    Adds:
-      - complex_by_site: from Site Start Date Child.complex
-      - color_by_site: from Site Start Date Child.color (hex)
-      - company_colour: from Site Start Dates.company_colour (hex)
-        and maps it as color_by_site["Company"]
-    """
     from frappe.utils import getdate
 
     if filters is None:
