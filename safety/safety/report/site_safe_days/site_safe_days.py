@@ -10,28 +10,51 @@ from datetime import timedelta
 # --------------------------
 # Helpers
 # --------------------------
+SYSTEM_ROW_FIELDS = {
+    "name", "owner", "creation", "modified", "modified_by",
+    "parent", "parentfield", "parenttype", "idx", "docstatus"
+}
+
+
 def normalize_text(value):
     return str(value or "").strip().lower()
 
 
+def parse_selected_sites(value):
+    if not value:
+        return []
+
+    if isinstance(value, list):
+        return [v for v in value if v]
+
+    if isinstance(value, str):
+        try:
+            parsed = frappe.parse_json(value)
+            if isinstance(parsed, list):
+                return [v for v in parsed if v]
+        except Exception:
+            pass
+
+        if "\n" in value:
+            return [v.strip() for v in value.split("\n") if v.strip()]
+
+        if "," in value:
+            return [v.strip() for v in value.split(",") if v.strip()]
+
+        return [value]
+
+    return []
+
+
 def row_to_values(row):
-    """
-    Extract readable scalar values from a child row / Table MultiSelect row.
-    """
     if not row:
         return []
 
-    if hasattr(row, "as_dict"):
-        row = row.as_dict()
-
-    system_fields = {
-        "name", "owner", "creation", "modified", "modified_by",
-        "parent", "parentfield", "parenttype", "idx", "docstatus"
-    }
-
+    row_dict = row.as_dict() if hasattr(row, "as_dict") else dict(row)
     values = []
-    for key, val in row.items():
-        if key in system_fields:
+
+    for key, val in row_dict.items():
+        if key in SYSTEM_ROW_FIELDS:
             continue
         if isinstance(val, (str, int, float)) and val not in ("", None):
             values.append(str(val).strip())
@@ -41,7 +64,8 @@ def row_to_values(row):
 
 def extract_table_values(doc, fieldname):
     """
-    Returns unique readable values from child rows / Table MultiSelect.
+    Collect all scalar values from the rows of a Table / Table MultiSelect.
+    This is intentionally broad so it still works even if the child fieldname differs.
     """
     rows = doc.get(fieldname) or []
     out = []
@@ -54,47 +78,56 @@ def extract_table_values(doc, fieldname):
     return out
 
 
-def has_exact_value(values, target_values):
-    normalized_values = {normalize_text(v) for v in values if v not in (None, "")}
-    normalized_targets = {normalize_text(v) for v in target_values}
-    return bool(normalized_values.intersection(normalized_targets))
+def contains_any(values, targets):
+    normalized_values = [normalize_text(v) for v in values if v not in (None, "")]
+    for value in normalized_values:
+        for target in targets:
+            t = normalize_text(target)
+            if value == t or t in value:
+                return True
+    return False
 
 
 def get_incident_flags_from_report(doc):
     """
-    Reset logic based on the NEW Incident Report doctype:
+    NEW reset logic from Incident Report:
 
-    - LTI / MTC / FAC come from select_type_of_incident
-    - PDI comes from select_type_of_incident when:
-        * Trackless Mobile Machinery
-        * Property Damage
-    - ENV comes from type_of_impact when:
-        * Environmental Impact
+    site                -> which site to affect
+    datetime_incident   -> which date to affect
+
+    select_type_of_incident:
+      - LTI
+      - MTC
+      - FAC
+      - PDI when Trackless Mobile Machinery / Property Damage / PDI
+
+    type_of_impact:
+      - Environmental Impact -> ENV
     """
     incident_types = extract_table_values(doc, "select_type_of_incident")
     impact_types = extract_table_values(doc, "type_of_impact")
 
-    lti = has_exact_value(
+    lti = contains_any(
         incident_types,
         ["LTI", "Lost Time Injury"]
     )
 
-    mtc = has_exact_value(
+    mtc = contains_any(
         incident_types,
         ["MTC", "Medical Treatment Case"]
     )
 
-    fac = has_exact_value(
+    fac = contains_any(
         incident_types,
         ["FAC", "First Aid Case", "First Aid"]
     )
 
-    pdi = has_exact_value(
+    pdi = contains_any(
         incident_types,
         ["Trackless Mobile Machinery", "Property Damage", "PDI"]
     )
 
-    env = has_exact_value(
+    env = contains_any(
         impact_types,
         ["Environmental Impact"]
     )
@@ -115,20 +148,6 @@ def get_incident_flags_from_report(doc):
 # Site Start Dates singleton
 # --------------------------
 def get_site_start_config():
-    """
-    Site Start Dates (Singleton) fields used:
-      - company_ltifr_target (Float)
-      - company_ltifr_actual (Float)
-      - company_colour (Data)
-
-    Child table Site Start Date Child fields used:
-      - site (Link Branch)
-      - start_date (Date)
-      - ltifr_target (Float)
-      - ltifr (Float)
-      - complex (Data/Select)
-      - color (Data)
-    """
     doc = frappe.get_single("Site Start Dates")
 
     out = {
@@ -180,15 +199,9 @@ def get_default_from_date(sites=None):
 def execute(filters=None):
     filters = filters or {}
 
-    selected_sites = filters.get("site") or []
-    if isinstance(selected_sites, str):
-        try:
-            parsed = frappe.parse_json(selected_sites)
-            selected_sites = parsed if isinstance(parsed, list) else [parsed]
-        except Exception:
-            selected_sites = [selected_sites]
-
+    selected_sites = parse_selected_sites(filters.get("site"))
     cfg = get_site_start_config()
+
     company_ltifr_target = cfg.get("_company_ltifr_target")
     company_ltifr_actual = cfg.get("_company_ltifr_actual")
 
@@ -271,7 +284,6 @@ def get_columns():
 
         {"label": _("LTIFR Target"), "fieldname": "ltifr_target", "fieldtype": "Float", "width": 120},
         {"label": _("LTIFR"), "fieldname": "ltifr", "fieldtype": "Float", "width": 90},
-
         {"label": _("FFPS"), "fieldname": "ffps", "fieldtype": "Float", "width": 90},
         {"label": _("FFMS"), "fieldname": "ffms", "fieldtype": "Float", "width": 90},
 
@@ -289,16 +301,11 @@ def get_columns():
 def fetch_incidents(sites, date_from, date_to, employer=None, company=None):
     filters = {
         "site": ["in", sites],
-        "event_category": "Incident (INC)",
         "docstatus": ["in", [0, 1]],
         "datetime_incident": ["between", [f"{date_from} 00:00:00", f"{date_to} 23:59:59"]],
     }
 
-    if employer:
-        filters["employer"] = employer
-    if company:
-        filters["company"] = company
-
+    # Keep incident-only logic, but tolerate blank/migrated event_category values
     rows = frappe.get_all(
         "Incident Report",
         filters=filters,
@@ -307,6 +314,9 @@ def fetch_incidents(sites, date_from, date_to, employer=None, company=None):
             "incident_number",
             "site",
             "datetime_incident",
+            "event_category",
+            "employer",
+            "company",
         ],
         order_by="datetime_incident asc",
     )
@@ -314,13 +324,27 @@ def fetch_incidents(sites, date_from, date_to, employer=None, company=None):
     out = {s: {} for s in sites}
 
     for r in rows:
+        if employer and r.get("employer") != employer:
+            continue
+        if company and r.get("company") != company:
+            continue
+
+        event_category = (r.get("event_category") or "").strip()
+        if event_category and event_category != "Incident (INC)":
+            continue
+
+        site = r.get("site")
+        if not site or site not in sites:
+            continue
+
         doc = frappe.get_doc("Incident Report", r["name"])
+        flags = get_incident_flags_from_report(doc)
+
+        # Skip rows that do not actually trigger any Site Safe Days category
+        if not any([flags["lti"], flags["mtc"], flags["fac"], flags["pdi"], flags["env"]]):
+            continue
 
         d = getdate(doc.get("datetime_incident"))
-        site = doc.get("site")
-
-        if site not in out:
-            out[site] = {}
 
         if d not in out[site]:
             out[site][d] = {
@@ -333,8 +357,6 @@ def fetch_incidents(sites, date_from, date_to, employer=None, company=None):
                 "counts": {"lti": 0, "mtc": 0, "fac": 0, "pdi": 0, "env": 0},
                 "links": [],
             }
-
-        flags = get_incident_flags_from_report(doc)
 
         out[site][d]["lti"] |= flags["lti"]
         out[site][d]["mtc"] |= flags["mtc"]
@@ -505,8 +527,6 @@ def build_company_summary(selected_sites, cfg, from_date, to_date, incidents_by_
 
 @frappe.whitelist()
 def get_today_snapshot(filters=None):
-    from frappe.utils import getdate
-
     if filters is None:
         filters = {}
     elif isinstance(filters, str):
