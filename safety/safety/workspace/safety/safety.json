@@ -105,7 +105,7 @@
    "hidden": 0,
    "is_query_report": 0,
    "label": "Reports",
-   "link_count": 11,
+   "link_count": 1,
    "link_type": "DocType",
    "onboard": 0,
    "type": "Card Break"
@@ -122,122 +122,12 @@
   },
   {
    "hidden": 0,
-   "is_query_report": 1,
-   "label": "TMM Day of Week Incidents",
-   "link_count": 0,
-   "link_to": "Day of the Week",
-   "link_type": "Report",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 1,
-   "label": "TMM Time of Day",
-   "link_count": 0,
-   "link_to": "TMM Time of Day",
-   "link_type": "Report",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 1,
-   "label": "TMM Date of Month ",
-   "link_count": 0,
-   "link_to": "TMM Date of the Month",
-   "link_type": "Report",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 1,
-   "label": "Type of TMM Incident",
-   "link_count": 0,
-   "link_to": "Type of TMM Incident",
-   "link_type": "Report",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 1,
-   "label": "TMM vs Injury",
-   "link_count": 0,
-   "link_to": "TMM vs Injury",
-   "link_type": "Report",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 1,
-   "label": "Injury Type",
-   "link_count": 0,
-   "link_to": "Injury Type",
-   "link_type": "Report",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 1,
-   "label": "Tasks Performed when Injured",
-   "link_count": 0,
-   "link_to": "Task Performed when Injured",
-   "link_type": "Report",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 1,
-   "label": "Body Part Injured",
-   "link_count": 0,
-   "link_to": "Body Part Injured",
-   "link_type": "Report",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 1,
-   "label": "TMM/Injury Day of Month",
-   "link_count": 0,
-   "link_to": "TMM and Injury per day of the Month",
-   "link_type": "Report",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 1,
-   "label": "TMM / Injury Per shift",
-   "link_count": 0,
-   "link_to": "TMM and Injury per shift",
-   "link_type": "Report",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
    "is_query_report": 0,
    "label": "Incident Management",
-   "link_count": 4,
+   "link_count": 3,
    "link_type": "DocType",
    "onboard": 0,
    "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Incident Management",
-   "link_count": 0,
-   "link_to": "Incident Management",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
   },
   {
    "hidden": 0,
@@ -270,7 +160,7 @@
    "type": "Link"
   }
  ],
- "modified": "2026-03-10 09:30:46.024712",
+ "modified": "2026-03-12 13:53:59.035332",
  "modified_by": "Administrator",
  "module": "Safety",
  "name": "Safety",

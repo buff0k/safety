@@ -11,7 +11,7 @@
   "details",
   "reactive_actions_taken",
   "proactive_actions_taken",
-  "action_category",
+  "action_categories",
   "incident_number",
   "date",
   "month",
@@ -179,16 +179,10 @@
    "label": "Month"
   },
   {
-   "fieldname": "action_category",
-   "fieldtype": "Select",
-   "label": "Action Category",
-   "options": "\nIncident (INC)\nInspection (INS)\nPlanned Task Observation (PTO)\nVisible Field Leadership (VFL)\nAudits (AUD)"
-  },
-  {
    "fieldname": "incident_number",
-   "fieldtype": "Link",
+   "fieldtype": "Dynamic Link",
    "label": "Incident Number",
-   "options": "Incident Management"
+   "options": "action_categories"
   },
   {
    "fetch_from": "responsible_person.employee_name",
@@ -257,16 +251,22 @@
    "fieldtype": "Table",
    "label": "Attach Evidence of Actions",
    "options": "Evidence"
+  },
+  {
+   "fieldname": "action_categories",
+   "fieldtype": "Link",
+   "label": "Action Category",
+   "options": "DocType"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-01-06 14:01:27.239553",
+ "modified": "2026-03-12 11:20:56.423601",
  "modified_by": "Administrator",
  "module": "Safety",
  "name": "Action Management",
- "naming_rule": "Expression",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {
