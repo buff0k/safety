@@ -7,7 +7,7 @@ from frappe.model.document import Document
 from frappe.utils import getdate
 
 
-class DrillDocumentMockDoc(Document):
+class MockDrillDocument(Document):
     def validate(self):
         """
         Server-side enforcement:
@@ -30,7 +30,7 @@ def get_next_unique_drill_document_number(doc_date):
         return None
 
     return generate_next_number(
-        doctype="DrillDocumentMockDoc",
+        doctype="MockDrillDocument",
         doc_date=doc_date,
     )
 

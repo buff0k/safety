@@ -9,9 +9,10 @@
   "emergency_schedule_tab",
   "emergency_schedule",
   "site",
+  "date",
+  "unique_number",
   "title",
   "year",
-  "unique_number",
   "table_pxsq"
  ],
  "fields": [
@@ -52,15 +53,20 @@
    "fieldname": "unique_number",
    "fieldtype": "Data",
    "label": "Unique Emergency Schedule Number "
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Datetime",
+   "label": "Date"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-02-24 12:36:11.940555",
+ "modified": "2026-03-13 07:24:07.279094",
  "modified_by": "Administrator",
  "module": "Safety",
- "name": "Emergency Preparedness",
+ "name": "Emergency Preparedness Schedule",
  "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [

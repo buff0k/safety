@@ -13,9 +13,9 @@ IGNORE_TEST_RECORD_DEPENDENCIES = []  # eg. ["User"]
 
 
 
-class IntegrationTestEmergencyPreparedness(IntegrationTestCase):
+class IntegrationTestMockDrillDocument(IntegrationTestCase):
 	"""
-	Integration tests for EmergencyPreparedness.
+	Integration tests for MockDrillDocument.
 	Use this class for testing interactions between multiple components.
 	"""
 
