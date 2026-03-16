@@ -47,7 +47,6 @@ def _extract_table_multiselect_values(doc, table_fieldname):
 
         picked = None
 
-        # Prefer obvious label/value style fields first
         preferred_fields = [
             "incident_type",
             "severity",
@@ -69,7 +68,6 @@ def _extract_table_multiselect_values(doc, table_fieldname):
                 picked = row_dict.get(field)
                 break
 
-        # Otherwise pick the first meaningful scalar field
         if picked is None:
             for key, val in row_dict.items():
                 if key in system_fields:
@@ -81,7 +79,6 @@ def _extract_table_multiselect_values(doc, table_fieldname):
         if picked not in (None, ""):
             values.append(str(picked))
 
-    # remove duplicates while preserving order
     seen = set()
     clean_values = []
     for value in values:
@@ -94,6 +91,18 @@ def _extract_table_multiselect_values(doc, table_fieldname):
 
 def _join_table_multiselect(doc, table_fieldname):
     return ", ".join(_extract_table_multiselect_values(doc, table_fieldname))
+
+
+def _get_first_row_from_possible_tables(doc, table_fieldnames):
+    """
+    Returns the first row from the first non-empty child table found.
+    Useful when fieldname may differ from the label.
+    """
+    for table_fieldname in table_fieldnames:
+        rows = doc.get(table_fieldname) or []
+        if rows:
+            return rows[0]
+    return None
 
 
 # ------------------------------------------------------------------
@@ -111,7 +120,6 @@ def incident_link_query(doctype, txt, searchfield, start, page_len, filters):
         "page_len": page_len
     }
 
-    # New Incident Report uses event_category
     if action_category:
         conditions.append("event_category = %(action_category)s")
         values["action_category"] = action_category
@@ -160,52 +168,57 @@ def get_flash_report_data(incident_number):
     # ---------------- LIFE SAVING RULES ----------------
     life_saving_rules = _join_table_multiselect(ir, "life_save_rule")
 
-    # ---------------- INJURED PERSON ----------------
-    injured_name = injured_position = injured_years = None
-    if ir.get("injured_detail"):
-        row = ir.get("injured_detail")[0]
-        injured_name = _first_non_empty(row, [
-            "injured_person_name",
-            "name_of_person",
-            "employee_name",
-            "full_name",
-            "person_name",
-            "responsible_person_name"
-        ])
-        injured_position = _first_non_empty(row, [
-            "position_of_injured",
-            "position",
-            "designation"
-        ])
-        injured_years = _first_non_empty(row, [
-            "years_in_current_position",
-            "years_in_position",
-            "years"
-        ])
+    # ---------------- RESPONSIBLE PERSON CHILD TABLE ----------------
+    # Requested mappings:
+    # name_of_person                <- injured_person_name
+    # position                      <- position_of_injured
+    # years_in_current_position     <- years_in_current_position
+    #
+    # We try a few possible table fieldnames to avoid breaking if the actual
+    # fieldname differs from the visible label "Responsible Person".
+    responsible_person_row = _get_first_row_from_possible_tables(
+        ir,
+        [
+            "responsible_person",
+            "responsible_person_detail",
+            "responsible_person_details",
+            "injured_detail"
+        ]
+    )
 
-    # ---------------- RESPONSIBLE PERSON ----------------
-    damage_name = damage_position = damage_years = None
-    if ir.get("responsible_for_damages"):
-        row = ir.get("responsible_for_damages")[0]
-        damage_name = _first_non_empty(row, [
-            "damages_by_full_name",
-            "responsible_person_name",
-            "employee_name",
-            "full_name",
-            "person_name"
-        ])
-        damage_position = _first_non_empty(row, [
-            "damages_caused_by_position",
-            "position_of_person_responsible",
-            "position",
-            "designation"
-        ])
-        damage_years = _first_non_empty(row, [
-            "damages_caused_by_years_in_current_position",
-            "years_in_position",
-            "years_in_current_position",
-            "years"
-        ])
+    injured_name = _first_non_empty(responsible_person_row, [
+        "injured_person_name"
+    ])
+    injured_position = _first_non_empty(responsible_person_row, [
+        "position_of_injured"
+    ])
+    injured_years = _first_non_empty(responsible_person_row, [
+        "years_in_current_position"
+    ])
+
+    # ---------------- PERSON RESPONSIBLE FOR DAMAGES ----------------
+    # Requested mappings:
+    # responsible_person_name            <- damages_by_full_name (kept as primary name source)
+    # position_of_person_responsible     <- damages_caused_by_position
+    # years_in_position                  <- damages_caused_by_years_in_current_position
+    damage_row = _get_first_row_from_possible_tables(
+        ir,
+        ["responsible_for_damages"]
+    )
+
+    damage_name = _first_non_empty(damage_row, [
+        "damages_by_full_name",
+        "responsible_person_name",
+        "employee_name",
+        "full_name",
+        "person_name"
+    ])
+    damage_position = _first_non_empty(damage_row, [
+        "damages_caused_by_position"
+    ])
+    damage_years = _first_non_empty(damage_row, [
+        "damages_caused_by_years_in_current_position"
+    ])
 
     # ---------------- EQUIPMENT ----------------
     equipment_id = serial_number = registration_number = make = None
@@ -251,10 +264,9 @@ def get_flash_report_data(incident_number):
     employer_display = ir.get("company") or ir.get("employer")
 
     # ---------------- DESCRIPTION ----------------
-    description_of_incident_impact = (
-        ir.get("description")
-        or ir.get("description_of_the_event")
-    )
+    # Requested mapping:
+    # description_of_incident_impact <- description_of_the_event
+    description_of_incident_impact = ir.get("description_of_the_event")
 
     return {
         "incident_classification": incident_classification,

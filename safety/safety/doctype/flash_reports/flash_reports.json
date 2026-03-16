@@ -35,10 +35,7 @@
   "applicable_life_saving_rule",
   "column_break_vuci",
   "repeat_incident",
-  "potential_severity_classification",
-  "report",
-  "flash_report",
-  "flash"
+  "potential_severity_classification"
  ],
  "fields": [
   {
@@ -128,21 +125,6 @@
    "options": "Incident Photos"
   },
   {
-   "fieldname": "report",
-   "fieldtype": "Tab Break",
-   "label": "Report"
-  },
-  {
-   "fieldname": "flash_report",
-   "fieldtype": "Section Break",
-   "label": "Flash Report"
-  },
-  {
-   "fieldname": "flash",
-   "fieldtype": "HTML",
-   "label": "Flash"
-  },
-  {
    "fieldname": "additional_information",
    "fieldtype": "Section Break",
    "label": "Additional Information"
@@ -211,7 +193,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-03-10 15:52:17.157445",
+ "modified": "2026-03-16 11:51:14.029415",
  "modified_by": "Administrator",
  "module": "Safety",
  "name": "Flash Reports",
