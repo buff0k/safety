@@ -66,8 +66,9 @@ frappe.query_reports["Incident Analysis Master Report"] = {
 			fieldtype: "Select",
 			reqd: 1,
 			default: "Nature of Injury",
-			options: "\nNature of Injury\nType of Damage\nBody Part\nTask\nShift Summary\nDay of Week\nDay of Month\nHour of Day\nIncident Type\nSeverity",
-			on_change: function (report) {
+			options:
+				"\nNature of Injury\nType of Damage\nBody Part\nTask\nShift Summary\nDay of Week\nDay of Month\nHour of Day\nIncident Type\nSeverity",
+			on_change: function () {
 				toggle_specialist_filters(frappe.query_report);
 				frappe.query_report.refresh();
 			},
@@ -87,7 +88,7 @@ frappe.query_reports["Incident Analysis Master Report"] = {
 			fieldname: "nature_of_injury_filter",
 			label: __("Nature of Injury"),
 			fieldtype: "Link",
-			options: "Nature of Injury",
+			options: "Injury Nature",
 			hidden: 0,
 			on_change: function () {
 				frappe.query_report.refresh();
@@ -97,7 +98,7 @@ frappe.query_reports["Incident Analysis Master Report"] = {
 			fieldname: "type_of_damage_filter",
 			label: __("Type of Damage"),
 			fieldtype: "Link",
-			options: "Equipment Damage Type",
+			options: "Equipment Damages",
 			hidden: 1,
 			on_change: function () {
 				frappe.query_report.refresh();
@@ -107,7 +108,7 @@ frappe.query_reports["Incident Analysis Master Report"] = {
 			fieldname: "body_part_filter",
 			label: __("Body Part"),
 			fieldtype: "Link",
-			options: "Body Part",
+			options: "Body Part Impacted",
 			hidden: 1,
 			on_change: function () {
 				frappe.query_report.refresh();
@@ -117,7 +118,7 @@ frappe.query_reports["Incident Analysis Master Report"] = {
 			fieldname: "task_filter",
 			label: __("Task"),
 			fieldtype: "Link",
-			options: "Task Classify",
+			options: "Classify the Task",
 			hidden: 1,
 			on_change: function () {
 				frappe.query_report.refresh();
@@ -127,7 +128,7 @@ frappe.query_reports["Incident Analysis Master Report"] = {
 			fieldname: "severity_filter",
 			label: __("Severity"),
 			fieldtype: "Link",
-			options: "Safety Incident Severity Classification",
+			options: "Severity Classification",
 			hidden: 1,
 			on_change: function () {
 				frappe.query_report.refresh();

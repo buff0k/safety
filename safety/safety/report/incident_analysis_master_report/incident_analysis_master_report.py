@@ -1,11 +1,10 @@
 from __future__ import annotations
 
-from collections import defaultdict
 from datetime import date, datetime
 
 import frappe
 from frappe import _
-from frappe.utils import getdate
+from frappe.utils import get_datetime, getdate
 
 
 MONTHS = [
@@ -75,7 +74,6 @@ MODE_CONFIG = {
 		"type": "parent",
 		"fieldname": "incident_type",
 		"label": _("Incident Type"),
-		"target_doctype": "Safety Incident Type",
 	},
 	"Shift Summary": {
 		"type": "derived",
@@ -101,6 +99,15 @@ MODE_CONFIG = {
 		"label": _("Hour of Day"),
 		"fixed_values": [f"{i:02d}:00" for i in range(24)],
 	},
+}
+
+# parent field -> master doctype selected by the report filter
+TMS_MASTER_MAP = {
+	"nature_of_the_injury": "Injury Nature",
+	"type_of_damage": "Equipment Damages",
+	"select_type_of_body_part": "Body Part Impacted",
+	"specify_task": "Classify the Task",
+	"select_severity": "Severity Classification",
 }
 
 
@@ -202,11 +209,9 @@ def apply_specialist_filters(parent_names: set[str], filters: dict) -> set[str]:
 	current = set(parent_names)
 
 	for filter_key, report_fieldname in filter_map:
-		if filters.get(filter_key):
-			match_names = get_matching_parent_names_for_tms(
-				report_fieldname,
-				filters[filter_key],
-			)
+		selected_value = filters.get(filter_key)
+		if selected_value:
+			match_names = get_matching_parent_names_for_tms(report_fieldname, selected_value)
 			current &= match_names
 
 	return current
@@ -456,7 +461,7 @@ def get_all_labels_for_mode(mode: str, buckets: dict) -> list[str]:
 
 	if mode_type == "tms":
 		parent_fieldname = MODE_CONFIG[mode]["fieldname"]
-		_child_doctype, _link_fieldname, target_doctype = get_tms_link_info(parent_fieldname)
+		target_doctype = TMS_MASTER_MAP.get(parent_fieldname)
 
 		if target_doctype:
 			rows = frappe.get_all(target_doctype, fields=["name"], order_by="name asc", limit_page_length=0)
@@ -465,12 +470,7 @@ def get_all_labels_for_mode(mode: str, buckets: dict) -> list[str]:
 			return labels + sorted(extra)
 
 	if mode_type == "parent":
-		target_doctype = MODE_CONFIG[mode].get("target_doctype")
-		if target_doctype:
-			rows = frappe.get_all(target_doctype, fields=["name"], order_by="name asc", limit_page_length=0)
-			labels = [r["name"] for r in rows]
-			extra = [k for k in buckets.keys() if k not in labels]
-			return labels + sorted(extra)
+		return sorted(buckets.keys())
 
 	return sorted(buckets.keys())
 
@@ -490,7 +490,8 @@ def get_tms_link_info(parent_fieldname: str) -> tuple[str, str, str | None]:
 	child_meta = frappe.get_meta(child_doctype)
 
 	candidate_fields = [
-		f for f in child_meta.fields
+		f
+		for f in child_meta.fields
 		if f.fieldname not in SYSTEM_CHILD_FIELDS
 		and f.fieldtype in ("Link", "Dynamic Link", "Data", "Select", "Small Text", "Read Only")
 	]
@@ -522,7 +523,7 @@ def to_datetime(dt_value) -> datetime:
 	if isinstance(dt_value, date):
 		return datetime(dt_value.year, dt_value.month, dt_value.day)
 
-	return datetime.strptime(str(dt_value), "%Y-%m-%d %H:%M:%S")
+	return get_datetime(dt_value)
 
 
 def get_chart(data: list[dict], mode: str) -> dict:

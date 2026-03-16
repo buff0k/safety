@@ -74,7 +74,7 @@
    "fieldtype": "Link",
    "label": "Nature of Injury",
    "mandatory": 0,
-   "options": "Nature of Injury",
+   "options": "Injury Nature",
    "wildcard_filter": 0
   },
   {
@@ -82,7 +82,7 @@
    "fieldtype": "Link",
    "label": "Type of Damage",
    "mandatory": 0,
-   "options": "Equipment Damage Type",
+   "options": "Equipment Damages",
    "wildcard_filter": 0
   },
   {
@@ -90,7 +90,7 @@
    "fieldtype": "Link",
    "label": "Body Part",
    "mandatory": 0,
-   "options": "Body Part",
+   "options": "Body Part Impacted",
    "wildcard_filter": 0
   },
   {
@@ -98,7 +98,7 @@
    "fieldtype": "Link",
    "label": "Task",
    "mandatory": 0,
-   "options": "Task Classify",
+   "options": "Classify the Task",
    "wildcard_filter": 0
   },
   {
@@ -106,14 +106,14 @@
    "fieldtype": "Link",
    "label": "Severity",
    "mandatory": 0,
-   "options": "Safety Incident Severity Classification",
+   "options": "Severity Classification",
    "wildcard_filter": 0
   }
  ],
  "idx": 0,
  "is_standard": "Yes",
  "letter_head": null,
- "modified": "2026-03-16 12:45:09.236468",
+ "modified": "2026-03-16 14:03:02.285403",
  "modified_by": "Administrator",
  "module": "Safety",
  "name": "Incident Analysis Master Report",
