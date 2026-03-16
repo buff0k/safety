@@ -65,6 +65,11 @@ MODE_CONFIG = {
 		"fieldname": "specify_task",
 		"label": _("Task"),
 	},
+	"Type of Incident": {
+		"type": "tms",
+		"fieldname": "select_type_of_incident",
+		"label": _("Type of Incident"),
+	},
 	"Severity": {
 		"type": "tms",
 		"fieldname": "select_severity",
@@ -107,6 +112,7 @@ TMS_MASTER_MAP = {
 	"type_of_damage": "Equipment Damages",
 	"select_type_of_body_part": "Body Part Impacted",
 	"specify_task": "Classify the Task",
+	"select_type_of_incident": "Classify Type of Incident",
 	"select_severity": "Severity Classification",
 }
 
@@ -203,6 +209,7 @@ def apply_specialist_filters(parent_names: set[str], filters: dict) -> set[str]:
 		("type_of_damage_filter", "type_of_damage"),
 		("body_part_filter", "select_type_of_body_part"),
 		("task_filter", "specify_task"),
+		("type_of_incident_filter", "select_type_of_incident"),
 		("severity_filter", "select_severity"),
 	]
 

@@ -70,6 +70,14 @@
    "wildcard_filter": 0
   },
   {
+   "fieldname": "type_of_incident",
+   "fieldtype": "Link",
+   "label": "Type of Incident ",
+   "mandatory": 0,
+   "options": "Classify Type of Incident",
+   "wildcard_filter": 0
+  },
+  {
    "fieldname": "nature_of_injury_filter",
    "fieldtype": "Link",
    "label": "Nature of Injury",
@@ -113,7 +121,7 @@
  "idx": 0,
  "is_standard": "Yes",
  "letter_head": null,
- "modified": "2026-03-16 14:03:02.285403",
+ "modified": "2026-03-16 14:15:42.598337",
  "modified_by": "Administrator",
  "module": "Safety",
  "name": "Incident Analysis Master Report",

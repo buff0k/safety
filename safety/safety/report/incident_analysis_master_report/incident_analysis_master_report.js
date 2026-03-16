@@ -67,7 +67,7 @@ frappe.query_reports["Incident Analysis Master Report"] = {
 			reqd: 1,
 			default: "Nature of Injury",
 			options:
-				"\nNature of Injury\nType of Damage\nBody Part\nTask\nShift Summary\nDay of Week\nDay of Month\nHour of Day\nIncident Type\nSeverity",
+				"\nNature of Injury\nType of Damage\nBody Part\nTask\nType of Incident\nShift Summary\nDay of Week\nDay of Month\nHour of Day\nIncident Type\nSeverity",
 			on_change: function () {
 				toggle_specialist_filters(frappe.query_report);
 				frappe.query_report.refresh();
@@ -125,6 +125,16 @@ frappe.query_reports["Incident Analysis Master Report"] = {
 			},
 		},
 		{
+			fieldname: "type_of_incident_filter",
+			label: __("Type of Incident"),
+			fieldtype: "Link",
+			options: "Classify Type of Incident",
+			hidden: 1,
+			on_change: function () {
+				frappe.query_report.refresh();
+			},
+		},
+		{
 			fieldname: "severity_filter",
 			label: __("Severity"),
 			fieldtype: "Link",
@@ -145,6 +155,7 @@ function toggle_specialist_filters(report) {
 		type_of_damage_filter: mode === "Type of Damage",
 		body_part_filter: mode === "Body Part",
 		task_filter: mode === "Task",
+		type_of_incident_filter: mode === "Type of Incident",
 		severity_filter: mode === "Severity",
 	};
 
