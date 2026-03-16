@@ -128,7 +128,7 @@ frappe.query_reports["Incident Analysis Master Report"] = {
 			fieldname: "type_of_incident_filter",
 			label: __("Type of Incident"),
 			fieldtype: "Link",
-			options: "Classify Type of Incident",
+			options: "Classify Incident",
 			hidden: 1,
 			on_change: function () {
 				frappe.query_report.refresh();

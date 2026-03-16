@@ -112,7 +112,7 @@ TMS_MASTER_MAP = {
 	"type_of_damage": "Equipment Damages",
 	"select_type_of_body_part": "Body Part Impacted",
 	"specify_task": "Classify the Task",
-	"select_type_of_incident": "Classify Type of Incident",
+	"select_type_of_incident": "Classify Incident",
 	"select_severity": "Severity Classification",
 }
 
