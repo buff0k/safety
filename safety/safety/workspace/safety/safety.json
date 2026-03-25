@@ -1,7 +1,7 @@
 {
  "app": "safety",
  "charts": [],
- "content": "[{\"id\":\"WM46gAsu6s\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Safety</span>\",\"col\":12}},{\"id\":\"YDdwWE9CLa\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Safety Dashboard\",\"col\":6}},{\"id\":\"XIn5aw_5EN\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Action Manager\",\"col\":6}},{\"id\":\"VGlE8Mg4Nw\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Injuries Dashboard\",\"col\":12}},{\"id\":\"tzg3OQoghB\",\"type\":\"card\",\"data\":{\"card_name\":\"Incident Management\",\"col\":4}},{\"id\":\"NMU_17QV6G\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}},{\"id\":\"8UkM4wQ-4X\",\"type\":\"card\",\"data\":{\"card_name\":\"Setup\",\"col\":4}},{\"id\":\"G2o10gRBsg\",\"type\":\"card\",\"data\":{\"card_name\":\"Emergency Preparedness\",\"col\":4}},{\"id\":\"WpjrZUuEsC\",\"type\":\"card\",\"data\":{\"card_name\":\"Visible Field Leadership\",\"col\":4}}]",
+ "content": "[{\"id\":\"WM46gAsu6s\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Safety</span>\",\"col\":12}},{\"id\":\"YDdwWE9CLa\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Safety Dashboard Mining\",\"col\":6}},{\"id\":\"WfI_v7M2fp\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Head Office Safety Dashboard\",\"col\":6}},{\"id\":\"XIn5aw_5EN\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Action Manager\",\"col\":12}},{\"id\":\"tzg3OQoghB\",\"type\":\"card\",\"data\":{\"card_name\":\"Incident Management\",\"col\":4}},{\"id\":\"NMU_17QV6G\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}},{\"id\":\"8UkM4wQ-4X\",\"type\":\"card\",\"data\":{\"card_name\":\"Setup\",\"col\":4}},{\"id\":\"G2o10gRBsg\",\"type\":\"card\",\"data\":{\"card_name\":\"Emergency Preparedness\",\"col\":4}},{\"id\":\"WpjrZUuEsC\",\"type\":\"card\",\"data\":{\"card_name\":\"Visible Field Leadership\",\"col\":4}}]",
  "creation": "2025-03-19 11:24:52.276925",
  "custom_blocks": [],
  "docstatus": 0,
@@ -14,25 +14,6 @@
  "is_hidden": 0,
  "label": "Safety",
  "links": [
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Setup",
-   "link_count": 1,
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Site Start Dates",
-   "link_count": 0,
-   "link_to": "Site Start Dates",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
   {
    "hidden": 0,
    "is_query_report": 0,
@@ -105,7 +86,7 @@
    "hidden": 0,
    "is_query_report": 0,
    "label": "Incident Management",
-   "link_count": 3,
+   "link_count": 4,
    "link_type": "DocType",
    "onboard": 0,
    "type": "Card Break"
@@ -143,11 +124,31 @@
   {
    "hidden": 0,
    "is_query_report": 0,
+   "label": "RMA Submissions",
+   "link_count": 0,
+   "link_to": "RMA",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
    "label": "Reports",
-   "link_count": 2,
+   "link_count": 3,
    "link_type": "DocType",
    "onboard": 0,
    "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Head Office Safe Days",
+   "link_count": 0,
+   "link_to": "Head Office Safe Days",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
   },
   {
    "hidden": 0,
@@ -168,9 +169,68 @@
    "link_type": "Report",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Setup",
+   "link_count": 5,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Head Office Start Dates",
+   "link_count": 0,
+   "link_to": "Head Office Start Dates",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Site Start Dates Mining",
+   "link_count": 0,
+   "link_to": "Site Start Dates",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Meeting Manager",
+   "link_count": 0,
+   "link_to": "Meeting Manager",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Hazardous Chemical Register",
+   "link_count": 0,
+   "link_to": "Hazardous Chemical Register",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Lessons Learnt",
+   "link_count": 0,
+   "link_to": "Lessons Learnt",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2026-03-16 13:01:48.641825",
+ "modified": "2026-03-25 15:45:02.664859",
  "modified_by": "Administrator",
  "module": "Safety",
  "name": "Safety",
@@ -195,8 +255,15 @@
   {
    "color": "Grey",
    "doc_view": "List",
-   "label": "Injuries Dashboard",
-   "link_to": "injuries-page",
+   "label": "Safety Dashboard Mining",
+   "link_to": "safety-dashboard",
+   "type": "Page"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Head Office Safety Dashboard",
+   "link_to": "safety-dashboard-2",
    "type": "Page"
   },
   {
@@ -206,13 +273,6 @@
    "link_to": "Action Management",
    "stats_filter": "[]",
    "type": "DocType"
-  },
-  {
-   "color": "Grey",
-   "doc_view": "List",
-   "label": "Safety Dashboard",
-   "link_to": "safety-dashboard",
-   "type": "Page"
   }
  ],
  "title": "Safety",

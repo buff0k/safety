@@ -1,54 +1,46 @@
 {
  "actions": [],
  "allow_rename": 1,
- "creation": "2026-02-17 05:30:15.421078",
+ "creation": "2026-03-25 13:43:49.446996",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "start_date_sites",
-  "company_ltifr_target",
-  "company_ltifr_actual",
-  "company_colour",
-  "site_and_start_date"
+  "head_office_ltifr_target",
+  "head_office_ltifr_actual",
+  "head_office_color",
+  "head_office_start_date"
  ],
  "fields": [
   {
-   "fieldname": "start_date_sites",
-   "fieldtype": "Section Break",
-   "label": "Start Date for Sites"
-  },
-  {
-   "fieldname": "site_and_start_date",
-   "fieldtype": "Table",
-   "label": "Sites and Start Dates",
-   "options": "Site Start Date Child"
-  },
-  {
-   "fieldname": "company_ltifr_target",
+   "fieldname": "head_office_ltifr_target",
    "fieldtype": "Float",
-   "label": "Company LTIFR Target",
-   "precision": "2"
+   "label": "Head Office LTIFR Target"
   },
   {
-   "fieldname": "company_ltifr_actual",
+   "fieldname": "head_office_ltifr_actual",
    "fieldtype": "Float",
-   "label": "Company LTIFR Actual",
-   "precision": "2"
+   "label": "Head Office LTIFR Actual"
   },
   {
-   "fieldname": "company_colour",
+   "fieldname": "head_office_color",
    "fieldtype": "Color",
-   "label": "Company Colour"
+   "label": "Head Office Color"
+  },
+  {
+   "fieldname": "head_office_start_date",
+   "fieldtype": "Table",
+   "label": "Head Office Start Date",
+   "options": "Head Office Start Dates Child"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2026-03-25 13:40:24.392118",
+ "modified": "2026-03-25 13:48:07.215002",
  "modified_by": "Administrator",
  "module": "Safety",
- "name": "Site Start Dates",
+ "name": "Head Office Start Dates",
  "owner": "Administrator",
  "permissions": [
   {
@@ -68,6 +60,15 @@
    "print": 1,
    "read": 1,
    "role": "Safety Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "Safety User",
    "share": 1,
    "write": 1
   }

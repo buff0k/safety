@@ -1,0 +1,275 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:  {incident_number}-{site}",
+ "creation": "2026-03-25 15:09:51.981055",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "incident_number",
+  "site",
+  "incident_classification",
+  "date_and_time_of_incident",
+  "nature_of_injury",
+  "nature_of_damage",
+  "nature_of_environmental_impact",
+  "where_did_incident_occur",
+  "name_of_injured_person",
+  "name_of_affected_person",
+  "name_of_employer_contractor",
+  "position_of_employee",
+  "years_in_current_position",
+  "potential_severity_classification",
+  "repeat_incident",
+  "life_saving_rule",
+  "description_of_incident",
+  "photos_and_attachments",
+  "column_break_pdhc",
+  "root_cause_analysis",
+  "immediate_causes",
+  "basic_causes",
+  "system_and_control_failures",
+  "learning_points",
+  "prelim_investigation",
+  "full_investigation",
+  "corrective",
+  "preliminary_investigation",
+  "f_investigation",
+  "preventative",
+  "p_investigation",
+  "fulls_investigation",
+  "disclaimer"
+ ],
+ "fields": [
+  {
+   "fieldname": "incident_number",
+   "fieldtype": "Link",
+   "label": "Incident Number ",
+   "options": "Incident Report"
+  },
+  {
+   "fetch_from": "incident_number.incident_type",
+   "fieldname": "incident_classification",
+   "fieldtype": "Data",
+   "label": "Incident Classification"
+  },
+  {
+   "fetch_from": "incident_number.datetime_incident",
+   "fieldname": "date_and_time_of_incident",
+   "fieldtype": "Date",
+   "label": "Date and Time of Incident"
+  },
+  {
+   "fieldname": "nature_of_injury",
+   "fieldtype": "Data",
+   "label": "Nature of Injury"
+  },
+  {
+   "fieldname": "nature_of_damage",
+   "fieldtype": "Data",
+   "label": "Nature of the Damage "
+  },
+  {
+   "fieldname": "nature_of_environmental_impact",
+   "fieldtype": "Data",
+   "label": "Nature of Environmental Impact"
+  },
+  {
+   "fetch_from": "incident_number.site",
+   "fieldname": "site",
+   "fieldtype": "Data",
+   "label": "Site"
+  },
+  {
+   "fetch_from": "incident_number.location_on_site",
+   "fieldname": "where_did_incident_occur",
+   "fieldtype": "Data",
+   "label": "Where did the Incident occur"
+  },
+  {
+   "fieldname": "name_of_injured_person",
+   "fieldtype": "Data",
+   "label": "Name of Injured Person "
+  },
+  {
+   "fieldname": "name_of_affected_person",
+   "fieldtype": "Data",
+   "label": "Name of Affected Person"
+  },
+  {
+   "fetch_from": "incident_number.company",
+   "fieldname": "name_of_employer_contractor",
+   "fieldtype": "Data",
+   "label": "Name of Employer / Contractor"
+  },
+  {
+   "fieldname": "position_of_employee",
+   "fieldtype": "Data",
+   "label": "Position of Employee"
+  },
+  {
+   "fieldname": "years_in_current_position",
+   "fieldtype": "Data",
+   "label": "Years in Current Position"
+  },
+  {
+   "fieldname": "potential_severity_classification",
+   "fieldtype": "Data",
+   "label": "Potential Severity Classification"
+  },
+  {
+   "fieldname": "repeat_incident",
+   "fieldtype": "Data",
+   "label": "Repeat Incident"
+  },
+  {
+   "fieldname": "life_saving_rule",
+   "fieldtype": "Data",
+   "label": "Life Saving Rule"
+  },
+  {
+   "fetch_from": "incident_number.description_of_the_event",
+   "fieldname": "description_of_incident",
+   "fieldtype": "Data",
+   "label": "1. Description of Incident "
+  },
+  {
+   "fieldname": "photos_and_attachments",
+   "fieldtype": "Table",
+   "label": "Photos and Attachments",
+   "options": "Incident Photos"
+  },
+  {
+   "fieldname": "column_break_pdhc",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "immediate_causes",
+   "fieldtype": "Small Text",
+   "label": "Immediate Causes: Conditions and Acts"
+  },
+  {
+   "fieldname": "basic_causes",
+   "fieldtype": "Small Text",
+   "label": "Basic Causes: Environmental Condition"
+  },
+  {
+   "fieldname": "system_and_control_failures",
+   "fieldtype": "Small Text",
+   "label": "System and Control Failures"
+  },
+  {
+   "fieldname": "root_cause_analysis",
+   "fieldtype": "Heading",
+   "label": "2. Root Cause Analysis"
+  },
+  {
+   "fieldname": "learning_points",
+   "fieldtype": "Heading",
+   "label": "3. Learning Points from Incident Investigation"
+  },
+  {
+   "default": "0",
+   "fieldname": "prelim_investigation",
+   "fieldtype": "Check",
+   "label": "Preliminary Investigation"
+  },
+  {
+   "default": "0",
+   "fieldname": "full_investigation",
+   "fieldtype": "Check",
+   "label": "Full Investigation"
+  },
+  {
+   "fieldname": "corrective",
+   "fieldtype": "Heading",
+   "label": "4. Corrective (Associated with immediate and basic causes)"
+  },
+  {
+   "default": "0",
+   "fieldname": "preliminary_investigation",
+   "fieldtype": "Check",
+   "label": "Preliminary Investigation"
+  },
+  {
+   "default": "0",
+   "fieldname": "f_investigation",
+   "fieldtype": "Check",
+   "label": "Full Investigation"
+  },
+  {
+   "fieldname": "preventative",
+   "fieldtype": "Heading",
+   "label": "5. Preventative (Associated with system / control failures)"
+  },
+  {
+   "default": "0",
+   "fieldname": "p_investigation",
+   "fieldtype": "Check",
+   "label": "Preliminary Investigation"
+  },
+  {
+   "default": "0",
+   "fieldname": "fulls_investigation",
+   "fieldtype": "Check",
+   "label": "Full Investigation"
+  },
+  {
+   "default": "The information contained in this document is for the consideration and use of the parties who receive it. It is not prescriptive and shall not be interpreted to impose any legal duties on or to attach any liability to such parties. No responsibility is accepted by Isambane Mining or any of its subsidiaries ",
+   "fieldname": "disclaimer",
+   "fieldtype": "Small Text",
+   "label": "7. Disclaimer"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-03-25 15:44:27.582575",
+ "modified_by": "Administrator",
+ "module": "Safety",
+ "name": "Lessons Learnt",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Safety Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Safety User",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -1,0 +1,135 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{unique_number}",
+ "creation": "2026-03-24 08:37:38.203674",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "datetime_of_meeting",
+  "datetime_of_meeting_end",
+  "unique_number",
+  "reason_for_meeting",
+  "column_break_xlpx",
+  "team_members",
+  "meeting_venue",
+  "type_of_meeting"
+ ],
+ "fields": [
+  {
+   "fieldname": "type_of_meeting",
+   "fieldtype": "Table MultiSelect",
+   "label": "Type of Meeting",
+   "options": "Type of Meeting Child"
+  },
+  {
+   "fieldname": "datetime_of_meeting",
+   "fieldtype": "Datetime",
+   "label": "Date and Time of Meeting Start"
+  },
+  {
+   "fieldname": "datetime_of_meeting_end",
+   "fieldtype": "Datetime",
+   "label": "Date and Time of Meeting End"
+  },
+  {
+   "fieldname": "team_members",
+   "fieldtype": "Table",
+   "label": "Team Members",
+   "options": "VFL Team"
+  },
+  {
+   "fieldname": "meeting_venue",
+   "fieldtype": "Table MultiSelect",
+   "label": "Meeting Venue",
+   "options": "Meeting Venue Child"
+  },
+  {
+   "fieldname": "unique_number",
+   "fieldtype": "Data",
+   "label": "Unique Number"
+  },
+  {
+   "fieldname": "reason_for_meeting",
+   "fieldtype": "Small Text",
+   "label": "Reason for Meeting"
+  },
+  {
+   "fieldname": "column_break_xlpx",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-03-25 15:01:35.811484",
+ "modified_by": "Administrator",
+ "module": "Safety",
+ "name": "Meeting Manager",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Safety Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Safety User",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Production User",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Engineering User",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -1,0 +1,23 @@
+{
+ "content": null,
+ "creation": "2026-03-25 14:25:14.604682",
+ "docstatus": 0,
+ "doctype": "Page",
+ "idx": 0,
+ "modified": "2026-03-25 14:25:14.604682",
+ "modified_by": "Administrator",
+ "module": "Safety",
+ "name": "safety-dashboard-2",
+ "owner": "Administrator",
+ "page_name": "safety-dashboard-2",
+ "roles": [
+  {
+   "role": "All"
+  }
+ ],
+ "script": null,
+ "standard": "Yes",
+ "style": null,
+ "system_page": 0,
+ "title": "Safety Dashboard 2"
+}
