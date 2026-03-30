@@ -35,3 +35,15 @@ fixtures = [
 		"Unsafe Act"
 	]]]}
 ]
+
+doctype_js = {
+    "Safety Performance Communication": "doctype/safety_performance_communication/safety_performance_communication.js"
+}
+
+scheduler_events = {
+    "cron": {
+        "0 4 * * 1": [
+            "safety.safety.doctype.safety_performance_communication.safety_performance_communication.generate_weekly_safety_performance_communications"
+        ]
+    }
+}

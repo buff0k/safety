@@ -1,0 +1,72 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-03-26 05:28:43.164144",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "site",
+  "company",
+  "week",
+  "start_date_of_week",
+  "end_date_of_week",
+  "attach_talk_topic_here"
+ ],
+ "fields": [
+  {
+   "fieldname": "site",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Site",
+   "options": "Branch"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "fieldname": "week",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Week",
+   "options": "\nWeek 1\nWeek 2\nWeek 3\nWeek 4\nWeek 5"
+  },
+  {
+   "fieldname": "start_date_of_week",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Start Date of Week"
+  },
+  {
+   "fieldname": "end_date_of_week",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "End Date of Week"
+  },
+  {
+   "fieldname": "attach_talk_topic_here",
+   "fieldtype": "Attach",
+   "in_list_view": 1,
+   "label": "Attach Talk Topic for Week Here"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-03-26 05:32:35.705493",
+ "modified_by": "Administrator",
+ "module": "Safety",
+ "name": "Talk Topics Child",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

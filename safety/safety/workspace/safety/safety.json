@@ -174,7 +174,7 @@
    "hidden": 0,
    "is_query_report": 0,
    "label": "Setup",
-   "link_count": 5,
+   "link_count": 6,
    "link_type": "DocType",
    "onboard": 0,
    "type": "Card Break"
@@ -228,9 +228,19 @@
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Talk Topics",
+   "link_count": 0,
+   "link_to": "Talk Topics",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2026-03-25 15:45:02.664859",
+ "modified": "2026-03-26 05:36:30.387848",
  "modified_by": "Administrator",
  "module": "Safety",
  "name": "Safety",
