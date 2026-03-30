@@ -13,7 +13,7 @@ class IncidentReportingForm(Document):
         if not self.get("select_incident_number"):
             return
 
-        inc = frappe.get_doc("Incident Management", self.select_incident_number)
+        inc = frappe.get_doc("Incident Report", self.select_incident_number)
 
         # Direct mappings
         self.reporting_name_surname = inc.get("reporting_person_name")
@@ -21,10 +21,10 @@ class IncidentReportingForm(Document):
         self.responsible_manager_isambane = inc.get("responsible_supervisor_name")
         self.description_of_incident = inc.get("description_of_the_event")
 
-        # Helpful mapping (matches your field intent)
+        # Helpful mapping
         self.where_did_the_incident_happen = inc.get("location_on_site")
 
-        # datetime_incident -> date_of_incident (your target field is Data)
+        # datetime_incident -> date_of_incident
         dt_val = inc.get("datetime_incident")
         self.date_of_incident = str(dt_val) if dt_val else None
 

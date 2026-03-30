@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "format: {select_incident_number}",
  "creation": "2026-02-25 10:01:12.899609",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -121,10 +122,11 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-03-10 15:48:15.270019",
+ "modified": "2026-03-30 14:22:34.479321",
  "modified_by": "Administrator",
  "module": "Safety",
  "name": "Incident Reporting Form",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {
