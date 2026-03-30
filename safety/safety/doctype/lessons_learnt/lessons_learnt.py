@@ -5,6 +5,9 @@ import frappe
 from frappe.model.document import Document
 
 
+NA_VALUE = "N/A"
+
+
 class LessonsLearnt(Document):
     def validate(self):
         populate_lessons_learnt_from_incident_doc(self)
@@ -32,85 +35,109 @@ def populate_lessons_learnt_from_incident_doc(doc):
     damage_row = get_first_damage_row(incident)
 
     # Nature of Injury -> nature_of_the_injury child table -> nature_of_injury
-    doc.nature_of_injury = join_child_link_values(
-        getattr(incident, "nature_of_the_injury", []),
-        "nature_of_injury"
+    doc.nature_of_injury = with_na(
+        join_child_link_values(
+            getattr(incident, "nature_of_the_injury", []),
+            "nature_of_injury"
+        )
     )
 
     # Nature of Damage -> type_of_damage child table -> specify_type_of_damage
-    doc.nature_of_damage = join_child_link_values(
-        getattr(incident, "type_of_damage", []),
-        "specify_type_of_damage"
+    doc.nature_of_damage = with_na(
+        join_child_link_values(
+            getattr(incident, "type_of_damage", []),
+            "specify_type_of_damage"
+        )
     )
 
-    # Nature of Environmental Impact -> description only if type_of_impact contains Environmental Impact
-    doc.nature_of_environmental_impact = get_environmental_impact_description(incident)
+    # Nature of Environmental Impact -> any value in type_of_impact field
+    doc.nature_of_environmental_impact = with_na(
+        join_child_link_values(
+            getattr(incident, "type_of_impact", []),
+            "describe_type_of_impact"
+        )
+    )
 
     # Name of Injured Person -> Responsible Person child table -> injured_person_name
-    doc.name_of_injured_person = safe_strip(
-        getattr(injured_row, "injured_person_name", None)
+    doc.name_of_injured_person = with_na(
+        safe_strip(getattr(injured_row, "injured_person_name", None))
     )
 
     # Name of Affected Person -> Person Responsible for Damages child table -> damages_by_full_name
-    doc.name_of_affected_person = safe_strip(
-        getattr(damage_row, "damages_by_full_name", None)
+    doc.name_of_affected_person = with_na(
+        safe_strip(getattr(damage_row, "damages_by_full_name", None))
     )
 
     # Position of Employee
-    # Rule given:
-    # - if injured_person_name has a value -> position_of_injured
-    # - if damages_by_full_name has a value -> damages_caused_by_position
-    # Implemented with injury first, then damage if injury blank.
-    doc.position_of_employee = (
+    # Prefer injury row position first, then damage row position.
+    doc.position_of_employee = with_na(
         safe_strip(getattr(injured_row, "position_of_injured", None))
         or safe_strip(getattr(damage_row, "damages_caused_by_position", None))
-        or ""
     )
 
     # Years in Current Position
-    # Rule given:
-    # - if damages_by_full_name has a value -> damages_caused_by_years_in_current_position
-    # - if injured_person_name has a value -> years_in_current_position
-    # Implemented with damage first, then injury if damage blank.
-    doc.years_in_current_position = (
+    # Prefer damage row years first, then injury row years.
+    doc.years_in_current_position = with_na(
         safe_strip(getattr(damage_row, "damages_caused_by_years_in_current_position", None))
         or safe_strip(getattr(injured_row, "years_in_current_position", None))
-        or ""
     )
 
     # Potential Severity Classification -> select_severity child table -> classify
-    doc.potential_severity_classification = join_child_link_values(
-        getattr(incident, "select_severity", []),
-        "classify"
+    doc.potential_severity_classification = with_na(
+        join_child_link_values(
+            getattr(incident, "select_severity", []),
+            "classify"
+        )
     )
 
     # Repeat Incident -> checkboxes in Incident Report
-    doc.repeat_incident = get_repeat_incident_value(incident)
+    doc.repeat_incident = with_na(get_repeat_incident_value(incident))
 
     # Life Saving Rule -> life_save_rule child table -> specify_life_saving_rule
-    doc.life_saving_rule = join_child_link_values(
-        getattr(incident, "life_save_rule", []),
-        "specify_life_saving_rule"
+    doc.life_saving_rule = with_na(
+        join_child_link_values(
+            getattr(incident, "life_save_rule", []),
+            "specify_life_saving_rule"
+        )
     )
+
+    # These fields must remain blank when empty, per your rule:
+    # immediate_causes
+    # basic_causes
+    # system_and_control_failures
+    # comments
+    # disclaimer
 
     # Not mapped yet from your instructions, so left unchanged:
     # doc.photos_and_attachments
-    # doc.immediate_causes
-    # doc.basic_causes
-    # doc.system_and_control_failures
 
 
 def clear_auto_mapped_fields(doc):
-    doc.nature_of_injury = ""
-    doc.nature_of_damage = ""
-    doc.nature_of_environmental_impact = ""
-    doc.name_of_injured_person = ""
-    doc.name_of_affected_person = ""
-    doc.position_of_employee = ""
-    doc.years_in_current_position = ""
-    doc.potential_severity_classification = ""
-    doc.repeat_incident = ""
-    doc.life_saving_rule = ""
+    # Fields that should default to N/A when no incident is selected
+    doc.nature_of_injury = NA_VALUE
+    doc.nature_of_damage = NA_VALUE
+    doc.nature_of_environmental_impact = NA_VALUE
+    doc.name_of_injured_person = NA_VALUE
+    doc.name_of_affected_person = NA_VALUE
+    doc.position_of_employee = NA_VALUE
+    doc.years_in_current_position = NA_VALUE
+    doc.potential_severity_classification = NA_VALUE
+    doc.repeat_incident = NA_VALUE
+    doc.life_saving_rule = NA_VALUE
+
+    # These must stay blank
+    if hasattr(doc, "immediate_causes"):
+        doc.immediate_causes = ""
+    if hasattr(doc, "basic_causes"):
+        doc.basic_causes = ""
+    if hasattr(doc, "system_and_control_failures"):
+        doc.system_and_control_failures = ""
+    if hasattr(doc, "comment"):
+        doc.comment = ""
+    if hasattr(doc, "comments"):
+        doc.comments = ""
+    if hasattr(doc, "disclaimer"):
+        doc.disclaimer = ""
 
 
 def get_first_injured_row(incident):
@@ -141,17 +168,6 @@ def join_child_link_values(rows, value_fieldname):
     return ", ".join(values)
 
 
-def get_environmental_impact_description(incident):
-    impact_rows = getattr(incident, "type_of_impact", []) or []
-
-    for row in impact_rows:
-        impact_value = safe_strip(getattr(row, "describe_type_of_impact", None))
-        if impact_value and impact_value.strip().lower() == "environmental impact":
-            return safe_strip(getattr(incident, "description", None))
-
-    return ""
-
-
 def get_repeat_incident_value(incident):
     values = []
 
@@ -162,6 +178,11 @@ def get_repeat_incident_value(incident):
         values.append("First Known Case")
 
     return ", ".join(values)
+
+
+def with_na(value):
+    value = safe_strip(value)
+    return value if value else NA_VALUE
 
 
 def safe_strip(value):

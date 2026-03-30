@@ -30,14 +30,9 @@
   "basic_causes",
   "system_and_control_failures",
   "learning_points",
-  "prelim_investigation",
-  "full_investigation",
+  "comment",
   "corrective",
-  "preliminary_investigation",
-  "f_investigation",
-  "preventative",
-  "p_investigation",
-  "fulls_investigation",
+  "comments",
   "disclaimer"
  ],
  "fields": [
@@ -72,7 +67,7 @@
   {
    "fieldname": "nature_of_environmental_impact",
    "fieldtype": "Data",
-   "label": "Nature of Environmental Impact"
+   "label": "Nature of Impact"
   },
   {
    "fetch_from": "incident_number.site",
@@ -169,62 +164,31 @@
    "label": "3. Learning Points from Incident Investigation"
   },
   {
-   "default": "0",
-   "fieldname": "prelim_investigation",
-   "fieldtype": "Check",
-   "label": "Preliminary Investigation"
-  },
-  {
-   "default": "0",
-   "fieldname": "full_investigation",
-   "fieldtype": "Check",
-   "label": "Full Investigation"
-  },
-  {
    "fieldname": "corrective",
    "fieldtype": "Heading",
-   "label": "4. Corrective (Associated with immediate and basic causes)"
-  },
-  {
-   "default": "0",
-   "fieldname": "preliminary_investigation",
-   "fieldtype": "Check",
-   "label": "Preliminary Investigation"
-  },
-  {
-   "default": "0",
-   "fieldname": "f_investigation",
-   "fieldtype": "Check",
-   "label": "Full Investigation"
-  },
-  {
-   "fieldname": "preventative",
-   "fieldtype": "Heading",
-   "label": "5. Preventative (Associated with system / control failures)"
-  },
-  {
-   "default": "0",
-   "fieldname": "p_investigation",
-   "fieldtype": "Check",
-   "label": "Preliminary Investigation"
-  },
-  {
-   "default": "0",
-   "fieldname": "fulls_investigation",
-   "fieldtype": "Check",
-   "label": "Full Investigation"
+   "label": "4. Corrective / Preventative  (Associated with immediate and basic causes)"
   },
   {
    "default": "The information contained in this document is for the consideration and use of the parties who receive it. It is not prescriptive and shall not be interpreted to impose any legal duties on or to attach any liability to such parties. No responsibility is accepted by Isambane Mining or any of its subsidiaries ",
    "fieldname": "disclaimer",
    "fieldtype": "Small Text",
-   "label": "7. Disclaimer"
+   "label": "5. Disclaimer"
+  },
+  {
+   "fieldname": "comments",
+   "fieldtype": "Small Text",
+   "label": "Comments"
+  },
+  {
+   "fieldname": "comment",
+   "fieldtype": "Small Text",
+   "label": "Comments"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-03-30 12:20:36.253934",
+ "modified": "2026-03-30 13:40:40.214688",
  "modified_by": "Administrator",
  "module": "Safety",
  "name": "Lessons Learnt",

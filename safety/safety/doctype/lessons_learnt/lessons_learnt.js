@@ -56,7 +56,7 @@ function run_lessons_learnt_population(frm) {
 }
 
 function clear_mapped_fields(frm) {
-	const fields = [
+	const naFields = [
 		'nature_of_injury',
 		'nature_of_damage',
 		'nature_of_environmental_impact',
@@ -69,7 +69,21 @@ function clear_mapped_fields(frm) {
 		'life_saving_rule'
 	];
 
-	fields.forEach(fieldname => {
-		frm.set_value(fieldname, '');
+	const blankFields = [
+		'immediate_causes',
+		'basic_causes',
+		'system_and_control_failures',
+		'comments',
+		'disclaimer'
+	];
+
+	naFields.forEach(fieldname => {
+		frm.set_value(fieldname, 'N/A');
+	});
+
+	blankFields.forEach(fieldname => {
+		if (frm.fields_dict[fieldname]) {
+			frm.set_value(fieldname, '');
+		}
 	});
 }
