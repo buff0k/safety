@@ -183,8 +183,46 @@
   {
    "hidden": 0,
    "is_query_report": 0,
+   "label": "Document Control",
+   "link_count": 1,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Document Register",
+   "link_count": 0,
+   "link_to": "Document Register",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "PPE Control",
+   "link_count": 1,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "PPE Issue Register",
+   "link_count": 0,
+   "link_to": "PPE Issue Register",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
    "label": "Setup",
-   "link_count": 10,
+   "link_count": 11,
    "link_type": "DocType",
    "onboard": 0,
    "type": "Card Break"
@@ -292,43 +330,15 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Document Control",
-   "link_count": 1,
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Document Register",
+   "label": "PPE Per Designation",
    "link_count": 0,
-   "link_to": "Document Register",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "PPE Control",
-   "link_count": 1,
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "PPE Issue Register",
-   "link_count": 0,
-   "link_to": "PPE Issue Register",
+   "link_to": "PPE Per Designation",
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
   }
  ],
- "modified": "2026-04-13 12:43:43.129417",
+ "modified": "2026-04-13 13:44:58.385489",
  "modified_by": "Administrator",
  "module": "Safety",
  "name": "Safety",
