@@ -1,0 +1,94 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:subclass_name",
+ "creation": "2026-04-13 11:17:38.214477",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "subclass_name",
+  "subclass_abbrev",
+  "valid_for"
+ ],
+ "fields": [
+  {
+   "fieldname": "subclass_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Subclass Name",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "subclass_abbrev",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Subclass Abbreviation",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "valid_for",
+   "fieldtype": "Int",
+   "label": "Validty Period (In Months)",
+   "non_negative": 1,
+   "reqd": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-04-13 12:09:25.553672",
+ "modified_by": "Administrator",
+ "module": "Safety",
+ "name": "Document Register Subclass",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Safety Manager",
+   "select": 1,
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Safety User",
+   "select": 1,
+   "share": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "subclass_name",
+ "track_changes": 1,
+ "track_seen": 1
+}

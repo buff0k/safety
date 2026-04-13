@@ -33,6 +33,18 @@ fixtures = [
 		"Minor Injury",
 		"Near Miss",
 		"Unsafe Act"
+	]]]},
+    {"dt": "Document Register Subclass", "filters": [["name", "in", [
+		"Policy",
+		"Mandatory Code of Practice",
+		"System Procedure",
+        "Standard Operating Procedure",
+        "Template",
+        "Register"
+	]]]},
+    {"dt": "Document Register Class", "filters": [["name", "in", [
+		"Policy",
+		"Procedure"
 	]]]}
 ]
 
