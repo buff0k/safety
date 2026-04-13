@@ -57,7 +57,11 @@ scheduler_events = {
         "0 4 * * 1": [
             "safety.safety.doctype.safety_performance_communication.safety_performance_communication.generate_weekly_safety_performance_communications"
         ]
-    }
+    },
+    "weekly": [
+		"safety.controllers.notifications.send_weekly_ppe_expired_notifications",
+		"safety.controllers.notifications.send_weekly_ppe_expiring_soon_notifications",
+	]
 }
 
 after_install = "safety.setup.add_employee_doclinks.ensure_employee_links"
