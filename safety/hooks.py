@@ -59,3 +59,6 @@ scheduler_events = {
         ]
     }
 }
+
+after_install = "safety.setup.add_employee_doclinks.ensure_employee_links"
+after_migrate = "safety.setup.add_employee_doclinks.ensure_employee_links"
