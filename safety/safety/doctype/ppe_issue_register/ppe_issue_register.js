@@ -7,6 +7,8 @@ frappe.ui.form.on("PPE Issue Register", {
 			frm.set_value("employee_name", "");
 			frm.set_value("branch", "");
 			frm.set_value("designation", "");
+			frm.set_value("company", "");
+			frm.set_value("letter_head", "");
 			frm.clear_table("ppe_issued");
 			frm.refresh_field("ppe_issued");
 			return;
@@ -15,12 +17,19 @@ frappe.ui.form.on("PPE Issue Register", {
 		frappe.db.get_value(
 			"Employee",
 			frm.doc.employee,
-			["employee_name", "branch", "designation"]
+			["employee_name", "branch", "designation", "company"]
 		).then((r) => {
 			if (r.message) {
 				frm.set_value("employee_name", r.message.employee_name || "");
 				frm.set_value("branch", r.message.branch || "");
 				frm.set_value("designation", r.message.designation || "");
+				frm.set_value("company", r.message.company || "");
+
+				if (r.message.company) {
+					set_default_letter_head(frm, r.message.company);
+				} else {
+					frm.set_value("letter_head", "");
+				}
 
 				if (r.message.designation) {
 					populate_ppe_from_designation(frm, r.message.designation);
@@ -38,6 +47,14 @@ frappe.ui.form.on("PPE Issue Register", {
 		} else {
 			frm.clear_table("ppe_issued");
 			frm.refresh_field("ppe_issued");
+		}
+	},
+
+	company(frm) {
+		if (frm.doc.company) {
+			set_default_letter_head(frm, frm.doc.company);
+		} else {
+			frm.set_value("letter_head", "");
 		}
 	},
 
@@ -87,6 +104,13 @@ function populate_ppe_from_designation(frm, designation) {
 				message: __("No PPE Per Designation record found for designation: {0}", [designation]),
 				indicator: "orange"
 			});
+		});
+}
+
+function set_default_letter_head(frm, company) {
+	frappe.db.get_value("Company", company, "default_letter_head")
+		.then((r) => {
+			frm.set_value("letter_head", (r.message && r.message.default_letter_head) || "");
 		});
 }
 
