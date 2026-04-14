@@ -146,12 +146,12 @@
   {
    "fieldname": "basic_causes",
    "fieldtype": "Small Text",
-   "label": "Basic Causes: Environmental Condition"
+   "label": "Root Cause"
   },
   {
    "fieldname": "system_and_control_failures",
    "fieldtype": "Small Text",
-   "label": "System and Control Failures"
+   "label": "Contributing Factors"
   },
   {
    "fieldname": "root_cause_analysis",
@@ -188,7 +188,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-03-30 13:40:40.214688",
+ "modified": "2026-04-14 12:28:01.668715",
  "modified_by": "Administrator",
  "module": "Safety",
  "name": "Lessons Learnt",

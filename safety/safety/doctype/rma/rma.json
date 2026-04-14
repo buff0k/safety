@@ -9,6 +9,7 @@
   "date",
   "incident_number",
   "unique_number",
+  "claim_number",
   "rma_description_attachments"
  ],
  "fields": [
@@ -33,12 +34,17 @@
    "fieldname": "date",
    "fieldtype": "Date",
    "label": "Date"
+  },
+  {
+   "fieldname": "claim_number",
+   "fieldtype": "Data",
+   "label": "Claim Number"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-03-25 14:48:19.344930",
+ "modified": "2026-04-14 12:31:33.823645",
  "modified_by": "Administrator",
  "module": "Safety",
  "name": "RMA",
