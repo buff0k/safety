@@ -14,6 +14,8 @@
   "responsible_manager_contractor",
   "injured_name_and_surname",
   "injured_person_coy_number",
+  "involved_name_surname",
+  "involved_person_coy_number",
   "where_did_the_incident_happen",
   "date_of_incident",
   "safety",
@@ -55,12 +57,12 @@
   {
    "fieldname": "injured_name_and_surname",
    "fieldtype": "Data",
-   "label": "Injured / Involved Person Name and Surname "
+   "label": "Injured Person Name and Surname "
   },
   {
    "fieldname": "injured_person_coy_number",
    "fieldtype": "Data",
-   "label": "Injured / Involved Person COY Number"
+   "label": "Injured Person COY Number"
   },
   {
    "fieldname": "select_incident_number",
@@ -117,12 +119,22 @@
    "fieldname": "immediate_actions_taken",
    "fieldtype": "Small Text",
    "label": "Immediate Actions Taken "
+  },
+  {
+   "fieldname": "involved_name_surname",
+   "fieldtype": "Data",
+   "label": "Involved Person Name and Surname"
+  },
+  {
+   "fieldname": "involved_person_coy_number",
+   "fieldtype": "Data",
+   "label": "Involved Person COY Number"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-03-30 14:22:34.479321",
+ "modified": "2026-04-14 12:09:16.563021",
  "modified_by": "Administrator",
  "module": "Safety",
  "name": "Incident Reporting Form",
