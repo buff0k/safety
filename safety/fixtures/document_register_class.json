@@ -1,18 +1,1 @@
-[
- {
-  "class_abbrev": "POL",
-  "class_name": "Policy",
-  "docstatus": 0,
-  "doctype": "Document Register Class",
-  "modified": "2026-04-13 11:27:15.667806",
-  "name": "Policy"
- },
- {
-  "class_abbrev": "PROC",
-  "class_name": "Procedure",
-  "docstatus": 0,
-  "doctype": "Document Register Class",
-  "modified": "2026-04-13 11:27:24.967541",
-  "name": "Procedure"
- }
-]
+[]
