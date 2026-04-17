@@ -7,6 +7,11 @@ EQUIPMENT_CHILD_DOCTYPE = "Equipment"
 INCIDENT_TYPE_CHILD_DOCTYPE = "Classify Type of Incident"
 DAMAGE_TYPE_CHILD_DOCTYPE = "Equipment Damage Type"
 
+ALLOWED_INCIDENT_TYPES = (
+	"Property Damage",
+	"Trackless Mobile Machinery (TMM)",
+)
+
 
 def execute(filters=None):
 	filters = frappe._dict(filters or {})
@@ -26,12 +31,36 @@ def validate_filters(filters):
 		if filters.start_date > filters.end_date:
 			frappe.throw(_("Start Date cannot be after End Date."))
 
+	selected_incident_type = normalize_filter_value(filters.get("select_type_of_incident"))
+	if selected_incident_type and selected_incident_type not in ALLOWED_INCIDENT_TYPES:
+		frappe.throw(
+			_("Select Type Of Incident can only be Property Damage or Trackless Mobile Machinery (TMM).")
+		)
+
 
 def get_columns():
 	return [
 		{
+			"label": _("Date"),
+			"fieldname": "incident_date",
+			"fieldtype": "Date",
+			"width": 110,
+		},
+		{
 			"label": _("Equipment ID"),
 			"fieldname": "equipment_id",
+			"fieldtype": "Data",
+			"width": 180,
+		},
+		{
+			"label": _("Select Type Of Incident"),
+			"fieldname": "select_type_of_incident",
+			"fieldtype": "Data",
+			"width": 230,
+		},
+		{
+			"label": _("Damage Type"),
+			"fieldname": "damage_type",
 			"fieldtype": "Data",
 			"width": 220,
 		},
@@ -45,13 +74,13 @@ def get_columns():
 			"label": _("Incident Count"),
 			"fieldname": "incident_count",
 			"fieldtype": "Int",
-			"width": 130,
+			"width": 120,
 		},
 		{
 			"label": _("Total Cost"),
 			"fieldname": "total_cost",
 			"fieldtype": "Currency",
-			"width": 160,
+			"width": 140,
 		},
 	]
 
@@ -61,6 +90,8 @@ def get_data(filters):
 	params = {
 		"incident_parenttype": INCIDENT_DOCTYPE,
 		"equipment_parentfield": "equipment_details",
+		"allowed_incident_type_1": ALLOWED_INCIDENT_TYPES[0],
+		"allowed_incident_type_2": ALLOWED_INCIDENT_TYPES[1],
 	}
 
 	conditions.append("ir.docstatus < 2")
@@ -76,6 +107,22 @@ def get_data(filters):
 	if filters.get("site"):
 		conditions.append("ir.site = %(site)s")
 		params["site"] = filters.get("site")
+
+	conditions.append(
+		f"""
+		EXISTS (
+			SELECT 1
+			FROM `tab{INCIDENT_TYPE_CHILD_DOCTYPE}` sti_filter
+			WHERE sti_filter.parent = ir.name
+				AND sti_filter.parenttype = '{INCIDENT_DOCTYPE}'
+				AND sti_filter.parentfield = 'select_type_of_incident'
+				AND {get_dynamic_value_field_sql(INCIDENT_TYPE_CHILD_DOCTYPE, 'sti_filter')} IN (
+					%(allowed_incident_type_1)s,
+					%(allowed_incident_type_2)s
+				)
+		)
+		"""
+	)
 
 	select_type_of_incident = normalize_filter_value(filters.get("select_type_of_incident"))
 	if select_type_of_incident:
@@ -101,10 +148,16 @@ def get_data(filters):
 
 	where_clause = " AND ".join(conditions)
 
+	incident_type_value_sql = get_dynamic_value_field_sql(INCIDENT_TYPE_CHILD_DOCTYPE, "sti")
+	damage_type_value_sql = get_dynamic_value_field_sql(DAMAGE_TYPE_CHILD_DOCTYPE, "dmg")
+
 	query = f"""
 		SELECT
+			DATE(ir.datetime_incident) AS incident_date,
 			COALESCE(eq.equipment_id, 'Unknown') AS equipment_id,
-			COUNT(eq.name) AS damage_entry_count,
+			COALESCE(sti_values.incident_type, '') AS select_type_of_incident,
+			COALESCE(dmg_values.damage_type, '') AS damage_type,
+			COUNT(DISTINCT eq.name) AS damage_entry_count,
 			COUNT(DISTINCT ir.name) AS incident_count,
 			SUM(COALESCE(eq.value_of_the_damage, 0)) AS total_cost
 		FROM `tab{INCIDENT_DOCTYPE}` ir
@@ -112,21 +165,48 @@ def get_data(filters):
 			ON eq.parent = ir.name
 			AND eq.parenttype = %(incident_parenttype)s
 			AND eq.parentfield = %(equipment_parentfield)s
+		LEFT JOIN (
+			SELECT
+				sti.parent,
+				{incident_type_value_sql} AS incident_type
+			FROM `tab{INCIDENT_TYPE_CHILD_DOCTYPE}` sti
+			WHERE sti.parenttype = '{INCIDENT_DOCTYPE}'
+				AND sti.parentfield = 'select_type_of_incident'
+				AND {incident_type_value_sql} IN (
+					%(allowed_incident_type_1)s,
+					%(allowed_incident_type_2)s
+				)
+			GROUP BY sti.parent, {incident_type_value_sql}
+		) sti_values
+			ON sti_values.parent = ir.name
+		LEFT JOIN (
+			SELECT
+				dmg.parent,
+				{damage_type_value_sql} AS damage_type
+			FROM `tab{DAMAGE_TYPE_CHILD_DOCTYPE}` dmg
+			WHERE dmg.parenttype = '{INCIDENT_DOCTYPE}'
+				AND dmg.parentfield = 'type_of_damage'
+			GROUP BY dmg.parent, {damage_type_value_sql}
+		) dmg_values
+			ON dmg_values.parent = ir.name
 		WHERE {where_clause}
-		GROUP BY COALESCE(eq.equipment_id, 'Unknown')
-		ORDER BY total_cost DESC, equipment_id ASC
+		GROUP BY
+			DATE(ir.datetime_incident),
+			COALESCE(eq.equipment_id, 'Unknown'),
+			COALESCE(sti_values.incident_type, ''),
+			COALESCE(dmg_values.damage_type, '')
+		ORDER BY
+			incident_date DESC,
+			equipment_id ASC,
+			select_type_of_incident ASC,
+			damage_type ASC
 	"""
 
 	return frappe.db.sql(query, params, as_dict=True)
 
 
 def build_table_multiselect_condition(parentfield, child_doctype, filter_param):
-	link_field = get_first_link_field(child_doctype)
-
-	if link_field:
-		value_field = f"child.`{link_field}`"
-	else:
-		value_field = "child.name"
+	value_field_sql = get_dynamic_value_field_sql(child_doctype, "child")
 
 	return f"""
 		EXISTS (
@@ -135,9 +215,16 @@ def build_table_multiselect_condition(parentfield, child_doctype, filter_param):
 			WHERE child.parent = ir.name
 				AND child.parenttype = '{INCIDENT_DOCTYPE}'
 				AND child.parentfield = '{parentfield}'
-				AND {value_field} = %({filter_param})s
+				AND {value_field_sql} = %({filter_param})s
 		)
 	"""
+
+
+def get_dynamic_value_field_sql(child_doctype, alias):
+	link_field = get_first_link_field(child_doctype)
+	if link_field:
+		return f"{alias}.`{link_field}`"
+	return f"{alias}.name"
 
 
 def get_first_link_field(child_doctype):
@@ -165,8 +252,15 @@ def get_chart(data):
 	if not data:
 		return None
 
-	labels = [row.get("equipment_id") for row in data[:10]]
-	values = [flt(row.get("total_cost")) for row in data[:10]]
+	chart_map = {}
+	for row in data:
+		equipment_id = row.get("equipment_id") or "Unknown"
+		chart_map.setdefault(equipment_id, 0.0)
+		chart_map[equipment_id] += flt(row.get("total_cost"))
+
+	top_items = sorted(chart_map.items(), key=lambda x: x[1], reverse=True)[:10]
+	labels = [item[0] for item in top_items]
+	values = [item[1] for item in top_items]
 
 	return {
 		"data": {

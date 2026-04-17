@@ -340,7 +340,7 @@
   {
    "hidden": 0,
    "is_query_report": 1,
-   "label": "TMM and Damage Report",
+   "label": "TMM and Damage Report (Costs)",
    "link_count": 0,
    "link_to": "TMM and Damage Report",
    "link_type": "Report",
@@ -348,7 +348,7 @@
    "type": "Link"
   }
  ],
- "modified": "2026-04-17 08:51:33.772628",
+ "modified": "2026-04-17 09:23:22.378677",
  "modified_by": "Administrator",
  "module": "Safety",
  "name": "Safety",
