@@ -11,6 +11,12 @@ frappe.query_reports["TMM and Damage Report"] = {
 			fieldtype: "Date"
 		},
 		{
+			fieldname: "site",
+			label: __("Site"),
+			fieldtype: "Link",
+			options: "Branch"
+		},
+		{
 			fieldname: "select_type_of_incident",
 			label: __("Select Type Of Incident"),
 			fieldtype: "Link",

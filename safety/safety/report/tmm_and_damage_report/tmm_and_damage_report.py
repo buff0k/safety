@@ -58,7 +58,10 @@ def get_columns():
 
 def get_data(filters):
 	conditions = []
-	params = {}
+	params = {
+		"incident_parenttype": INCIDENT_DOCTYPE,
+		"equipment_parentfield": "equipment_details",
+	}
 
 	conditions.append("ir.docstatus < 2")
 
@@ -69,6 +72,10 @@ def get_data(filters):
 	if filters.get("end_date"):
 		conditions.append("DATE(ir.datetime_incident) <= %(end_date)s")
 		params["end_date"] = filters.get("end_date")
+
+	if filters.get("site"):
+		conditions.append("ir.site = %(site)s")
+		params["site"] = filters.get("site")
 
 	select_type_of_incident = normalize_filter_value(filters.get("select_type_of_incident"))
 	if select_type_of_incident:
@@ -110,9 +117,6 @@ def get_data(filters):
 		ORDER BY total_cost DESC, equipment_id ASC
 	"""
 
-	params["incident_parenttype"] = INCIDENT_DOCTYPE
-	params["equipment_parentfield"] = "equipment_details"
-
 	return frappe.db.sql(query, params, as_dict=True)
 
 
@@ -122,7 +126,6 @@ def build_table_multiselect_condition(parentfield, child_doctype, filter_param):
 	if link_field:
 		value_field = f"child.`{link_field}`"
 	else:
-		# Fallback in case the child doctype has no Link field
 		value_field = "child.name"
 
 	return f"""
