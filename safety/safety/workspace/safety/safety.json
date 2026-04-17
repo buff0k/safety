@@ -85,45 +85,6 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Reports",
-   "link_count": 3,
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 1,
-   "label": "Head Office Safe Days",
-   "link_count": 0,
-   "link_to": "Head Office Safe Days",
-   "link_type": "Report",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 1,
-   "label": "Site Safe Days",
-   "link_count": 0,
-   "link_to": "Site Safe Days",
-   "link_type": "Report",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 1,
-   "label": "Incident Analysis Master Report",
-   "link_count": 0,
-   "link_to": "Incident Analysis Master Report",
-   "link_type": "Report",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
    "label": "Incident Management",
    "link_count": 5,
    "link_type": "DocType",
@@ -336,9 +297,58 @@
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Reports",
+   "link_count": 4,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Head Office Safe Days",
+   "link_count": 0,
+   "link_to": "Head Office Safe Days",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Site Safe Days",
+   "link_count": 0,
+   "link_to": "Site Safe Days",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Incident Analysis Master Report",
+   "link_count": 0,
+   "link_to": "Incident Analysis Master Report",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "TMM and Damage Report",
+   "link_count": 0,
+   "link_to": "TMM and Damage Report",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2026-04-13 13:44:58.385489",
+ "modified": "2026-04-17 08:51:33.772628",
  "modified_by": "Administrator",
  "module": "Safety",
  "name": "Safety",
