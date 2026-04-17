@@ -1,1 +1,56 @@
-[]
+[
+ {
+  "docstatus": 0,
+  "doctype": "Document Register Subclass",
+  "modified": "2026-04-13 12:12:49.163111",
+  "name": "Policy",
+  "subclass_abbrev": "POL",
+  "subclass_name": "Policy",
+  "valid_for": 36
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Document Register Subclass",
+  "modified": "2026-04-13 12:12:56.191524",
+  "name": "Mandatory Code of Practice",
+  "subclass_abbrev": "MCOP",
+  "subclass_name": "Mandatory Code of Practice",
+  "valid_for": 24
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Document Register Subclass",
+  "modified": "2026-04-13 12:13:01.953647",
+  "name": "System Procedure",
+  "subclass_abbrev": "SP",
+  "subclass_name": "System Procedure",
+  "valid_for": 36
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Document Register Subclass",
+  "modified": "2026-04-13 12:13:07.194812",
+  "name": "Standard Operating Procedure",
+  "subclass_abbrev": "SOP",
+  "subclass_name": "Standard Operating Procedure",
+  "valid_for": 36
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Document Register Subclass",
+  "modified": "2026-04-13 12:13:17.232213",
+  "name": "Template",
+  "subclass_abbrev": "DT",
+  "subclass_name": "Template",
+  "valid_for": 36
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Document Register Subclass",
+  "modified": "2026-04-13 12:13:22.658059",
+  "name": "Register",
+  "subclass_abbrev": "REG",
+  "subclass_name": "Register",
+  "valid_for": 36
+ }
+]
