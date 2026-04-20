@@ -7,7 +7,6 @@
  "engine": "InnoDB",
  "field_order": [
   "item",
-  "item_name",
   "qty",
   "re_issue_date"
  ],
@@ -18,17 +17,9 @@
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Item",
-   "link_filters": "[[\"Item\",\"item_group\",\"=\",\"PPE\"]]",
-   "options": "Item",
+   "link_filters": "[[\"Item Group\",\"parent_item_group\",\"=\",\"PPE\"]]",
+   "options": "Item Group",
    "reqd": 1
-  },
-  {
-   "fieldname": "item_name",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "in_standard_filter": 1,
-   "label": "Item Description",
-   "read_only": 1
   },
   {
    "fieldname": "re_issue_date",
@@ -52,7 +43,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2026-04-13 13:02:21.969474",
+ "modified": "2026-04-20 07:48:06.511147",
  "modified_by": "Administrator",
  "module": "Safety",
  "name": "PPE Issue Register Table",

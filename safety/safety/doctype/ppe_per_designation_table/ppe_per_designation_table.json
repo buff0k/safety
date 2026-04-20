@@ -7,7 +7,6 @@
  "engine": "InnoDB",
  "field_order": [
   "item",
-  "item_name",
   "qty"
  ],
  "fields": [
@@ -15,18 +14,10 @@
    "fieldname": "item",
    "fieldtype": "Link",
    "in_list_view": 1,
-   "label": "Item",
-   "link_filters": "[[\"Item\",\"item_group\",\"=\",\"PPE\"]]",
-   "options": "Item",
+   "label": "PPE Item",
+   "link_filters": "[[\"Item Group\",\"parent_item_group\",\"=\",\"PPE\"]]",
+   "options": "Item Group",
    "reqd": 1
-  },
-  {
-   "fieldname": "item_name",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "in_standard_filter": 1,
-   "label": "Item Description",
-   "read_only": 1
   },
   {
    "fieldname": "qty",
@@ -41,7 +32,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2026-04-13 13:17:32.364952",
+ "modified": "2026-04-20 07:46:52.479581",
  "modified_by": "Administrator",
  "module": "Safety",
  "name": "PPE Per Designation Table",

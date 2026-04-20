@@ -63,24 +63,6 @@ frappe.ui.form.on("PPE Issue Register", {
 	}
 });
 
-frappe.ui.form.on("PPE Issue Register Table", {
-	item(frm, cdt, cdn) {
-		let row = locals[cdt][cdn];
-
-		if (!row.item) {
-			frappe.model.set_value(cdt, cdn, "item_name", "");
-			return;
-		}
-
-		frappe.db.get_value("Item", row.item, "item_name")
-			.then((r) => {
-				if (r.message) {
-					frappe.model.set_value(cdt, cdn, "item_name", r.message.item_name || "");
-				}
-			});
-	}
-});
-
 function populate_ppe_from_designation(frm, designation) {
 	frappe.db.get_doc("PPE Per Designation", designation)
 		.then((doc) => {
@@ -89,7 +71,6 @@ function populate_ppe_from_designation(frm, designation) {
 			(doc.ppe_required || []).forEach((row) => {
 				let child = frm.add_child("ppe_issued");
 				child.item = row.item;
-				child.item_name = row.item_name;
 				child.qty = row.qty;
 				child.re_issue_date = get_reissue_date(frm.doc.issue_date);
 			});
