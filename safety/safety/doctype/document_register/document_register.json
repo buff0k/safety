@@ -116,7 +116,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-04-13 12:28:50.634755",
+ "modified": "2026-04-20 07:59:55.471565",
  "modified_by": "Administrator",
  "module": "Safety",
  "name": "Document Register",
@@ -146,6 +146,7 @@
    "role": "Safety Manager",
    "select": 1,
    "share": 1,
+   "submit": 1,
    "write": 1
   },
   {
