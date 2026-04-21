@@ -8,8 +8,13 @@
  "field_order": [
   "date",
   "incident_number",
+  "incident_type",
   "unique_number",
   "claim_number",
+  "employee",
+  "employee_name",
+  "designation",
+  "branch",
   "rma_description_attachments"
  ],
  "fields": [
@@ -22,8 +27,11 @@
   {
    "fieldname": "incident_number",
    "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Incident Number",
-   "options": "Incident Report"
+   "options": "Incident Report",
+   "reqd": 1
   },
   {
    "fieldname": "unique_number",
@@ -33,18 +41,64 @@
   {
    "fieldname": "date",
    "fieldtype": "Date",
-   "label": "Date"
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Date",
+   "reqd": 1
   },
   {
    "fieldname": "claim_number",
    "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Claim Number"
+  },
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Employee",
+   "options": "Employee",
+   "reqd": 1
+  },
+  {
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Employee Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "branch",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Site",
+   "options": "Branch"
+  },
+  {
+   "fieldname": "incident_type",
+   "fieldtype": "Link",
+   "label": "Incident Type",
+   "options": "Safety Incident Type",
+   "read_only": 1
+  },
+  {
+   "fieldname": "designation",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Designation",
+   "options": "Designation",
+   "read_only": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-04-14 12:31:33.823645",
+ "modified": "2026-04-21 08:42:46.140108",
  "modified_by": "Administrator",
  "module": "Safety",
  "name": "RMA",

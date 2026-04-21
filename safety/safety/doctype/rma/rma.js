@@ -2,6 +2,13 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on("RMA", {
+  setup(frm) {
+    frm.add_fetch("employee", "employee_name", "employee_name");
+    frm.add_fetch("employee", "designation", "designation");
+    frm.add_fetch("incident_number", "site", "branch");
+    frm.add_fetch("incident_number", "incident_type", "incident_type");
+  },
+
   refresh(frm) {
     maybe_set_unique_number(frm);
   },
