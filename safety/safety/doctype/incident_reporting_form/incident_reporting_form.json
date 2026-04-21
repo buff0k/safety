@@ -30,9 +30,9 @@
   {
    "default": "Isambane Mining",
    "fieldname": "company_name",
-   "fieldtype": "Select",
+   "fieldtype": "Link",
    "label": "Company Name ",
-   "options": "\nIsambane Mining"
+   "options": "Company"
   },
   {
    "fieldname": "reporting_name_surname",
@@ -134,7 +134,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-04-14 12:09:16.563021",
+ "modified": "2026-04-21 08:20:50.259595",
  "modified_by": "Administrator",
  "module": "Safety",
  "name": "Incident Reporting Form",
