@@ -1,0 +1,317 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "{site}-{date}-{working_area}",
+ "creation": "2026-04-20 18:33:56.957463",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "smart_start_notice_html",
+  "company_and_letter_head_section",
+  "company",
+  "letter_head",
+  "intro_html",
+  "hira_details_section",
+  "date",
+  "time",
+  "site",
+  "working_area",
+  "job_description",
+  "person_leading_hira",
+  "occupation",
+  "leader_signature",
+  "hazards_section",
+  "hazards_and_controls",
+  "team_section",
+  "team_members",
+  "supervisor_section",
+  "supervisor_name",
+  "supervisor_occupation",
+  "supervisor_date",
+  "supervisor_signature",
+  "supervisor_note_html",
+  "ppe_equipment_reference_html",
+  "ppe_equipment_checked",
+  "additional_section",
+  "additional_ppe",
+  "additional_hazards",
+  "notes_html",
+  "document_no",
+  "revision",
+  "effective_date",
+  "page_info"
+ ],
+ "fields": [
+  {
+   "fieldname": "smart_start_notice_html",
+   "fieldtype": "HTML",
+   "label": "Smart Start Notice"
+  },
+  {
+   "fieldname": "company_and_letter_head_section",
+   "fieldtype": "Section Break",
+   "label": "Company Details"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "letter_head",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Letter Head",
+   "options": "Letter Head",
+   "read_only": 1
+  },
+  {
+   "fieldname": "intro_html",
+   "fieldtype": "HTML",
+   "label": "Intro"
+  },
+  {
+   "fieldname": "hira_details_section",
+   "fieldtype": "Section Break",
+   "label": "HIRA Details"
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "time",
+   "fieldtype": "Time",
+   "label": "Time"
+  },
+  {
+   "fieldname": "site",
+   "fieldtype": "Link",
+   "label": "Site",
+   "options": "Location"
+  },
+  {
+   "fieldname": "working_area",
+   "fieldtype": "Data",
+   "label": "Working Area"
+  },
+  {
+   "fieldname": "job_description",
+   "fieldtype": "Small Text",
+   "label": "Job Description"
+  },
+  {
+   "fieldname": "person_leading_hira",
+   "fieldtype": "Data",
+   "label": "Name of Person Leading the HIRA"
+  },
+  {
+   "fieldname": "occupation",
+   "fieldtype": "Data",
+   "label": "Occupation"
+  },
+  {
+   "fieldname": "leader_signature",
+   "fieldtype": "Signature",
+   "label": "Signature"
+  },
+  {
+   "fieldname": "hazards_section",
+   "fieldtype": "Section Break",
+   "label": "Hazards, Risks and Controls"
+  },
+  {
+   "fieldname": "hazards_and_controls",
+   "fieldtype": "Table",
+   "label": "Hazards and Controls",
+   "options": "The Smart Start Hira Hazard"
+  },
+  {
+   "fieldname": "team_section",
+   "fieldtype": "Section Break",
+   "label": "Team Members"
+  },
+  {
+   "fieldname": "team_members",
+   "fieldtype": "Table",
+   "label": "Team Members",
+   "options": "The Smart Start Hira Team Member"
+  },
+  {
+   "fieldname": "supervisor_section",
+   "fieldtype": "Section Break",
+   "label": "Counter Signing by Supervisor"
+  },
+  {
+   "fieldname": "supervisor_name",
+   "fieldtype": "Data",
+   "label": "Supervisor Name"
+  },
+  {
+   "fieldname": "supervisor_occupation",
+   "fieldtype": "Data",
+   "label": "Supervisor Occupation"
+  },
+  {
+   "fieldname": "supervisor_date",
+   "fieldtype": "Date",
+   "label": "Supervisor Date"
+  },
+  {
+   "fieldname": "supervisor_signature",
+   "fieldtype": "Signature",
+   "label": "Supervisor Signature"
+  },
+  {
+   "fieldname": "supervisor_note_html",
+   "fieldtype": "HTML",
+   "label": "Supervisor Note"
+  },
+  {
+   "fieldname": "ppe_equipment_reference_html",
+   "fieldtype": "HTML",
+   "label": "Equipment and PPE Reference"
+  },
+  {
+   "default": "0",
+   "fieldname": "ppe_equipment_checked",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Tick to confirm equipment and PPE requirements were checked",
+   "reqd": 1
+  },
+  {
+   "fieldname": "additional_section",
+   "fieldtype": "Section Break",
+   "label": "Additional Information"
+  },
+  {
+   "fieldname": "additional_ppe",
+   "fieldtype": "Long Text",
+   "label": "List the PPE if it is not contained above"
+  },
+  {
+   "fieldname": "additional_hazards",
+   "fieldtype": "Long Text",
+   "label": "Write down the hazard if it is not listed above"
+  },
+  {
+   "fieldname": "notes_html",
+   "fieldtype": "HTML",
+   "label": "Notes"
+  },
+  {
+   "default": "IS-SHEQ-DT-SMART-068",
+   "fieldname": "document_no",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Document No",
+   "read_only": 1
+  },
+  {
+   "default": "1.0",
+   "fieldname": "revision",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Revision",
+   "read_only": 1
+  },
+  {
+   "default": "2026-03-31",
+   "fieldname": "effective_date",
+   "fieldtype": "Date",
+   "hidden": 1,
+   "label": "Effective Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "page_info",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Page",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-04-21 15:57:23.037257",
+ "modified_by": "Administrator",
+ "module": "Safety",
+ "name": "The Smart Start Hira",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Engineering Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Engineering User",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Production User",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Projects Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "search_fields": "company,site,working_area,job_description,person_leading_hira",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}
