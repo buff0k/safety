@@ -64,10 +64,8 @@
   {
    "fieldname": "issue_date",
    "fieldtype": "Date",
-   "in_list_view": 1,
-   "in_standard_filter": 1,
-   "label": "Issue Date",
-   "reqd": 1
+   "hidden": 1,
+   "label": "Issue Date"
   },
   {
    "fieldname": "attach",
@@ -100,7 +98,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-04-13 14:48:53.768941",
+ "modified": "2026-05-12 12:02:52.997112",
  "modified_by": "Administrator",
  "module": "Safety",
  "name": "PPE Issue Register",

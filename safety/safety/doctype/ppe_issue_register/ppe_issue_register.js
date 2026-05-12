@@ -56,10 +56,20 @@ frappe.ui.form.on("PPE Issue Register", {
 		} else {
 			frm.set_value("letter_head", "");
 		}
+	}
+});
+
+frappe.ui.form.on("PPE Issue Register Table", {
+	issue_day(frm, cdt, cdn) {
+		set_child_reissue_date(cdt, cdn);
 	},
 
-	issue_date(frm) {
-		set_reissue_dates_from_issue_date(frm);
+	date_of_re_issue(frm, cdt, cdn) {
+		set_child_reissue_date(cdt, cdn);
+	},
+
+	ppe_issued_add(frm, cdt, cdn) {
+		set_child_reissue_date(cdt, cdn);
 	}
 });
 
@@ -72,7 +82,10 @@ function populate_ppe_from_designation(frm, designation) {
 				let child = frm.add_child("ppe_issued");
 				child.item = row.item;
 				child.qty = row.qty;
-				child.re_issue_date = get_reissue_date(frm.doc.issue_date);
+
+				// Re-Issue Date is calculated from child issue_day first.
+				// If issue_day is empty, it falls back to child date_of_re_issue.
+				child.re_issue_date = get_reissue_date_from_child_row(child);
 			});
 
 			frm.refresh_field("ppe_issued");
@@ -95,26 +108,34 @@ function set_default_letter_head(frm, company) {
 		});
 }
 
-function set_reissue_dates_from_issue_date(frm) {
-	if (!frm.doc.issue_date || !frm.doc.ppe_issued || !frm.doc.ppe_issued.length) {
+function set_child_reissue_date(cdt, cdn) {
+	let row = locals[cdt][cdn];
+
+	if (!row) {
 		return;
 	}
 
-	const reissue_date = get_reissue_date(frm.doc.issue_date);
+	let reissue_date = get_reissue_date_from_child_row(row);
 
-	(frm.doc.ppe_issued || []).forEach((row) => {
-		row.re_issue_date = reissue_date;
-	});
-
-	frm.refresh_field("ppe_issued");
+	frappe.model.set_value(cdt, cdn, "re_issue_date", reissue_date);
 }
 
-function get_reissue_date(issue_date) {
-	if (!issue_date) {
+function get_reissue_date_from_child_row(row) {
+	if (!row) {
 		return "";
 	}
 
-	let reissue_date = frappe.datetime.add_months(issue_date, 12);
+	let source_date = row.issue_day || row.date_of_re_issue;
+
+	return get_reissue_date(source_date);
+}
+
+function get_reissue_date(source_date) {
+	if (!source_date) {
+		return "";
+	}
+
+	let reissue_date = frappe.datetime.add_months(source_date, 12);
 	reissue_date = frappe.datetime.add_days(reissue_date, -1);
 
 	return reissue_date;

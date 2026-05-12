@@ -8,7 +8,11 @@
  "field_order": [
   "item",
   "qty",
-  "re_issue_date"
+  "issue_day",
+  "re_issue_date",
+  "re_issue_ahead_of_re_issue_date",
+  "date_of_re_issue",
+  "comments"
  ],
  "fields": [
   {
@@ -37,13 +41,39 @@
    "label": "Qty",
    "non_negative": 1,
    "reqd": 1
+  },
+  {
+   "fieldname": "re_issue_ahead_of_re_issue_date",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Reason for Re-Issue ahead of re-issue date",
+   "options": "\nLost\nDamaged\nRe-Issue"
+  },
+  {
+   "fieldname": "date_of_re_issue",
+   "fieldtype": "Date",
+   "label": "Date of Reason for Re-Issue ahead of re-issue date"
+  },
+  {
+   "fieldname": "comments",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Comments"
+  },
+  {
+   "fieldname": "issue_day",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Issue Date",
+   "reqd": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2026-04-20 07:48:06.511147",
+ "modified": "2026-05-12 12:00:04.653789",
  "modified_by": "Administrator",
  "module": "Safety",
  "name": "PPE Issue Register Table",
