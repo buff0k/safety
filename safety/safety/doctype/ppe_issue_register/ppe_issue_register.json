@@ -2,6 +2,7 @@
  "actions": [],
  "allow_import": 1,
  "allow_rename": 1,
+ "autoname": "format: {employee}-{issue_date}",
  "creation": "2026-04-13 12:32:25.622280",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -64,7 +65,6 @@
   {
    "fieldname": "issue_date",
    "fieldtype": "Date",
-   "hidden": 1,
    "label": "Issue Date"
   },
   {
@@ -98,10 +98,11 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-05-12 12:02:52.997112",
+ "modified": "2026-05-19 07:32:56.442987",
  "modified_by": "Administrator",
  "module": "Safety",
  "name": "PPE Issue Register",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {
