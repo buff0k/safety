@@ -29,22 +29,9 @@
    "link_type": "Page",
    "show_arrow": 0,
    "type": "Link"
-  },
-  {
-   "child": 0,
-   "collapsible": 1,
-   "icon": "lamp-desk",
-   "indent": 0,
-   "keep_closed": 0,
-   "label": "Desktop",
-   "link_to": "desktop",
-   "link_type": "Page",
-   "show_arrow": 0,
-   "type": "Link",
-   "url": "/desk"
   }
  ],
- "modified": "2026-02-17 15:45:52.039482",
+ "modified": "2026-06-18 10:18:54.868960",
  "modified_by": "Administrator",
  "module": "Safety",
  "name": "Safety",

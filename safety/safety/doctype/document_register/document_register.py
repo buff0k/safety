@@ -1,13 +1,42 @@
 # Copyright (c) 2026, BuFf0k and contributors
 # For license information, please see license.txt
 
+import re
+
 import frappe
 from frappe import _
 from frappe.model.document import Document
 
 
+REVISION_PATTERN = re.compile(r"^(?P<base>.+)-Rev\.(?P<revision>\d+)$")
+FRAPPE_AMENDMENT_PATTERN = re.compile(r"^(?P<base>.+)-(?P<amendment>\d+)$")
+
+
 class DocumentRegister(Document):
+	def before_naming(self):
+		self.set_document_number()
+
 	def autoname(self):
+		self.set_document_number()
+
+	def before_insert(self):
+		self.set_document_number()
+
+	def validate(self):
+		if self.name:
+			self.document_no = self.name
+
+	def before_submit(self):
+		if not self.attach:
+			frappe.throw(_("You cannot submit this document unless 'Attach Executed Document' is populated."))
+
+	def set_document_number(self):
+		if self.amended_from:
+			self.set_revision_document_number()
+		else:
+			self.set_original_document_number()
+
+	def set_original_document_number(self):
 		company_abbrev = self.get_company_abbrev()
 		department_abbrev = self.get_department_abbrev()
 		subclass_abbrev = self.get_subclass_abbrev()
@@ -15,22 +44,89 @@ class DocumentRegister(Document):
 		prefix = f"{company_abbrev}-{department_abbrev}-{subclass_abbrev}"
 		next_number = self.get_next_number(prefix)
 
-		self.name = f"{prefix}-{next_number}"
-		self.document_no = self.name
+		document_no = f"{prefix}-{next_number}"
 
-	def before_insert(self):
-		# Safety fallback in case autoname ran before document_no was set
-		if not self.document_no:
-			self.document_no = self.name
+		self.name = document_no
+		self.document_no = document_no
 
-	def validate(self):
-		# Keep document_no synced with the generated name
-		if self.name and not self.is_new() and not self.document_no:
-			self.document_no = self.name
+	def set_revision_document_number(self):
+		base_document_no = self.get_base_document_no(self.amended_from)
+		next_revision = self.get_next_revision_number(base_document_no)
 
-	def before_submit(self):
-		if not self.attach:
-			frappe.throw(_("You cannot submit this document unless 'Attach Executed Document' is populated."))
+		document_no = f"{base_document_no}-Rev.{next_revision}"
+
+		self.name = document_no
+		self.document_no = document_no
+
+	def get_base_document_no(self, document_no):
+		if not document_no:
+			frappe.throw(_("Amended From is required to create a revision."))
+
+		revision_match = REVISION_PATTERN.match(document_no)
+		if revision_match:
+			return revision_match.group("base")
+
+		frappe_amendment_match = FRAPPE_AMENDMENT_PATTERN.match(document_no)
+		if frappe_amendment_match:
+			possible_base = frappe_amendment_match.group("base")
+
+			if frappe.db.exists("Document Register", possible_base):
+				return possible_base
+
+		return document_no
+
+	def get_next_revision_number(self, base_document_no):
+		"""
+		The original submitted document is treated as Rev.1.
+
+		Examples:
+		    IS-HR-POL-001          = original / Rev.1
+		    IS-HR-POL-001-Rev.2    = first amendment
+		    IS-HR-POL-001-Rev.3    = second amendment
+
+		Cancelled revisions are included because a cancelled Rev.2 must still
+		cause the next amended document to become Rev.3.
+		"""
+
+		existing = frappe.db.sql(
+			"""
+			SELECT name
+			FROM `tabDocument Register`
+			WHERE name = %s
+			   OR name LIKE %s
+			   OR name LIKE %s
+			""",
+			(
+				base_document_no,
+				f"{base_document_no}-Rev.%",
+				f"{base_document_no}-%",
+			),
+			as_dict=True,
+		)
+
+		max_revision = 1
+
+		for row in existing:
+			name = row.name or ""
+
+			if name == base_document_no:
+				max_revision = max(max_revision, 1)
+				continue
+
+			revision_match = REVISION_PATTERN.match(name)
+			if revision_match and revision_match.group("base") == base_document_no:
+				max_revision = max(max_revision, int(revision_match.group("revision")))
+				continue
+
+			# This handles documents already created as Frappe amendments,
+			# e.g. IS-HR-POL-001-1. Treat the first Frappe amendment as Rev.2,
+			# the second as Rev.3, etc.
+			frappe_amendment_match = FRAPPE_AMENDMENT_PATTERN.match(name)
+			if frappe_amendment_match and frappe_amendment_match.group("base") == base_document_no:
+				amendment_number = int(frappe_amendment_match.group("amendment"))
+				max_revision = max(max_revision, amendment_number + 1)
+
+		return max_revision + 1
 
 	def get_company_abbrev(self):
 		if not self.company:
@@ -39,7 +135,7 @@ class DocumentRegister(Document):
 		company_abbrev = frappe.db.get_value(
 			"Company Abbreviation",
 			self.company,
-			"company_abbrev"
+			"company_abbrev",
 		)
 
 		if not company_abbrev:
@@ -51,8 +147,6 @@ class DocumentRegister(Document):
 		if not self.department:
 			frappe.throw(_("Department is required."))
 
-		# In your setup, the Document Register links directly to the
-		# Department Abbreviation doctype, whose name is the abbreviation.
 		return self.department.strip()
 
 	def get_subclass_abbrev(self):
@@ -62,7 +156,7 @@ class DocumentRegister(Document):
 		subclass_abbrev = frappe.db.get_value(
 			"Document Register Subclass",
 			self.document_subclass,
-			"subclass_abbrev"
+			"subclass_abbrev",
 		)
 
 		if not subclass_abbrev:
@@ -81,18 +175,24 @@ class DocumentRegister(Document):
 			ORDER BY creation DESC
 			""",
 			(like_pattern,),
-			as_dict=True
+			as_dict=True,
 		)
 
 		max_number = 0
 
 		for row in existing:
 			name = row.name or ""
+
+			if REVISION_PATTERN.match(name):
+				continue
+
 			parts = name.split("-")
+
 			if len(parts) < 4:
 				continue
 
 			last_part = parts[-1]
+
 			if last_part.isdigit():
 				max_number = max(max_number, int(last_part))
 

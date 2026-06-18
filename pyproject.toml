@@ -7,7 +7,7 @@ version = "16.0.0"
 description = "Safety Incident Management System for Mining"
 requires-python = ">=3.14"
 readme = "README.md"
-#dynamic = ["version"]
+dynamic = ["version"]
 dependencies = [
     # "frappe~=16.0.0" # Installed and managed by bench.
 ]
