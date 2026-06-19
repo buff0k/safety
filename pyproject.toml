@@ -3,7 +3,6 @@ name = "safety"
 authors = [
     { name = "BuFf0k", email = "buff0k@gmail.com"}
 ]
-version = "16.0.0"
 description = "Safety Incident Management System for Mining"
 requires-python = ">=3.14"
 readme = "README.md"
