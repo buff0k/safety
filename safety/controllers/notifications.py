@@ -22,7 +22,6 @@ def send_weekly_ppe_expired_notifications():
 			parent.branch,
 			parent.issue_date,
 			child.item,
-			child.item_name,
 			child.qty,
 			child.re_issue_date,
 			child.idx
@@ -62,7 +61,6 @@ def send_weekly_ppe_expiring_soon_notifications():
 			parent.branch,
 			parent.issue_date,
 			child.item,
-			child.item_name,
 			child.qty,
 			child.re_issue_date,
 			child.idx
@@ -96,11 +94,14 @@ def _send_ppe_notification(rows, subject, intro):
 	register_links = {}
 	for row in rows:
 		if row["register_name"] not in register_links:
-			register_links[row["register_name"]] = get_url(f"/app/ppe-issue-register/{row['register_name']}")
+			register_links[row["register_name"]] = get_url(
+				f"/app/ppe-issue-register/{row['register_name']}"
+			)
 
 	table_rows = []
 	for row in rows:
 		register_url = register_links[row["register_name"]]
+
 		table_rows.append(
 			f"""
 			<tr>
@@ -109,7 +110,6 @@ def _send_ppe_notification(rows, subject, intro):
 				<td>{frappe.utils.escape_html(row.get("designation") or "")}</td>
 				<td>{frappe.utils.escape_html(row.get("branch") or "")}</td>
 				<td>{frappe.utils.escape_html(row.get("item") or "")}</td>
-				<td>{frappe.utils.escape_html(row.get("item_name") or "")}</td>
 				<td style="text-align:right;">{row.get("qty") or 0}</td>
 				<td>{frappe.utils.escape_html(str(row.get("re_issue_date") or ""))}</td>
 				<td><a href="{register_url}">{frappe.utils.escape_html(row.get("register_name") or "")}</a></td>
@@ -125,8 +125,7 @@ def _send_ppe_notification(rows, subject, intro):
 					<th>Employee Name</th>
 					<th>Designation</th>
 					<th>Branch</th>
-					<th>Item</th>
-					<th>Item Description</th>
+					<th>PPE Item</th>
 					<th>Qty</th>
 					<th>Re-Issue Date</th>
 					<th>PPE Register</th>
