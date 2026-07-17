@@ -1,0 +1,208 @@
+{
+ "actions": [],
+ "allow_bulk_edit": 1,
+ "autoname": "format:SLL-{YYYY}-{#####}",
+ "creation": "2026-07-17 15:23:36.393749",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "lesson_tab",
+  "source_section",
+  "incident_investigation",
+  "safety_incident",
+  "workflow_state",
+  "content_section",
+  "title",
+  "incident_summary",
+  "key_causes",
+  "failed_controls",
+  "positive_controls",
+  "lesson",
+  "required_behaviour",
+  "publication_section",
+  "target_audience",
+  "applicable_sites",
+  "communication_channel",
+  "publication_date",
+  "communication_owner",
+  "publication_attachment",
+  "acknowledgement_required"
+ ],
+ "fields": [
+  {
+   "fieldname": "lesson_tab",
+   "fieldtype": "Tab Break",
+   "label": "Lesson"
+  },
+  {
+   "fieldname": "source_section",
+   "fieldtype": "Section Break",
+   "label": "Source"
+  },
+  {
+   "fieldname": "incident_investigation",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Incident Investigation",
+   "options": "Incident Investigation",
+   "reqd": 1
+  },
+  {
+   "fieldname": "safety_incident",
+   "fieldtype": "Link",
+   "label": "Incident Report",
+   "options": "Incident Report",
+   "read_only": 1
+  },
+  {
+   "fieldname": "workflow_state",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Workflow State",
+   "read_only": 1
+  },
+  {
+   "fieldname": "content_section",
+   "fieldtype": "Section Break",
+   "label": "Content"
+  },
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Title",
+   "reqd": 1
+  },
+  {
+   "fieldname": "incident_summary",
+   "fieldtype": "Text Editor",
+   "label": "Incident Summary"
+  },
+  {
+   "fieldname": "key_causes",
+   "fieldtype": "Text Editor",
+   "label": "Key Causes"
+  },
+  {
+   "fieldname": "failed_controls",
+   "fieldtype": "Text Editor",
+   "label": "Failed Controls"
+  },
+  {
+   "fieldname": "positive_controls",
+   "fieldtype": "Text Editor",
+   "label": "Positive Controls"
+  },
+  {
+   "fieldname": "lesson",
+   "fieldtype": "Text Editor",
+   "label": "Lesson Learnt",
+   "reqd": 1
+  },
+  {
+   "fieldname": "required_behaviour",
+   "fieldtype": "Text Editor",
+   "label": "Required Behaviour"
+  },
+  {
+   "fieldname": "publication_section",
+   "fieldtype": "Section Break",
+   "label": "Publication"
+  },
+  {
+   "fieldname": "target_audience",
+   "fieldtype": "Small Text",
+   "label": "Target Audience"
+  },
+  {
+   "fieldname": "applicable_sites",
+   "fieldtype": "Small Text",
+   "label": "Applicable Sites"
+  },
+  {
+   "fieldname": "communication_channel",
+   "fieldtype": "Select",
+   "label": "Communication Channel",
+   "options": "Toolbox Talk\nSafety Alert\nManagement Brief\nTraining\nPoster\nOther"
+  },
+  {
+   "fieldname": "publication_date",
+   "fieldtype": "Date",
+   "label": "Publication Date"
+  },
+  {
+   "fieldname": "communication_owner",
+   "fieldtype": "Link",
+   "label": "Communication Owner",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "publication_attachment",
+   "fieldtype": "Attach",
+   "label": "Publication Attachment"
+  },
+  {
+   "default": "0",
+   "fieldname": "acknowledgement_required",
+   "fieldtype": "Check",
+   "label": "Acknowledgement Required"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-07-17 15:23:38.455802",
+ "modified_by": "Administrator",
+ "module": "Safety",
+ "name": "Safety Lessons Learnt",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Safety Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Safety User",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "search_fields": "incident_investigation,safety_incident,title",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "title",
+ "track_changes": 1,
+ "track_seen": 1
+}

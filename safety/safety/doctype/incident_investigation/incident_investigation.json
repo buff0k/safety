@@ -1,0 +1,361 @@
+{
+ "actions": [],
+ "allow_bulk_edit": 1,
+ "autoname": "format:INV-{YYYY}-{#####}",
+ "creation": "2026-07-17 15:23:35.389086",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "overview_tab",
+  "source_section",
+  "safety_incident",
+  "investigation_type",
+  "investigation_kind",
+  "source_column",
+  "incident_number",
+  "incident_datetime",
+  "site",
+  "location_on_site",
+  "control_section",
+  "workflow_state",
+  "lead_investigator",
+  "investigation_owner",
+  "target_completion_date",
+  "actual_completion_date",
+  "legally_privileged",
+  "confidentiality_notice",
+  "summary_section",
+  "incident_summary",
+  "scope",
+  "terms_of_reference",
+  "team_tab",
+  "team_members",
+  "evidence_tab",
+  "evidence",
+  "timeline_tab",
+  "timeline",
+  "peepo_tab",
+  "peepo_items",
+  "icam_tab",
+  "icam_findings",
+  "causes_tab",
+  "causes",
+  "conclusion_section",
+  "executive_summary",
+  "final_conclusion",
+  "recommendations_tab",
+  "recommendations",
+  "linked_records_tab",
+  "linked_records_html"
+ ],
+ "fields": [
+  {
+   "fieldname": "overview_tab",
+   "fieldtype": "Tab Break",
+   "label": "Overview"
+  },
+  {
+   "fieldname": "source_section",
+   "fieldtype": "Section Break",
+   "label": "Source Incident"
+  },
+  {
+   "fieldname": "safety_incident",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Incident Report",
+   "options": "Incident Report",
+   "reqd": 1
+  },
+  {
+   "fieldname": "investigation_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Investigation Type",
+   "options": "ICAM\nS4\nBasic Investigation\nOther",
+   "reqd": 1
+  },
+  {
+   "default": "Primary",
+   "fieldname": "investigation_kind",
+   "fieldtype": "Select",
+   "label": "Investigation Kind",
+   "options": "Primary\nSupplementary\nReopened"
+  },
+  {
+   "fieldname": "source_column",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "incident_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Incident Number",
+   "read_only": 1
+  },
+  {
+   "fieldname": "incident_datetime",
+   "fieldtype": "Datetime",
+   "label": "Incident Date and Time",
+   "read_only": 1
+  },
+  {
+   "fieldname": "site",
+   "fieldtype": "Link",
+   "label": "Site",
+   "options": "Branch",
+   "read_only": 1
+  },
+  {
+   "fieldname": "location_on_site",
+   "fieldtype": "Small Text",
+   "label": "Site Specific Location",
+   "read_only": 1
+  },
+  {
+   "fieldname": "control_section",
+   "fieldtype": "Section Break",
+   "label": "Investigation Control"
+  },
+  {
+   "fieldname": "workflow_state",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Workflow State",
+   "read_only": 1
+  },
+  {
+   "fieldname": "lead_investigator",
+   "fieldtype": "Link",
+   "label": "Lead Investigator",
+   "options": "Employee",
+   "reqd": 1
+  },
+  {
+   "default": "__user",
+   "fieldname": "investigation_owner",
+   "fieldtype": "Link",
+   "label": "Investigation Owner",
+   "options": "User"
+  },
+  {
+   "fieldname": "target_completion_date",
+   "fieldtype": "Date",
+   "label": "Target Completion Date"
+  },
+  {
+   "fieldname": "actual_completion_date",
+   "fieldtype": "Date",
+   "label": "Actual Completion Date",
+   "read_only": 1
+  },
+  {
+   "default": "1",
+   "fieldname": "legally_privileged",
+   "fieldtype": "Check",
+   "label": "Legally Privileged"
+  },
+  {
+   "default": "This document and its contents are confidential and legally privileged and may not be copied or distributed without prior written authority.",
+   "fieldname": "confidentiality_notice",
+   "fieldtype": "Small Text",
+   "label": "Confidentiality Notice"
+  },
+  {
+   "fieldname": "summary_section",
+   "fieldtype": "Section Break",
+   "label": "Scope and Summary"
+  },
+  {
+   "fieldname": "incident_summary",
+   "fieldtype": "Text Editor",
+   "label": "Incident Summary"
+  },
+  {
+   "fieldname": "scope",
+   "fieldtype": "Text Editor",
+   "label": "Scope"
+  },
+  {
+   "fieldname": "terms_of_reference",
+   "fieldtype": "Text Editor",
+   "label": "Terms of Reference"
+  },
+  {
+   "fieldname": "team_tab",
+   "fieldtype": "Tab Break",
+   "label": "Team"
+  },
+  {
+   "fieldname": "team_members",
+   "fieldtype": "Table",
+   "label": "Investigation Team",
+   "options": "Incident Investigation Team Member"
+  },
+  {
+   "fieldname": "evidence_tab",
+   "fieldtype": "Tab Break",
+   "label": "Evidence"
+  },
+  {
+   "fieldname": "evidence",
+   "fieldtype": "Table",
+   "label": "Evidence",
+   "options": "Incident Investigation Evidence"
+  },
+  {
+   "fieldname": "timeline_tab",
+   "fieldtype": "Tab Break",
+   "label": "Timeline & Five Whys"
+  },
+  {
+   "fieldname": "timeline",
+   "fieldtype": "Table",
+   "label": "Timeline",
+   "options": "Incident Investigation Timeline Event"
+  },
+  {
+   "fieldname": "peepo_tab",
+   "fieldtype": "Tab Break",
+   "label": "PEEPO"
+  },
+  {
+   "fieldname": "peepo_items",
+   "fieldtype": "Table",
+   "label": "PEEPO Items",
+   "options": "Incident Investigation PEEPO Item"
+  },
+  {
+   "fieldname": "icam_tab",
+   "fieldtype": "Tab Break",
+   "label": "ICAM Analysis"
+  },
+  {
+   "fieldname": "icam_findings",
+   "fieldtype": "Table",
+   "label": "ICAM Findings",
+   "options": "Incident Investigation ICAM Finding"
+  },
+  {
+   "fieldname": "causes_tab",
+   "fieldtype": "Tab Break",
+   "label": "Causes & Findings"
+  },
+  {
+   "fieldname": "causes",
+   "fieldtype": "Table",
+   "label": "Causes and Findings",
+   "options": "Incident Investigation Cause"
+  },
+  {
+   "fieldname": "conclusion_section",
+   "fieldtype": "Section Break",
+   "label": "Conclusion"
+  },
+  {
+   "fieldname": "executive_summary",
+   "fieldtype": "Text Editor",
+   "label": "Executive Summary"
+  },
+  {
+   "fieldname": "final_conclusion",
+   "fieldtype": "Text Editor",
+   "label": "Final Conclusion"
+  },
+  {
+   "fieldname": "recommendations_tab",
+   "fieldtype": "Tab Break",
+   "label": "Recommendations"
+  },
+  {
+   "fieldname": "recommendations",
+   "fieldtype": "Table",
+   "label": "Recommendations",
+   "options": "Incident Investigation Recommendation"
+  },
+  {
+   "fieldname": "linked_records_tab",
+   "fieldtype": "Tab Break",
+   "label": "Linked Records"
+  },
+  {
+   "fieldname": "linked_records_html",
+   "fieldtype": "HTML",
+   "label": "Interviews, Actions and Lessons Learnt"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [
+  {
+   "group": "Related Safety Records",
+   "link_doctype": "Incident Investigation Interview",
+   "link_fieldname": "incident_investigation"
+  },
+  {
+   "group": "Related Safety Records",
+   "link_doctype": "Safety Corrective Action",
+   "link_fieldname": "incident_investigation"
+  },
+  {
+   "group": "Related Safety Records",
+   "link_doctype": "Safety Lessons Learnt",
+   "link_fieldname": "incident_investigation"
+  }
+ ],
+ "modified": "2026-07-17 15:23:41.601593",
+ "modified_by": "Administrator",
+ "module": "Safety",
+ "name": "Incident Investigation",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Safety Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Safety User",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "search_fields": "incident_number,safety_incident,site",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "incident_number",
+ "track_changes": 1,
+ "track_seen": 1
+}

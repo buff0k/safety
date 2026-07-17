@@ -1,0 +1,215 @@
+{
+ "actions": [],
+ "allow_bulk_edit": 1,
+ "autoname": "format:INT-{YYYY}-{#####}",
+ "creation": "2026-07-17 15:23:36.011333",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "interview_tab",
+  "source_section",
+  "incident_investigation",
+  "safety_incident",
+  "workflow_state",
+  "interviewee_section",
+  "interviewee_employee",
+  "external_interviewee",
+  "external_interviewee_name",
+  "interviewee_designation",
+  "interviewee_column",
+  "interviewer",
+  "scheduled_date",
+  "conducted_date",
+  "location",
+  "questions_section",
+  "questions",
+  "summary_section",
+  "statement_file",
+  "interview_summary",
+  "follow_up_required",
+  "follow_up_details"
+ ],
+ "fields": [
+  {
+   "fieldname": "interview_tab",
+   "fieldtype": "Tab Break",
+   "label": "Interview"
+  },
+  {
+   "fieldname": "source_section",
+   "fieldtype": "Section Break",
+   "label": "Source"
+  },
+  {
+   "fieldname": "incident_investigation",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Incident Investigation",
+   "options": "Incident Investigation",
+   "reqd": 1
+  },
+  {
+   "fieldname": "safety_incident",
+   "fieldtype": "Link",
+   "label": "Incident Report",
+   "options": "Incident Report",
+   "read_only": 1
+  },
+  {
+   "fieldname": "workflow_state",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Workflow State",
+   "read_only": 1
+  },
+  {
+   "fieldname": "interviewee_section",
+   "fieldtype": "Section Break",
+   "label": "Interviewee"
+  },
+  {
+   "fieldname": "interviewee_employee",
+   "fieldtype": "Link",
+   "label": "Employee",
+   "options": "Employee"
+  },
+  {
+   "default": "0",
+   "fieldname": "external_interviewee",
+   "fieldtype": "Check",
+   "label": "External Interviewee"
+  },
+  {
+   "depends_on": "eval:doc.external_interviewee",
+   "fieldname": "external_interviewee_name",
+   "fieldtype": "Data",
+   "label": "External Interviewee Name"
+  },
+  {
+   "fieldname": "interviewee_designation",
+   "fieldtype": "Data",
+   "label": "Designation"
+  },
+  {
+   "fieldname": "interviewee_column",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "interviewer",
+   "fieldtype": "Link",
+   "label": "Interviewer",
+   "options": "Employee",
+   "reqd": 1
+  },
+  {
+   "fieldname": "scheduled_date",
+   "fieldtype": "Datetime",
+   "label": "Scheduled Date"
+  },
+  {
+   "fieldname": "conducted_date",
+   "fieldtype": "Datetime",
+   "label": "Conducted Date"
+  },
+  {
+   "fieldname": "location",
+   "fieldtype": "Data",
+   "label": "Location"
+  },
+  {
+   "fieldname": "questions_section",
+   "fieldtype": "Section Break",
+   "label": "Questions and Answers"
+  },
+  {
+   "fieldname": "questions",
+   "fieldtype": "Table",
+   "label": "Questions",
+   "options": "Incident Interview Question"
+  },
+  {
+   "fieldname": "summary_section",
+   "fieldtype": "Section Break",
+   "label": "Summary"
+  },
+  {
+   "fieldname": "statement_file",
+   "fieldtype": "Attach",
+   "label": "Signed Statement"
+  },
+  {
+   "fieldname": "interview_summary",
+   "fieldtype": "Text Editor",
+   "label": "Interview Summary"
+  },
+  {
+   "default": "0",
+   "fieldname": "follow_up_required",
+   "fieldtype": "Check",
+   "label": "Follow-up Required"
+  },
+  {
+   "depends_on": "eval:doc.follow_up_required",
+   "fieldname": "follow_up_details",
+   "fieldtype": "Small Text",
+   "label": "Follow-up Details"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-07-17 15:23:37.795530",
+ "modified_by": "Administrator",
+ "module": "Safety",
+ "name": "Incident Investigation Interview",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Safety Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Safety User",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "search_fields": "incident_investigation,interviewee_employee,external_interviewee_name",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "external_interviewee_name",
+ "track_changes": 1,
+ "track_seen": 1
+}

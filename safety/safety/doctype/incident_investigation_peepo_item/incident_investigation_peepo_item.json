@@ -1,0 +1,98 @@
+{
+ "actions": [],
+ "allow_bulk_edit": 1,
+ "creation": "2026-07-17 15:16:31.640512",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "peepo_category",
+  "factor",
+  "planned_information",
+  "responsible_person",
+  "due_date",
+  "finding",
+  "evidence_reference",
+  "relevance",
+  "causal_significance",
+  "completed"
+ ],
+ "fields": [
+  {
+   "fieldname": "peepo_category",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "PEEPO Category",
+   "options": "People\nEnvironment\nEquipment\nProcedures\nOrganisation",
+   "reqd": 1
+  },
+  {
+   "fieldname": "factor",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Factor",
+   "reqd": 1
+  },
+  {
+   "fieldname": "planned_information",
+   "fieldtype": "Small Text",
+   "label": "Planned Information"
+  },
+  {
+   "fieldname": "responsible_person",
+   "fieldtype": "Link",
+   "label": "Responsible Person",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "due_date",
+   "fieldtype": "Date",
+   "label": "Due Date"
+  },
+  {
+   "fieldname": "finding",
+   "fieldtype": "Text Editor",
+   "label": "Finding"
+  },
+  {
+   "fieldname": "evidence_reference",
+   "fieldtype": "Data",
+   "label": "Evidence Reference"
+  },
+  {
+   "default": "Pending",
+   "fieldname": "relevance",
+   "fieldtype": "Select",
+   "label": "Relevance",
+   "options": "Pending\nRelevant\nNot Relevant"
+  },
+  {
+   "fieldname": "causal_significance",
+   "fieldtype": "Select",
+   "label": "Causal Significance",
+   "options": "None\nContributing Factor\nRoot Cause"
+  },
+  {
+   "default": "0",
+   "fieldname": "completed",
+   "fieldtype": "Check",
+   "label": "Completed"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-07-17 15:23:39.354849",
+ "modified_by": "Administrator",
+ "module": "Safety",
+ "name": "Incident Investigation PEEPO Item",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

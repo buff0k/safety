@@ -94,9 +94,29 @@
   {
    "hidden": 0,
    "is_query_report": 0,
+   "label": "Incident Investigation",
+   "link_count": 0,
+   "link_to": "Incident Investigation",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
    "label": "Incident Report",
    "link_count": 0,
    "link_to": "Incident Report",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Incident Investigation Interview",
+   "link_count": 0,
+   "link_to": "Incident Investigation Interview",
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
@@ -114,9 +134,29 @@
   {
    "hidden": 0,
    "is_query_report": 0,
+   "label": "Safety Corrective Action",
+   "link_count": 0,
+   "link_to": "Safety Corrective Action",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
    "label": "Incident Reporting Form",
    "link_count": 0,
    "link_to": "Incident Reporting Form",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Safety Lessons Learnt",
+   "link_count": 0,
+   "link_to": "Safety Lessons Learnt",
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
@@ -348,7 +388,7 @@
    "type": "Link"
   }
  ],
- "modified": "2026-04-17 09:23:22.378677",
+ "modified": "2026-07-17 15:23:42.097469",
  "modified_by": "Administrator",
  "module": "Safety",
  "name": "Safety",

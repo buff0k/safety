@@ -1,0 +1,119 @@
+{
+ "actions": [],
+ "allow_bulk_edit": 1,
+ "creation": "2026-07-17 15:16:31.507259",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "event_date",
+  "event_time",
+  "event_title",
+  "event_description",
+  "person_or_team",
+  "evidence_reference",
+  "confirmed",
+  "disputed",
+  "dispute_notes",
+  "why_1",
+  "why_2",
+  "why_3",
+  "why_4",
+  "why_5"
+ ],
+ "fields": [
+  {
+   "fieldname": "event_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Date"
+  },
+  {
+   "fieldname": "event_time",
+   "fieldtype": "Time",
+   "in_list_view": 1,
+   "label": "Time"
+  },
+  {
+   "fieldname": "event_title",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Event",
+   "reqd": 1
+  },
+  {
+   "fieldname": "event_description",
+   "fieldtype": "Text Editor",
+   "label": "Description"
+  },
+  {
+   "fieldname": "person_or_team",
+   "fieldtype": "Data",
+   "label": "Person / Team"
+  },
+  {
+   "fieldname": "evidence_reference",
+   "fieldtype": "Data",
+   "label": "Evidence Reference"
+  },
+  {
+   "default": "0",
+   "fieldname": "confirmed",
+   "fieldtype": "Check",
+   "label": "Confirmed"
+  },
+  {
+   "default": "0",
+   "fieldname": "disputed",
+   "fieldtype": "Check",
+   "label": "Disputed"
+  },
+  {
+   "depends_on": "eval:doc.disputed",
+   "fieldname": "dispute_notes",
+   "fieldtype": "Small Text",
+   "label": "Dispute Notes"
+  },
+  {
+   "fieldname": "why_1",
+   "fieldtype": "Small Text",
+   "label": "Why 1"
+  },
+  {
+   "fieldname": "why_2",
+   "fieldtype": "Small Text",
+   "label": "Why 2"
+  },
+  {
+   "fieldname": "why_3",
+   "fieldtype": "Small Text",
+   "label": "Why 3"
+  },
+  {
+   "fieldname": "why_4",
+   "fieldtype": "Small Text",
+   "label": "Why 4"
+  },
+  {
+   "fieldname": "why_5",
+   "fieldtype": "Small Text",
+   "label": "Why 5"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-07-17 15:23:39.113159",
+ "modified_by": "Administrator",
+ "module": "Safety",
+ "name": "Incident Investigation Timeline Event",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

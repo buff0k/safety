@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_bulk_edit": 1,
  "allow_rename": 1,
  "autoname": "format: {incident_number}",
  "creation": "2026-03-10 06:20:28.510523",
@@ -62,7 +63,10 @@
   "investigation",
   "investigation_requirement",
   "is_the_investigation_required",
+  "investigation_type",
+  "investigation_not_required_reason",
   "preliminiary_investigation",
+  "related_safety_records_html",
   "investigation_type_and_attachments",
   "investigation_technique",
   "investigation_techniques",
@@ -400,10 +404,11 @@
    "label": "Investigation requirement "
   },
   {
+   "default": "Pending",
    "fieldname": "is_the_investigation_required",
    "fieldtype": "Select",
    "label": "Is the investigation required",
-   "options": "\nYes\nNo"
+   "options": "Pending\nYes\nNo"
   },
   {
    "fieldname": "preliminiary_investigation",
@@ -549,12 +554,43 @@
    "fieldtype": "Select",
    "label": "RMA Submission",
    "options": "\nYES\nNO"
+  },
+  {
+   "depends_on": "is_investigation_required == \"Yes\"",
+   "fieldname": "investigation_type",
+   "fieldtype": "Select",
+   "label": "Investigation Type",
+   "mandatory_depends_on": "is_investigation_required == \"Yes\"",
+   "options": "ICAM\nS4\nBasic Investigation\nOther"
+  },
+  {
+   "depends_on": "is_investigation_required == \"No\"",
+   "fieldname": "investigation_not_required_reason",
+   "fieldtype": "Small Text",
+   "label": "Reason Investigation is not required",
+   "mandatory_depends_on": "is_investigation_required == \"No\""
+  },
+  {
+   "fieldname": "related_safety_records_html",
+   "fieldtype": "HTML",
+   "label": "Related Flash Reports and Investigations"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
- "links": [],
- "modified": "2026-04-21 08:24:30.403537",
+ "links": [
+  {
+   "group": "Related Safety Records",
+   "link_doctype": "Flash Reports",
+   "link_fieldname": "incident_number"
+  },
+  {
+   "group": "Related Safety Records",
+   "link_doctype": "Incident Investigation",
+   "link_fieldname": "safety_incident"
+  }
+ ],
+ "modified": "2026-07-17 15:23:41.129317",
  "modified_by": "Administrator",
  "module": "Safety",
  "name": "Incident Report",
@@ -601,5 +637,7 @@
  "rows_threshold_for_grid_search": 20,
  "sort_field": "creation",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "track_changes": 1,
+ "track_seen": 1
 }

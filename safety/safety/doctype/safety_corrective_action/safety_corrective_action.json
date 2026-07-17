@@ -1,0 +1,245 @@
+{
+ "actions": [],
+ "allow_bulk_edit": 1,
+ "autoname": "format:SACT-{YYYY}-{#####}",
+ "creation": "2026-07-17 15:23:36.214011",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "action_tab",
+  "source_section",
+  "incident_investigation",
+  "safety_incident",
+  "source_recommendation_row",
+  "workflow_state",
+  "action_section",
+  "action",
+  "action_type",
+  "priority",
+  "action_column",
+  "responsible_employee",
+  "action_owner",
+  "department",
+  "target_date",
+  "completion_section",
+  "completion_details",
+  "completion_evidence",
+  "completed_on",
+  "verified_by",
+  "verified_on",
+  "verification_comments",
+  "effectiveness_review_required",
+  "effectiveness_review_date",
+  "effectiveness_result"
+ ],
+ "fields": [
+  {
+   "fieldname": "action_tab",
+   "fieldtype": "Tab Break",
+   "label": "Corrective Action"
+  },
+  {
+   "fieldname": "source_section",
+   "fieldtype": "Section Break",
+   "label": "Source"
+  },
+  {
+   "fieldname": "incident_investigation",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Incident Investigation",
+   "options": "Incident Investigation",
+   "reqd": 1
+  },
+  {
+   "fieldname": "safety_incident",
+   "fieldtype": "Link",
+   "label": "Incident Report",
+   "options": "Incident Report",
+   "read_only": 1
+  },
+  {
+   "fieldname": "source_recommendation_row",
+   "fieldtype": "Data",
+   "label": "Source Recommendation Row",
+   "read_only": 1
+  },
+  {
+   "fieldname": "workflow_state",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Workflow State",
+   "read_only": 1
+  },
+  {
+   "fieldname": "action_section",
+   "fieldtype": "Section Break",
+   "label": "Action"
+  },
+  {
+   "fieldname": "action",
+   "fieldtype": "Text Editor",
+   "label": "Action",
+   "reqd": 1
+  },
+  {
+   "fieldname": "action_type",
+   "fieldtype": "Select",
+   "label": "Action Type",
+   "options": "Corrective\nPreventive\nCritical Control\nTraining\nProcedure\nEngineering\nSupervisory\nCommunication\nManagement of Change"
+  },
+  {
+   "default": "Medium",
+   "fieldname": "priority",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Priority",
+   "options": "Low\nMedium\nHigh\nCritical"
+  },
+  {
+   "fieldname": "action_column",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "responsible_employee",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Responsible Employee",
+   "options": "Employee",
+   "reqd": 1
+  },
+  {
+   "fieldname": "action_owner",
+   "fieldtype": "Link",
+   "label": "Action Owner",
+   "options": "User"
+  },
+  {
+   "fieldname": "department",
+   "fieldtype": "Link",
+   "label": "Department",
+   "options": "Department"
+  },
+  {
+   "fieldname": "target_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Target Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "completion_section",
+   "fieldtype": "Section Break",
+   "label": "Completion and Verification"
+  },
+  {
+   "fieldname": "completion_details",
+   "fieldtype": "Text Editor",
+   "label": "Completion Details"
+  },
+  {
+   "fieldname": "completion_evidence",
+   "fieldtype": "Attach",
+   "label": "Completion Evidence"
+  },
+  {
+   "fieldname": "completed_on",
+   "fieldtype": "Datetime",
+   "label": "Completed On",
+   "read_only": 1
+  },
+  {
+   "fieldname": "verified_by",
+   "fieldtype": "Link",
+   "label": "Verified By",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "verified_on",
+   "fieldtype": "Datetime",
+   "label": "Verified On",
+   "read_only": 1
+  },
+  {
+   "fieldname": "verification_comments",
+   "fieldtype": "Small Text",
+   "label": "Verification Comments"
+  },
+  {
+   "default": "0",
+   "fieldname": "effectiveness_review_required",
+   "fieldtype": "Check",
+   "label": "Effectiveness Review Required"
+  },
+  {
+   "depends_on": "eval:doc.effectiveness_review_required",
+   "fieldname": "effectiveness_review_date",
+   "fieldtype": "Date",
+   "label": "Effectiveness Review Date"
+  },
+  {
+   "depends_on": "eval:doc.effectiveness_review_required",
+   "fieldname": "effectiveness_result",
+   "fieldtype": "Select",
+   "label": "Effectiveness Result",
+   "options": "Pending\nEffective\nPartially Effective\nIneffective"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-07-17 15:23:38.090962",
+ "modified_by": "Administrator",
+ "module": "Safety",
+ "name": "Safety Corrective Action",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Safety Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Safety User",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "search_fields": "incident_investigation,safety_incident,responsible_employee",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "action",
+ "track_changes": 1,
+ "track_seen": 1
+}

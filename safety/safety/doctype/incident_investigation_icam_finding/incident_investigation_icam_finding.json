@@ -1,0 +1,72 @@
+{
+ "actions": [],
+ "allow_bulk_edit": 1,
+ "creation": "2026-07-17 15:16:31.767096",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "icam_level",
+  "category",
+  "finding",
+  "supporting_evidence",
+  "causal",
+  "included_in_chart"
+ ],
+ "fields": [
+  {
+   "fieldname": "icam_level",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "ICAM Level",
+   "options": "Organisational Failings\nTask and Environmental Conditions\nIndividual / Team Actions\nAbsent or Failed Defences",
+   "reqd": 1
+  },
+  {
+   "fieldname": "category",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Category",
+   "reqd": 1
+  },
+  {
+   "fieldname": "finding",
+   "fieldtype": "Text Editor",
+   "label": "Finding",
+   "reqd": 1
+  },
+  {
+   "fieldname": "supporting_evidence",
+   "fieldtype": "Data",
+   "label": "Supporting Evidence"
+  },
+  {
+   "default": "0",
+   "fieldname": "causal",
+   "fieldtype": "Check",
+   "label": "Causal"
+  },
+  {
+   "default": "1",
+   "fieldname": "included_in_chart",
+   "fieldtype": "Check",
+   "label": "Include in ICAM Chart"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-07-17 15:23:39.597977",
+ "modified_by": "Administrator",
+ "module": "Safety",
+ "name": "Incident Investigation ICAM Finding",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

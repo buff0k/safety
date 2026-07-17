@@ -1,0 +1,77 @@
+{
+ "actions": [],
+ "allow_bulk_edit": 1,
+ "creation": "2026-07-17 15:16:31.890795",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "cause_type",
+  "cause_statement",
+  "supporting_evidence",
+  "management_control",
+  "critical_control",
+  "validated",
+  "validated_by"
+ ],
+ "fields": [
+  {
+   "fieldname": "cause_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Cause Type",
+   "options": "Immediate Cause\nRoot Cause\nContributing Factor\nCritical Control Failure\nOther Finding",
+   "reqd": 1
+  },
+  {
+   "fieldname": "cause_statement",
+   "fieldtype": "Text Editor",
+   "label": "Cause / Finding",
+   "reqd": 1
+  },
+  {
+   "fieldname": "supporting_evidence",
+   "fieldtype": "Data",
+   "label": "Supporting Evidence"
+  },
+  {
+   "fieldname": "management_control",
+   "fieldtype": "Small Text",
+   "label": "Management Control"
+  },
+  {
+   "fieldname": "critical_control",
+   "fieldtype": "Data",
+   "label": "Critical Control"
+  },
+  {
+   "default": "0",
+   "fieldname": "validated",
+   "fieldtype": "Check",
+   "label": "Validated"
+  },
+  {
+   "depends_on": "eval:doc.validated",
+   "fieldname": "validated_by",
+   "fieldtype": "Link",
+   "label": "Validated By",
+   "options": "Employee"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-07-17 15:23:39.807715",
+ "modified_by": "Administrator",
+ "module": "Safety",
+ "name": "Incident Investigation Cause",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}
