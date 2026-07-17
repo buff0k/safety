@@ -556,19 +556,19 @@
    "options": "\nYES\nNO"
   },
   {
-   "depends_on": "is_investigation_required == \"Yes\"",
+   "depends_on": "eval:doc.is_the_investigation_required==\"Yes\"",
    "fieldname": "investigation_type",
    "fieldtype": "Select",
    "label": "Investigation Type",
-   "mandatory_depends_on": "is_investigation_required == \"Yes\"",
+   "mandatory_depends_on": "eval:doc.is_the_investigation_required==\"Yes\"",
    "options": "ICAM\nS4\nBasic Investigation\nOther"
   },
   {
-   "depends_on": "is_investigation_required == \"No\"",
+   "depends_on": "eval:doc.is_the_investigation_required==\"No\"",
    "fieldname": "investigation_not_required_reason",
    "fieldtype": "Small Text",
    "label": "Reason Investigation is not required",
-   "mandatory_depends_on": "is_investigation_required == \"No\""
+   "mandatory_depends_on": "eval:doc.is_the_investigation_required==\"No\""
   },
   {
    "fieldname": "related_safety_records_html",
@@ -590,7 +590,7 @@
    "link_fieldname": "safety_incident"
   }
  ],
- "modified": "2026-07-17 15:23:41.129317",
+ "modified": "2026-07-17 15:45:02.663680",
  "modified_by": "Administrator",
  "module": "Safety",
  "name": "Incident Report",

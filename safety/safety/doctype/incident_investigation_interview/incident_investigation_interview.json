@@ -10,7 +10,6 @@
   "source_section",
   "incident_investigation",
   "safety_incident",
-  "workflow_state",
   "interviewee_section",
   "interviewee_employee",
   "external_interviewee",
@@ -27,7 +26,8 @@
   "statement_file",
   "interview_summary",
   "follow_up_required",
-  "follow_up_details"
+  "follow_up_details",
+  "amended_from"
  ],
  "fields": [
   {
@@ -53,14 +53,6 @@
    "fieldtype": "Link",
    "label": "Incident Report",
    "options": "Incident Report",
-   "read_only": 1
-  },
-  {
-   "fieldname": "workflow_state",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "Status",
-   "options": "Workflow State",
    "read_only": 1
   },
   {
@@ -154,12 +146,23 @@
    "fieldname": "follow_up_details",
    "fieldtype": "Small Text",
    "label": "Follow-up Details"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Incident Investigation Interview",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
+ "is_submittable": 1,
  "links": [],
- "modified": "2026-07-17 15:23:37.795530",
+ "modified": "2026-07-17 15:51:56.565226",
  "modified_by": "Administrator",
  "module": "Safety",
  "name": "Incident Investigation Interview",
