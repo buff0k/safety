@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_bulk_edit": 1,
  "allow_import": 1,
  "allow_rename": 1,
  "autoname": "format: {employee}-{issue_date}",
@@ -16,6 +17,7 @@
   "designation",
   "issue_date",
   "attach",
+  "attach_multiple",
   "ppe_issued"
  ],
  "fields": [
@@ -92,13 +94,19 @@
    "label": "Letter Head",
    "options": "Letter Head",
    "read_only": 1
+  },
+  {
+   "fieldname": "attach_multiple",
+   "fieldtype": "Table",
+   "label": "Attach Multiple Signed Forms",
+   "options": "PPE Invoice Attach"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-05-19 07:32:56.442987",
+ "modified": "2026-08-21 14:36:25.105831",
  "modified_by": "Administrator",
  "module": "Safety",
  "name": "PPE Issue Register",
