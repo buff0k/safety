@@ -6,12 +6,12 @@ app_email = "buff0k@gmail.com"
 app_license = "mit"
 required_apps = ["frappe/hrms"]
 source_link = "http://github.com/buff0k/safety"
-app_logo_url = "/assets/safety/images/is-logo.svg"
+app_logo_url = "/assets/safety/images/is-logo.png"
 app_home = "/desk/safety"
 add_to_apps_screen = [
 	{
 		"name": app_name,
-		"logo": "/assets/safety/images/is-logo.svg",
+		"logo": "/assets/safety/images/is-logo.png",
 		"title": app_title,
 		"route": app_home,
 		"has_permission": "safety.safety.utils.check_app_permission",
