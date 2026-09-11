@@ -1,6 +1,6 @@
 {
  "app": "safety",
- "creation": "2026-01-14 08:06:58.877788",
+ "creation": "2026-06-18 09:47:55.639885",
  "docstatus": 0,
  "doctype": "Desktop Icon",
  "hidden": 0,
@@ -10,8 +10,8 @@
  "link": "/app/safety",
  "link_to": "Safety",
  "link_type": "Workspace Sidebar",
- "logo_url": "/assets/safety/images/is-logo.svg",
- "modified": "2026-02-02 15:43:51.669812",
+ "logo_url": "/assets/safety/images/is-logo.png",
+ "modified": "2026-09-11 18:45:47.985953",
  "modified_by": "Administrator",
  "name": "Safety",
  "owner": "Administrator",
